@@ -1,5 +1,5 @@
 <template>
-  <component class="-font" :is="tag" :class="[size, weight]">
+  <component class="-font" :is="tag" :class="[size, weight, color]">
     <slot />
   </component>
 </template>
@@ -24,6 +24,12 @@ export default {
       validator: function(value) {
         return ['thin', 'bold'].indexOf(value) !== -1
       }
+    },
+    color: {
+      type: String,
+      validator: function(value) {
+        return ['soft'].indexOf(value) !== -1
+      }
     }
   }
 }
@@ -33,6 +39,7 @@ export default {
 .-font {
   font-family: var(--font-family);
 }
+/* size */
 .large {
   font-size: 24px;
 }
@@ -50,10 +57,16 @@ export default {
   font-size: 10px;
 }
 
+/* weight */
 .thin {
   font-weight: 300;
 }
 .bold {
   font-weight: 500;
+}
+
+/* color */
+.soft {
+  color: var(--soft-icon-color);
 }
 </style>

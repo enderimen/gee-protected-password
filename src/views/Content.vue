@@ -43,7 +43,9 @@ export default {
 <style lang="scss">
 .m-content {
     width: 100%;
-    padding: 40px 65px;
+    padding-top: 40px;
+    padding-left: 65px;
+    padding-right: 65px;
     background-color: var(--content-bg-color);
 }
 </style>
