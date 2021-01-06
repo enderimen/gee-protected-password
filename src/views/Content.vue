@@ -43,6 +43,8 @@ export default {
 <style lang="scss">
 .m-content {
     width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
     padding-top: 40px;
     padding-left: 65px;
     padding-right: 65px;

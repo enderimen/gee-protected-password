@@ -94,7 +94,7 @@ export default {
   }
 
   &__item {
-    height: 90px;
+    height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -129,8 +129,8 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 30px;
-    height: 104px;
-    width: 360px;
+    height: 164px;
+    width: 390px;
     background-color: var(--white);
     border-radius: 15px;
     border: 2px solid var(--line-bg-color);
@@ -153,8 +153,8 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 30px;
-    height: 104px;
-    width: 360px;
+    height: 134px;
+    width: 390px;
 
     & a {
       text-decoration: none;

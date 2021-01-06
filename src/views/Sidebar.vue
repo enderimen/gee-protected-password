@@ -142,10 +142,10 @@ export default {
   }
 
   .darkmode-switch-btn {
-    height: 24px;
+    height: 28px;
     width: 50px;
-    padding: 2px;
     border-radius: 24px;
+    padding: 2px;
     background-color: var(--light-text-color);
     border: 2px solid var(--active-link-badge-color);
     margin-right: 5px;
@@ -154,9 +154,9 @@ export default {
     &::after {
       display: inline-flex;
       align-self: flex-end;
-      content: " ";
-      height: 24px;
-      width: 24px;
+      content: "";
+      height: 20px;
+      width: 20px;
       background-color: var(--active-bg-color);
       border-radius: 50%;
       transition: all ease .3s;
@@ -172,7 +172,7 @@ export default {
         background-color: var(--theme-bg-color);
 
         &:after {
-          margin-left: 26px;
+          margin-left: 22px;
           background-color: var(--light-text-color);
         }
       }
