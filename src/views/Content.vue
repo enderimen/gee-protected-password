@@ -2,13 +2,13 @@
   <section class="m-content">
       <app-header>
           <app-button>
-              <IconPlus class="icon -small"/>
+              <IconPlus class="icon -small -mr15"/>
               Ekle
           </app-button>
       </app-header>
       <slot/>
-      <app-no-content>
-            <icon-password class="icon -medium -soft"/>
+      <!-- <app-no-content>
+            <icon-password class="icon -large -soft"/>
             <app-text tag="h3" size="large" weight="bold" class="-mt20">
                 Tüm parolalarınız tek bir yerde!
             </app-text>
@@ -16,7 +16,7 @@
                 Özenle korunan GEE kasanıza şifrelerinizi eklemeye başlayın.
             </app-text>
             <app-button class="-mt20">Yeni Şifre</app-button>
-      </app-no-content>
+      </app-no-content> -->
   </section>
 </template>
 

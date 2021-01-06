@@ -8,31 +8,31 @@
       <nav class="m-navigation">
         <ul>
           <li>
-            <IconLamb class="icon"/>
+            <IconLamb class="icon -mr15"/>
             <h4>Hemen Başla!</h4>
           </li>
           <li>
             <router-link tag="a" to="/passwords">
-              <IconPassword class="icon"/>
+              <IconPassword class="icon -mr15"/>
               <span>Şifrelerim</span>
             </router-link>
           </li>
           <li>
             <router-link tag="a" to="/secure-notes" class="active">
-              <IconNote class="icon"/>
+              <IconNote class="icon -mr15"/>
               <span>Notlarım</span>
             </router-link>
           </li>
           <li>
             <router-link tag="a" to="/account">
-              <IconPerson class="icon"/>
+              <IconPerson class="icon -mr15"/>
               <span>Hesabım</span>
             </router-link>
           </li>
 
           <li>
             <router-link tag="a" to="/settings">
-              <IconSettings class="icon"/>
+              <IconSettings class="icon -mr15"/>
               <span>Ayarlar</span>
             </router-link>
           </li>
@@ -46,7 +46,7 @@
               <span>Darkmode</span>
           </label>
           <router-link tag="a" to="/logout">
-            <IconLogout class="icon"/>
+            <IconLogout class="icon -mr15"/>
               <span>logout</span>
           </router-link>
       </div>

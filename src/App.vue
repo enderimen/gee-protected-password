@@ -22,11 +22,6 @@ export default {
 </script>
 
 <style lang="scss">
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-}
-
 .row {
   display: flex;
 }

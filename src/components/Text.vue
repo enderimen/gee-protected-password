@@ -41,7 +41,7 @@ export default {
   font-weight: 400;
 }
 .small {
-  font-size: 12px;
+  font-size: 14px;
 }
 .xsmall {
   font-size: 11px;

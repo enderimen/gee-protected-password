@@ -1,11 +1,17 @@
 .-mr10 {
   margin-right: 10px;
 }
+.-mr15 {
+  margin-right: 15px;
+}
 .-mr20 {
   margin-right: 20px;
 }
 .-ml10 {
   margin-left: 10px;
+}
+.-ml15 {
+  margin-left: 15px;
 }
 .-ml20 {
   margin-left: 20px;
@@ -13,11 +19,17 @@
 .-mb10 {
   margin-bottom: 10px;
 }
+.-mb15 {
+  margin-bottom: 15px;
+}
 .-mb20 {
   margin-bottom: 20px;
 }
 .-mt10 {
   margin-top: 10px;
+}
+.-mt15 {
+  margin-top: 15px;
 }
 .-mt20 {
   margin-top: 20px;
@@ -26,13 +38,17 @@
 .icon {
   height: 22px;
   width: 22px;
-  margin-right: 15px;
   display: inline-block;
   color: var(--light-text-color);
 
   &.-small {
     height: 14px;
     width: 14px;
+  }
+
+  &.-large {
+    height: 22px;
+    width: 30px;
   }
 
   &.-medium {
