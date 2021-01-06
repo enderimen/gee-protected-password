@@ -1,0 +1,50 @@
+.-mr10 {
+  margin-right: 10px;
+}
+.-mr20 {
+  margin-right: 20px;
+}
+.-ml10 {
+  margin-left: 10px;
+}
+.-ml20 {
+  margin-left: 20px;
+}
+.-mb10 {
+  margin-bottom: 10px;
+}
+.-mb20 {
+  margin-bottom: 20px;
+}
+.-mt10 {
+  margin-top: 10px;
+}
+.-mt20 {
+  margin-top: 20px;
+}
+
+.icon {
+  height: 22px;
+  width: 22px;
+  margin-right: 15px;
+  display: inline-block;
+  color: var(--light-text-color);
+
+  &.-small {
+    height: 14px;
+    width: 14px;
+  }
+
+  &.-medium {
+    height: 65px;
+    width: 56px;
+  }
+
+  &.-black {
+    color: var(--black-text-color);
+  }
+
+  &.-soft {
+    color: var(--soft-text-color);
+  }
+}
