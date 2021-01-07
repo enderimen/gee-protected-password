@@ -15,8 +15,9 @@
           <app-text size="small" weight="bold" class="-mb10" color="soft">Parola</app-text>
 
           <div class="group">
-            <input type="password" :value="passwordDetail.password" class="m-password__input" disabled>
-            <IconCopy class="icon -soft"/>
+            <input type="password" :value="passwordDetail.password" class="m-password__input">
+            <input type="text" :value="passwordDetail.password" class="m-password__input -hidden" data-copy-clipboard>
+            <app-copy class="icon -soft" @click="copyClipboard"/>
           </div>
         </div>
 
@@ -32,20 +33,24 @@
           <app-text size="small" weight="bold" class="-mb10" color="soft">created</app-text>
           <app-text size="small" weight="thin" color="soft" class="-mb20">{{ passwordDetail.created }}</app-text>
         </div>
+        <app-copied-alert/>
       </section>
   </section>
 </template>
 
 <script>
 import appText from "@/components/Text.vue";
-import IconCopy from "@/icons/copy.svg";
+import appCopy from "@/icons/copy.svg";
 import appPasswordItem from '@/components/PasswordItem.vue';
+import appCopiedAlert from '@/components/CopiedAlert.vue';
+import copyClipboard from "@/mixin/_copy-clipboard.js";
 
 export default {
   components: {
     appText,
-    IconCopy,
-    appPasswordItem
+    appCopy,
+    appPasswordItem,
+    appCopiedAlert
   },
   data() {
     return {
@@ -107,8 +112,9 @@ export default {
         return parseInt(passwordId) === passwordItem.id
       });
       this.passwordDetail = currentPassword;
-    }
-  }
+    },
+  },
+  mixins: [copyClipboard]
 }
 </script>
 
@@ -183,6 +189,13 @@ export default {
     background-color: transparent;
     font-size: 18px;
     font-weight: bold;
+
+    &.-hidden {
+      position: absolute;
+      z-index: -9999;
+      left: -100%;
+      top: -100%;
+    }
   }
 
   &__info {
