@@ -34,7 +34,7 @@ import IconMessage from '@/icons/message.svg';
 export default {
   components: {
     appText,
-    IconMessage
+    IconMessage  
   }
 }
 </script>

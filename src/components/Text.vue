@@ -42,9 +42,11 @@ export default {
 /* size */
 .large {
   font-size: 24px;
+  line-height: 36px;
 }
 .normal {
   font-size: 18px;
+  line-height: 27px;
   font-weight: 400;
 }
 .small {
