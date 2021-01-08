@@ -43,12 +43,42 @@ export default new Vuex.Store({
       lastModified: "Today at 12:09 PM",
       created: "Today at 03:25 AM"
     },
+    noteList: [
+      {
+          id: 1,
+          title: "Test Teknik Not",
+          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
+          lastModified: "Today at 12:09 PM",
+          created: "Today at 03:25 AM"
+        },
+        {
+          id: 2,
+          title: "Test Yahoo Notu",
+          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
+          lastModified: "Today at 12:09 PM",
+          created: "Today at 02:25 AM"
+        },
+        {
+          id: 3,
+          title: "Vue 101",
+          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
+          lastModified: "Today at 12:09 PM",
+          created: "Today at 07:25 AM"
+        },
+        {
+          id: 4,
+          title: "Vue 201",
+          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
+          lastModified: "Today at 12:09 PM",
+          created: "Today at 07:25 AM"
+        }
+    ],
     isOpenWindow: false,
+    searchQuery: "",
     componentOptions: {
       name: "app-",
       title: "Yeni oluştur"
     },
-    searchQuery: ""
   },
   getters: {
     getIsOpenWindow(state) {
@@ -61,11 +91,16 @@ export default new Vuex.Store({
       return state.passwordList;
     },
     getPassword(state) {
-
       return (productId) => state.passwordList.find(passwordItem => passwordItem.id === parseInt(productId))
     },
     getPasswordDetail(state) {
       return state.passwordDetail;
+    },
+    getNoteList(state) {
+      return state.noteList;
+    },
+    getNote(state, noteId) {
+      return state.noteList.filter(note => note.id === parseInt(noteId));
     }
   },
   mutations: {
@@ -77,6 +112,12 @@ export default new Vuex.Store({
     },
     setPasswordDetail(state, passwordItem) {
       state.passwordDetail = passwordItem;
+    },
+    deleteNote(state, noteId) {
+      state.noteList.splice(noteList.findIndex(noteId - 1), 1);
+    },
+    editNote(state) {
+      return state.noteList;
     }
   },
   actions: {
