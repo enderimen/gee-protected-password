@@ -2,10 +2,10 @@
   <section class="m-password">
       <section class="m-password__list">
         <div class="m-password__searchArea">
-          <input type="text" class="m-password__search -mr20" placeholder="Hesap ya da şifre ara">
+          <input type="text" class="m-password__search -mr20" placeholder="Hesap ya da şifre ara" @input="setSearchQuery">
         </div>
 
-        <app-password-item @click.native="currentAccount" v-for="password in passwordList" :key="password.id" :password="password" :data-id="password.id"></app-password-item>
+        <app-password-item @click.native="currentAccount" v-for="password in getPasswordList()" :key="password.id" :password="password" :data-id="password.id"></app-password-item>
       </section>
 
       <section class="m-password__detail">
@@ -22,15 +22,15 @@
         </div>
 
         <div class="m-password__info">
-          <app-text size="small" weight="bold" class="-mb10" color="soft">Website</app-text>
+          <app-text size="small" weight="bold" class="-mb10" color="soft">Website Adresi</app-text>
           <a href="https://www.gmail.com" class="-mb20">
             <app-text size="small" weight="thin" color="soft" >{{ passwordDetail.website }}</app-text>
           </a>
 
-          <app-text size="small" weight="bold" class="-mb10" color="soft">Last Modified</app-text>
+          <app-text size="small" weight="bold" class="-mb10" color="soft">Son Düzenleme</app-text>
           <app-text size="small" weight="thin" color="soft" class="-mb20">{{ passwordDetail.lastModified }}</app-text>
 
-          <app-text size="small" weight="bold" class="-mb10" color="soft">created</app-text>
+          <app-text size="small" weight="bold" class="-mb10" color="soft">Oluşturulma</app-text>
           <app-text size="small" weight="thin" color="soft" class="-mb20">{{ passwordDetail.created }}</app-text>
         </div>
         <app-copied-alert/>
@@ -44,6 +44,7 @@ import appCopy from "@/icons/copy.svg";
 import appPasswordItem from '@/components/PasswordItem.vue';
 import appCopiedAlert from '@/components/CopiedAlert.vue';
 import copyClipboard from "@/mixin/_copy-clipboard.js";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -52,49 +53,13 @@ export default {
     appPasswordItem,
     appCopiedAlert
   },
-  data() {
+  data() {
     return {
-      passwordList: [
-        {
-          id: 1,
-          title: "Google Gmail",
-          name: "imen.ender@gmail.com",
-          password: "sdasdasdasasdsdsdasdasds",
-          website: "https://www.gmail.com",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 03:25 AM"
-        },
-        {
-          id: 2,
-          title: "Google Gmail",
-          name: "imen.ender@gmail.com",
-          password: "sdasdasdasaasdasdasd",
-          website: "https://www.gmail.com",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 02:25 AM"
-        },
-        {
-          id: 3,
-          title: "Google Gmail",
-          name: "imen.ender@gmail.com",
-          password: "sdasda",
-          website: "https://www.gmail.com",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 07:25 AM"
-        }
-      ],
-      passwordDetail: {
-          id: 1,
-          title: "Test Account",
-          name: "test@gmail.com",
-          password: "sdasdasdasasdsdsdasdas",
-          website: "https://www.gee.com",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 03:25 AM"
-        }
+      passwordDetail: {},
     }
   },
   methods: {
+    ...mapGetters(["getPasswordList"]),
     currentAccount(event) {
       const tabList = document.querySelectorAll(".js-tab");
 
@@ -105,13 +70,10 @@ export default {
       });
 
       event.target.classList.add("-active");
-      this.showDetailPassword(event.target.dataset.id);
+      this.passwordDetail = this.$store.getters.getPassword(event.target.dataset.id);
     },
-    showDetailPassword(passwordId) {
-      const currentPassword = this.passwordList.find((passwordItem) => {
-        return parseInt(passwordId) === passwordItem.id
-      });
-      this.passwordDetail = currentPassword;
+    setSearchQuery(event) {
+      this.$store.commit("setSearchQuery", event.target.value);
     },
   },
   mixins: [copyClipboard]
@@ -156,6 +118,7 @@ export default {
   &__list {
     flex: 1;
     border-right: 1px solid var(--line-bg-color);
+    overflow-y: scroll;
   }
 
   &__detail {

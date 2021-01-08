@@ -7,8 +7,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'passwords',
+    component: () => import(/* webpackChunkName: "password" */ '@/views/MyPassword.vue')
   },
   {
     path: '/about',
