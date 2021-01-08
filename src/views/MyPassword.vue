@@ -5,18 +5,24 @@
           <input type="text" class="m-password__search -mr20" placeholder="Hesap ya da şifre ara" @input="setSearchQuery">
         </div>
 
-        <app-password-item @click.native="currentAccount" v-for="password in getPasswordList()" :key="password.id" :password="password" :data-id="password.id"></app-password-item>
+        <app-password-item
+        @click.native="currentAccount"
+        v-for="password in getPasswordList()"
+        :key="password.id"
+        :password="password"
+        :data-id="password.id"
+        :class="{'-active': password.id == 1}"></app-password-item>
       </section>
 
       <section class="m-password__detail">
         <div class="m-password__summary">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Kullanıcı Adı</app-text>
-          <app-text size="small" weight="thin" class="-mb20">{{ passwordDetail.name }}</app-text>
+          <app-text size="small" weight="thin" class="-mb20">{{ getPasswordDetail().name }}</app-text>
           <app-text size="small" weight="bold" class="-mb10" color="soft">Parola</app-text>
 
           <div class="group">
-            <input type="password" :value="passwordDetail.password" class="m-password__input">
-            <input type="text" :value="passwordDetail.password" class="m-password__input -hidden" data-copy-clipboard>
+            <input type="password" :value="getPasswordDetail().password" class="m-password__input">
+            <input type="text" :value="getPasswordDetail().password" class="m-password__input -hidden" data-copy-clipboard>
             <app-copy class="icon -soft" @click="copyClipboard"/>
           </div>
         </div>
@@ -24,14 +30,14 @@
         <div class="m-password__info">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Website Adresi</app-text>
           <a href="https://www.gmail.com" class="-mb20">
-            <app-text size="small" weight="thin" color="soft" >{{ passwordDetail.website }}</app-text>
+            <app-text size="small" weight="thin" color="soft" >{{ getPasswordDetail().website }}</app-text>
           </a>
 
           <app-text size="small" weight="bold" class="-mb10" color="soft">Son Düzenleme</app-text>
-          <app-text size="small" weight="thin" color="soft" class="-mb20">{{ passwordDetail.lastModified }}</app-text>
+          <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail().lastModified }}</app-text>
 
           <app-text size="small" weight="bold" class="-mb10" color="soft">Oluşturulma</app-text>
-          <app-text size="small" weight="thin" color="soft" class="-mb20">{{ passwordDetail.created }}</app-text>
+          <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail().created }}</app-text>
         </div>
         <app-copied-alert/>
       </section>
@@ -58,8 +64,12 @@ export default {
       passwordDetail: {},
     }
   },
+  created() {
+    // NOTE: ilk elemanı çağıracak şekilde güncellenecek
+    this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(1))
+  },
   methods: {
-    ...mapGetters(["getPasswordList"]),
+    ...mapGetters(["getPasswordList", "getPasswordDetail"]),
     currentAccount(event) {
       const tabList = document.querySelectorAll(".js-tab");
 
@@ -70,7 +80,7 @@ export default {
       });
 
       event.target.classList.add("-active");
-      this.passwordDetail = this.$store.getters.getPassword(event.target.dataset.id);
+      this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(event.target.dataset.id));
     },
     setSearchQuery(event) {
       this.$store.commit("setSearchQuery", event.target.value);

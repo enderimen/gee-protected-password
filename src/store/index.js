@@ -61,7 +61,11 @@ export default new Vuex.Store({
       return state.passwordList;
     },
     getPassword(state) {
+
       return (productId) => state.passwordList.find(passwordItem => passwordItem.id === parseInt(productId))
+    },
+    getPasswordDetail(state) {
+      return state.passwordDetail;
     }
   },
   mutations: {
@@ -70,6 +74,9 @@ export default new Vuex.Store({
     },
     setSearchQuery(state, searchText){
       state.searchQuery = searchText;
+    },
+    setPasswordDetail(state, passwordItem) {
+      state.passwordDetail = passwordItem;
     }
   },
   actions: {
