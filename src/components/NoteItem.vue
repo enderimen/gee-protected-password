@@ -2,7 +2,7 @@
     <div class="m-note__item">
         <header class="m-note__header -header">
             <app-text size="small" weight="bold">{{note.title}}</app-text>
-            <IconDelete class="icon -black"/>
+            <IconDelete class="icon -black" @click="deleteNote({title: note.title, id: note.id})"/>
         </header>
         <article class="m-note__content">
             {{note.content}}
@@ -24,6 +24,13 @@ export default {
     },
     props: {
         note: Object
+    },
+    methods: {
+        deleteNote(note){
+            if(confirm(`${note.title} başlıklı notu silmek istediğinizden emin misiniz?`)){
+                this.$store.commit("deleteNote", note.id);
+            }
+        }
     }
 }
 </script>

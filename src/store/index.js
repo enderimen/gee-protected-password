@@ -114,7 +114,7 @@ export default new Vuex.Store({
       state.passwordDetail = passwordItem;
     },
     deleteNote(state, noteId) {
-      state.noteList.splice(noteList.findIndex(noteId - 1), 1);
+      state.noteList.splice(state.noteList.findIndex(note => note.id === parseInt(noteId)), 1);
     },
     editNote(state) {
       return state.noteList;
