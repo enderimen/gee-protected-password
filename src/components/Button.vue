@@ -15,6 +15,7 @@ export default {
     height: 50px;
     width: 150px;
     background-color: var(--theme-bg-color);
+    user-select: none;
 
     outline: none;
     border: none;

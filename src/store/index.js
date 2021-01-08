@@ -11,8 +11,8 @@ export default new Vuex.Store({
   state: {
     isOpenWindow: false,
     componentOptions: {
-      name: "app-new-note",
-      title: "Yeni oluştur"
+      name: "",
+      title: ""
     }
   },
   getters,

@@ -38,6 +38,7 @@ export default {
 <style scoped>
 .-font {
   font-family: var(--font-family);
+  user-select: none;
 }
 /* size */
 .large {

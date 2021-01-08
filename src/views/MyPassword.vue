@@ -23,16 +23,14 @@
           <div class="group">
             <input type="password" :value="getPasswordDetail().password" class="m-password__input">
             <input type="text" :value="getPasswordDetail().password" class="m-password__input -hidden" data-copy-clipboard>
-            <app-copy class="icon -soft" @click="copyClipboard"/>
+            <app-copy class="icon -soft" @click="copyClipboard('data-copy-clipboard')"/>
           </div>
         </div>
-
         <div class="m-password__info">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Website Adresi</app-text>
           <a href="https://www.gmail.com" class="-mb20">
             <app-text size="small" weight="thin" color="soft" >{{ getPasswordDetail().website }}</app-text>
           </a>
-
           <app-text size="small" weight="bold" class="-mb10" color="soft">Son Düzenleme</app-text>
           <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail().lastModified }}</app-text>
 
@@ -49,7 +47,7 @@ import appText from "@/components/Text.vue";
 import appCopy from "@/icons/copy.svg";
 import appPasswordItem from '@/components/PasswordItem.vue';
 import appCopiedAlert from '@/components/CopiedAlert.vue';
-import copyClipboard from "@/mixin/_copy-clipboard.js";
+import helperFuncs from "@/mixin/index.js";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -86,7 +84,7 @@ export default {
       this.$store.commit("setSearchQuery", event.target.value);
     },
   },
-  mixins: [copyClipboard]
+  mixins: [helperFuncs]
 }
 </script>
 

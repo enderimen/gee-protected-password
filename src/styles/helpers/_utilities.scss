@@ -59,4 +59,9 @@
   &.-soft {
     color: var(--soft-text-color);
   }
+
+  &.-rotate {
+    transition: all 300ms;
+    transform: rotate(180deg);
+  }
 }

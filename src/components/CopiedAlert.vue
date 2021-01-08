@@ -1,10 +1,13 @@
 <template>
-  <div class="m-copied" data-copy-alert>Parola kopyalandı 🎉</div>
+  <div class="m-copied" :class="{'-hasWindow' : getIsOpenWindow()}" data-copy-alert>Parola kopyalandı 🎉</div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-
+  methods: {
+    ...mapGetters(["getIsOpenWindow"])
+  }
 }
 </script>
 
@@ -14,6 +17,7 @@ export default {
     right: 0px;
     bottom: 80px;
     transform: translateX(100%);
+    z-index: 999;
 
     display: flex;
     align-items: center;
@@ -30,6 +34,10 @@ export default {
 
     &.-copied {
         transform: translateX(-30px);
+    }
+
+    &.-hasWindow {
+      bottom: 120px;
     }
 }
 </style>
