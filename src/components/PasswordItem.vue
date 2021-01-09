@@ -30,7 +30,7 @@ export default {
     border-bottom: 1px solid var(--line-bg-color);
 
     &.-active {
-        color: var(--light-text-color);
+        color: var(--white);
         background-color: var(--active-tab-bg-color);
         border: 0
     }

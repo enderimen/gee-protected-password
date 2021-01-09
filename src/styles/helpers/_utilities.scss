@@ -39,7 +39,7 @@
   height: 22px;
   width: 22px;
   display: inline-block;
-  color: var(--light-text-color);
+  color: var(--icon-default-color);
   cursor: pointer;
 
   &.-small {
@@ -57,7 +57,7 @@
   }
 
   &.-soft {
-    color: var(--soft-text-color);
+    color: var(--default-icon-color);
   }
 
   &.-rotate {

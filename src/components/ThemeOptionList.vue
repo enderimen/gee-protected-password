@@ -1,8 +1,10 @@
 <template>
   <section class="m-themeOption__list">
-    <app-theme-btn name="mona-lisa" color="mono-lisa" checked="true">Mona Lisa</app-theme-btn>
-    <app-theme-btn name="mona-liq" color="bunker">Mona Lisa</app-theme-btn>
-    <app-theme-btn name="mona-liw" color="science-blue">Mona Lisa</app-theme-btn>
+    <app-theme-btn name="bunker" color="bunker">Bunker</app-theme-btn>
+    <app-theme-btn name="science-blue" color="science-blue">Science Blue</app-theme-btn>
+    <app-theme-btn name="klein-blue" color="klein-blue">Klein Blue</app-theme-btn>
+    <app-theme-btn name="day-light" color="day-light">White</app-theme-btn>
+    <app-theme-btn name="mona-lisa" color="mona-lisa">Mona Lisa</app-theme-btn>
   </section>
 </template>
 
@@ -23,6 +25,5 @@ export default {
   padding-top: 43px;
   height: 100%;
   overflow-y: scroll;
-  color: red;
 }
 </style>

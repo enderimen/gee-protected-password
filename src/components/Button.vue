@@ -14,7 +14,8 @@ export default {
 .btn {
     height: 50px;
     width: 150px;
-    background-color: var(--theme-bg-color);
+    background-color: var(--button-bg-color);
+    border: 1px solid var(--button-border-color)!important;
     user-select: none;
 
     outline: none;
@@ -26,7 +27,7 @@ export default {
     justify-content: center;
 
     cursor: pointer;
-    color: var(--light-text-color);
+    color: var(--button-text-color);
 
     font-weight: 500;
     font-size: 18px;

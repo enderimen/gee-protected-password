@@ -61,7 +61,7 @@ export default {
         padding-left: 30px;
         padding-right: 30px;
         color: var(--white);
-        background-color: var(--theme-bg-color);
+        background-color: var(--sidemenu-bg-color);
 
         display: flex;
         align-items: center;
