@@ -22,3 +22,9 @@ export const setIsOpenWindow = (state, payload) => {
         }
     }
 };
+
+export const setThemeName = (state, themeName) => {
+    state.currentTheme = themeName;
+    document.documentElement.setAttribute("data-theme", state.currentTheme);
+    localStorage.setItem("theme-name", state.currentTheme);
+}

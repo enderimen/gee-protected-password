@@ -1,19 +1,31 @@
 <template>
-    <label class="theme-option" :for="name">
-        <input :id="name" class="theme-option-checkbox" type="radio" name="theme" :checked="checked">
-        <div class="theme-btn -mb10" :class="color"></div>
+    <label class="theme-option" :for="name" @click="isChecked">
+        <input :id="name" class="theme-option-checkbox" type="radio" name="theme" :checked="name == getCurrentThemeName()">
+        <div class="theme-btn -mb10" :class="color" :data-theme-name="name"></div>
         <app-text color="soft"><slot/></app-text>
     </label>
 </template>
 
 <script>
-import appText from './Text.vue'
+import appText from './Text.vue';
+import { mapMutations } from "vuex";
+import { mapGetters } from "vuex";
+
 export default {
   components: { appText },
     props: {
         name: String,
-        color: String,
-        checked: Boolean
+        color: String
+    },
+    methods: {
+        ...mapMutations(["setThemeName"]),
+        ...mapGetters(["getCurrentThemeName"]),
+        isChecked(event) {
+            const currentTheme = event.target.getAttribute("data-theme-name")
+            if(currentTheme) {
+                this.$store.commit("setThemeName", currentTheme);
+            }
+        }
     }
 }
 </script>
@@ -39,15 +51,27 @@ export default {
             height: 40px;
             width: 40px;
             border-radius: 40px;
-            
+
             &.bunker {
                 background-color: var(--theme-bunker);
             }
             &.science-blue {
                 background-color: var(--theme-science-blue);
             }
-            &.mono-lisa {
+            &.mona-lisa {
                 background-color: var(--theme-mono-lisa);
+            }
+            &.day-light {
+                border: 1px solid var(--placeholder-color);
+                background-color: var(--white);
+
+                &:before {
+                    border-bottom: 3px solid var(--black) !important;
+                    border-left: 3px solid var(--black) !important;
+                }
+            }
+            &.klein-blue {
+                background-color: var(--theme-klein-blue);
             }
         }
 

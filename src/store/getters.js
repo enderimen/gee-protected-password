@@ -5,3 +5,7 @@ export const getIsOpenWindow = (state) => {
 export const getComponentOptions = (state) => {
       return state.componentOptions;
 }
+
+export const getCurrentThemeName = (state) => {
+    return state.currentTheme;
+}

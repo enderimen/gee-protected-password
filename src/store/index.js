@@ -10,6 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isOpenWindow: false,
+    currentTheme: "",
     componentOptions: {
       name: "",
       title: ""
