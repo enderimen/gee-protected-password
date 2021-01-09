@@ -19,10 +19,18 @@ import appButton from './Button.vue';
 import appNewPassword from '@/components/NewPassword.vue';
 import appNewNote from '@/components/NewNote.vue';
 import appNewAccount from '@/components/NewAccount.vue';
+import appThemeOptionList from '@/components/ThemeOptionList.vue';
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
-  components: { appButton,appNewPassword, appNewAccount, appText, appNewNote },
+  components: {
+    appButton,
+    appNewPassword,
+    appNewAccount,
+    appText,
+    appNewNote,
+    appThemeOptionList
+  },
   computed: {
     ...mapGetters(["getIsOpenWindow", "getComponentOptions"])
   },

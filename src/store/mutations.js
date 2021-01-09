@@ -15,6 +15,10 @@ export const setIsOpenWindow = (state, payload) => {
                 state.componentOptions.name = "app-new-account";
                 state.componentOptions.title = "Yeni Hesap Ekle";
             break;
+            case "theme-option":
+                state.componentOptions.name = "app-theme-option-list";
+                state.componentOptions.title = "Tema Seçin";
+            break;
         }
     }
 };

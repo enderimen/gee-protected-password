@@ -2,7 +2,7 @@
   <header class="m-header">
         <slot />
         <div class="row">
-            <button class="choose-theme -mr20" title="Tema seçin" @click="setIsOpenWindow({status: true, component: getCurrentComponentName()})"></button>
+            <button class="a-themeOption -mr20" title="Tema seçin" @click="setIsOpenWindow({status: true, component: 'theme-option'})"></button>
             <IconBell />
         </div>
   </header>
@@ -33,7 +33,7 @@ export default {
     justify-content: space-between;
 }
 
-.choose-theme {
+.a-themeOption {
     height: 20px;
     width: 20px;
     background-color: var(--active-bg-color);
