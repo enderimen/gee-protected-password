@@ -63,7 +63,7 @@ export default {
         }
 
         &.-generate-password {
-            width: 100%;
+            width: 80%;
             padding-left: 0;
             margin-bottom: 0;
             margin-right: auto;
