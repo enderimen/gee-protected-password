@@ -23,7 +23,7 @@
           <div class="group">
             <input type="password" :value="getPasswordDetail().password" class="m-password__input">
             <input type="text" :value="getPasswordDetail().password" class="m-password__input -hidden" data-copy-clipboard>
-            <app-copy class="icon -soft" @click="copyClipboard('data-copy-clipboard')"/>
+            <app-copy class="icon -soft" @click="copyClipboard($event ,'data-copy-clipboard')"/>
           </div>
         </div>
         <div class="m-password__info">
@@ -37,7 +37,7 @@
           <app-text size="small" weight="bold" class="-mb10" color="soft">Oluşturulma</app-text>
           <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail().created }}</app-text>
         </div>
-        <app-copied-alert/>
+        <app-copied-alert />
       </section>
   </section>
 </template>

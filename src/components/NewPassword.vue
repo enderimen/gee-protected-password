@@ -1,5 +1,5 @@
 <template>
-  <form class="m-password__form">
+    <form class="m-password__form">
         <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Kullanıcı Adı*</app-text>
         <input type="text" placeholder="Kullanıcı adı girin">
 
@@ -15,10 +15,10 @@
         <div class="group">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
             <input type="text" class="-generate-password -hidden" :value="generatedPasswordHistory" data-generate-password>
-            <icon-copy class="icon -soft -mr10" @click="copyClipboard('data-generate-password')"></icon-copy>
+            <icon-copy class="icon -soft -mr10" @click="copyClipboard($event,'data-generate-password')"></icon-copy>
             <icon-generate class="icon -soft" @click="actionGeneratePassword"></icon-generate>
         </div>
-  </form>
+    </form>
 </template>
 
 <script>
@@ -32,26 +32,6 @@ export default {
         appText,
         IconGenerate,
         IconCopy
-    },
-    data() {
-        return {
-            generatedPasswordHistory: null
-        }
-    },
-    created() {
-        this.generatedPasswordHistory = this.generatePassword();
-    },
-    methods:{
-        actionGeneratePassword(event) {
-            this.generatedPasswordHistory = this.generatePassword();
-
-            const currentElement = event.target;
-            currentElement.classList.add("-rotate");
-
-            setTimeout(() => {
-                currentElement.classList.remove("-rotate");
-            }, 300)
-        }
     },
     mixins: [helperFuncs]
 }

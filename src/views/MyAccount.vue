@@ -23,6 +23,7 @@
           <app-text weight="bold" class="-mb15">E-posta 3</app-text>
           <app-text weight="thin" size="small">imen.ender@gmail.com</app-text>
         </div>
+        <app-copied-alert />
       </div>
   </section>
 </template>
@@ -30,11 +31,13 @@
 <script>
 import appText from '@/components/Text.vue';
 import IconMessage from '@/icons/message.svg';
+import appCopiedAlert from '@/components/CopiedAlert.vue';
 
 export default {
   components: {
     appText,
-    IconMessage  
+    IconMessage,
+    appCopiedAlert
   }
 }
 </script>

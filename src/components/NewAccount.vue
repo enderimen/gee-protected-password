@@ -14,9 +14,10 @@
 
     <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
     <div class="group">
-        <input type="text" class="-generate-password" data-generate-password="asaasdasd" value="xbD!DGfQGcV*" disabled required>
-        <icon-copy class="icon -soft -mr10"></icon-copy>
-        <icon-generate class="icon -soft"></icon-generate>
+        <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
+        <input type="text" class="-generate-password -hidden" :value="generatedPasswordHistory" data-generate-password>
+        <icon-copy class="icon -soft -mr10" @click="copyClipboard($event,'data-generate-password')"></icon-copy>
+        <icon-generate class="icon -soft" @click="actionGeneratePassword"></icon-generate>
     </div>
   </form>
 </template>
@@ -25,6 +26,7 @@
 import appText from './Text.vue';
 import IconGenerate from "@/icons/generate.svg";
 import IconCopy from "@/icons/copy.svg";
+import helperFuncs from "@/mixin/index.js";
 
 export default {
     components: {
@@ -32,6 +34,7 @@ export default {
         IconGenerate,
         IconCopy
     },
+    mixins: [helperFuncs]
 }
 </script>
 
@@ -69,6 +72,13 @@ export default {
             font-size: 16px;
             line-height: 24px;
             letter-spacing: 2px;
+
+            &.-hidden {
+                position: absolute;
+                left: -9999px;
+                top: -9999px;
+                opacity: 0;
+            }
         }
     }
 
