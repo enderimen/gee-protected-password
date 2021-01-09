@@ -42,6 +42,7 @@ export default {
     display: flex;
     flex-direction: column;
     box-shadow: 0px 0px 10px rgba(0,0,0, .1);
+    transition: all 300ms;
 
     &.-opened {
         right: 0;
