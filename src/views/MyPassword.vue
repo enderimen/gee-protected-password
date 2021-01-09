@@ -63,7 +63,6 @@ export default {
     }
   },
   created() {
-    // NOTE: ilk elemanı çağıracak şekilde güncellenecek
     this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(1))
   },
   methods: {
