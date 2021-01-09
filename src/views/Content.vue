@@ -1,7 +1,7 @@
 <template>
   <section class="m-content">
       <app-header>
-          <app-button>
+          <app-button @click.native="setIsOpenWindow({status: true, component: getCurrentComponentName()})">
               <IconPlus class="icon -small -mr15"/>
               Ekle
           </app-button>
@@ -13,7 +13,7 @@
                 Tüm parolalarınız tek bir yerde!
             </app-text>
             <app-text tag="p" weight="thin" class="-mt20">
-                Özenle korunan GEE kasanıza şifrelerinizi eklemeye başlayın.
+                Özenle korunan GEE kasanıza, şifrelerinizi hemen eklemeye başlayın.
             </app-text>
             <app-button class="-mt20">Yeni Şifre</app-button>
       </app-no-content> -->
@@ -27,6 +27,7 @@ import IconPlus from "@/icons/plus.svg";
 import IconPassword from "@/icons/password.svg";
 import appNoContent from "@/components/NoContent.vue";
 import appText from "@/components/Text.vue";
+import { mapMutations } from "vuex";
 
 export default {
     components: {
@@ -36,6 +37,12 @@ export default {
         appButton,
         IconPlus,
         appText
+    },
+    methods: {
+        ...mapMutations(["setIsOpenWindow"]),
+        getCurrentComponentName() {
+            return this.$router.currentRoute.path.split("/")[1]
+        }
     }
 }
 </script>

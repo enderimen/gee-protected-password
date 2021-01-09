@@ -33,7 +33,7 @@ export default {
     transition: all 300ms;
 
     &.-copied {
-        transform: translateX(-30px);
+        transform: translateX(-83px);
     }
 
     &.-hasWindow {
