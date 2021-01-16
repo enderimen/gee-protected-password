@@ -68,6 +68,7 @@ export default {
   &__card {
     height: 106px;
     width: 167px;
+    border: 1px solid var(--widget-card-border-color);
     border-radius: 5px;
     background-color: var(--theme-bg-color);
 
