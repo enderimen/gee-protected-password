@@ -3,9 +3,9 @@ import Vuex from 'vuex';
 import * as getters from "./getters";
 import * as mutations from "./mutations";
 import * as actions from "./actions";
-import password from "./password/password";
-import account from "./account/account";
-import note from "./note/note";
+import password from "./module/password";
+import account from "./module/account";
+import note from "./module/note";
 
 Vue.use(Vuex);
 
