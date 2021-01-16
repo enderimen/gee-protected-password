@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-password__form {
     display: flex;
     flex-direction: column;

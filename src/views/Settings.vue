@@ -47,7 +47,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-settings__form {
     display: flex;
     padding-top: 40px;

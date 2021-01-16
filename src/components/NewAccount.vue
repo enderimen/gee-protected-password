@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-newAccount {
     display: flex;
     flex-direction: column;

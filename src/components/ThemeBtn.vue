@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .theme-option {
     margin: 10px 20px;
     display: flex;

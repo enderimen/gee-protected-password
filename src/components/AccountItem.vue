@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-widget {
     &__card {
     height: 106px;

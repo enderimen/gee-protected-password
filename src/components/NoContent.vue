@@ -10,7 +10,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-nocontent {
   height: calc(100% - var(--header-gap));
     width: 100%;

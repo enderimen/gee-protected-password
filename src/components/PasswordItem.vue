@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-password__item {
     height: 80px;
     display: flex;

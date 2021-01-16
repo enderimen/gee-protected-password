@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-themeOption__list {
   display: flex;
   flex-wrap: wrap;
