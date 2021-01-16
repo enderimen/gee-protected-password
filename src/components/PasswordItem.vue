@@ -27,6 +27,7 @@ export default {
     padding-left: 20px;
     cursor: pointer;
     transition: ease-in 300ms;
+    color: var(--tab-text-color);
     border-bottom: 1px solid var(--line-bg-color);
 
     &.-active {

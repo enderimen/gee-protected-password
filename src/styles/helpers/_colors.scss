@@ -7,9 +7,14 @@
 
   --white: #fff;
   --black: #000;
+  --tab-text-color: #000;
   --content-bg-color: #fbf1f1;
   --soft-content-bg-color: #ececec;
   --sidemenu-bg-color: #0d1117;
+  --sidewindow-bg-color: #fff;
+  --sidewindow-border-color: transparent;
+  --sidemenu-header-border-color: #fff;
+  --widget-text-color: #00;
   --active-bg-color: #1f383e;
   --active-tab-bg-color: #076dcb;
   --active-link-badge-color: #3b90a5;
@@ -41,9 +46,9 @@
   --login-sidebar-bg-color: #0d3b66;
   --login-title-text-color: #566b8a;
 
-  --note-header-bg-color: #fbb901;
-  --note-foooter-bg-color: #fbb901;
-  --note-content-bg-color: #f7dc59;
+  --note-header-bg-color: #f7dc59;
+  --note-footer-bg-color: #f7dc59;
+  --note-content-bg-color: #ffea83;
 
   --alert-bg-color: #60bf82;
 }
@@ -51,6 +56,18 @@
 [data-theme="dark"] {
   --theme-bg-color: #0d1117;
   --active-bg-color: #0d1117;
+  --content-bg-color: #0d1117;
+  --soft-content-bg-color: #0d1117;
+  --sidewindow-bg-color: #0d1117;
+  --sidewindow-border-color: #30363d;
+  --sidemenu-header-border-color: #30363d;
+  --tab-text-color: #fff;
+  --widget-text-color: #fff;
+  --sidebar-border-color: #30363d;
+
+  --note-header-bg-color: #fff;
+  --note-footer-bg-color: #fff;
+  --note-content-bg-color: #fff;
 }
 
 [data-theme="mona-lisa"] {
@@ -61,6 +78,7 @@
   --button-border-color: #ff8e8e;
   --active-link-badge-color: #3ac2e4;
   --active-tab-bg-color: #912f56;
+  --widget-text-color: #000;
   --current-menu-bg-color: #912f56;
   --menu-bg-hover: #912f56;
   --soft-line-bg-color: #d6d6d6;
@@ -72,6 +90,7 @@
   --theme-bg-color: #404e67;
   --active-bg-color: #404e67;
   --sidemenu-bg-color: #404e67;
+  --widget-text-color: #000;
   --soft-line-bg-color: #1f383e;
   --button-bg-color: #404e67;
   --button-border-color: #404e67;
@@ -87,6 +106,7 @@
   --soft-line-bg-color: #d1d1d1;
   --active-tab-bg-color: #076dcb;
   --light-text-color: #fff;
+  --widget-text-color: #000;
 }
 
 [data-theme="klein-blue"] {
@@ -99,12 +119,13 @@
   --soft-line-bg-color: #d1d1d1;
   --soft-text-color: #fff;
   --light-text-color: #fff;
+  --widget-text-color: #000;
 }
 
 [data-theme="day-light"] {
   --theme-bg-color: #f8f8f8;
   --active-bg-color: #f8f8f8;
-  --button-bg-color: #ffffff;
+  --button-bg-color: #fff;
   --soft-line-bg-color: #d1d1d1;
   --sidemenu-bg-color: #000;
   --current-menu-bg-color: #000;
@@ -116,6 +137,12 @@
 
   --menu-bg-hover: #000;
   --menu-text-hover: #fff;
+  --widget-text-color: #000;
   --active-link-badge-color: #3ac2e4;
   --soft-text-color: #000;
+
+  // & .m-content {
+  //   background: var(--content-bg-color)
+  //     url("https://www.transparenttextures.com/patterns/skulls.png");
+  // }
 }

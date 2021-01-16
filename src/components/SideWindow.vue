@@ -54,6 +54,7 @@ export default {
 
     &.-opened {
         right: 0;
+        border-left: 1px solid var(--sidewindow-border-color);
     }
 
     &__header {
@@ -62,6 +63,7 @@ export default {
         padding-right: 30px;
         color: var(--white);
         background-color: var(--sidemenu-bg-color);
+        border-bottom: 1px solid var(--sidemenu-header-border-color);
 
         display: flex;
         align-items: center;
@@ -70,7 +72,7 @@ export default {
     &__content {
         flex: 2;
         padding: 45px 83px;
-        background-color: var(--white);
+        background-color: var(--sidewindow-bg-color);
         display: flex;
         flex-direction: column;
         justify-content: space-between;

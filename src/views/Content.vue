@@ -55,6 +55,7 @@ export default {
     padding-top: 40px;
     padding-left: 65px;
     padding-right: 65px;
-    background-color: var(--content-bg-color);
+     background-color: var(--content-bg-color);
+    // background: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/skulls.png");
 }
 </style>

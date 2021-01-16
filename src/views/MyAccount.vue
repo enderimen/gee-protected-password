@@ -80,6 +80,7 @@ export default {
     display: flex;
     flex-direction: column;
     margin-right: 37px;
+    color: var(--widget-text-color);
   }
 }
 </style>
