@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss">
 .theme-option {
-    margin: 20px;
+    margin: 10px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,12 +66,25 @@ export default {
                 background-color: var(--white);
 
                 &:before {
+                    border-radius: 2px;
                     border-bottom: 3px solid var(--black) !important;
                     border-left: 3px solid var(--black) !important;
                 }
             }
             &.klein-blue {
                 background-color: var(--theme-klein-blue);
+            }
+            &.skulls {
+                background: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/skulls.png") 100%;
+            }
+            &.white-leather {
+                background: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/white-leather.png") 100%;
+            }
+            &.flowers {
+                background: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/flowers.png") 100%;
+            }
+            &.xv {
+                background: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/xv.png") 100%;
             }
         }
 
@@ -88,6 +101,7 @@ export default {
                 width: 18px;
                 border-bottom: 3px solid var(--white);
                 border-left: 3px solid var(--white);
+                border-radius: 2px;
                 transform: rotate(-45deg);
             }
         }
