@@ -68,7 +68,7 @@ export default {
             left: 50%;
             top: -10px;
             transform: translateX(-50%);
-            background: url("./../icons/pin.png") no-repeat;
+            background-image: url("./../icons/pin.png");
             background-repeat: no-repeat;
             background-size: 100%;
         }

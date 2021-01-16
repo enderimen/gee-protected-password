@@ -8,7 +8,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import appNoteItem from '../components/NoteItem.vue';
+import appNoteItem from '@/components/NoteItem.vue';
 
 export default {
     components: {
