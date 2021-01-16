@@ -20,15 +20,12 @@ export default {
         appText
     },
     methods: {
-        ...mapMutations(["setIsOpenWindow"]),
-        getCurrentComponentName() {
-            return this.$router.currentRoute.path.split("/")[1]
-        }
+        ...mapMutations(["setIsOpenWindow"])
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-header {
     height: var(--header-gap);
     display: flex;

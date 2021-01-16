@@ -7,16 +7,6 @@
           </app-button>
       </app-header>
       <slot/>
-      <!-- <app-no-content>
-            <icon-password class="icon -large -soft"/>
-            <app-text tag="h3" size="large" weight="bold" class="-mt20">
-                Tüm parolalarınız tek bir yerde!
-            </app-text>
-            <app-text tag="p" weight="thin" class="-mt20">
-                Özenle korunan GEE kasanıza, şifrelerinizi hemen eklemeye başlayın.
-            </app-text>
-            <app-button class="-mt20">Yeni Şifre</app-button>
-      </app-no-content> -->
   </section>
 </template>
 
@@ -24,19 +14,13 @@
 import appHeader from "@/components/Header.vue";
 import appButton from "@/components/Button.vue";
 import IconPlus from "@/icons/plus.svg";
-import IconPassword from "@/icons/password.svg";
-import appNoContent from "@/components/NoContent.vue";
-import appText from "@/components/Text.vue";
 import { mapMutations } from "vuex";
 
 export default {
     components: {
         appHeader,
-        appNoContent,
-        IconPassword,
         appButton,
-        IconPlus,
-        appText
+        IconPlus
     },
     methods: {
         ...mapMutations(["setIsOpenWindow"]),
@@ -50,7 +34,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-content {
     width: 100%;
     height: 100vh;
