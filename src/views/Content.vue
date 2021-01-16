@@ -1,7 +1,7 @@
 <template>
   <section class="m-content">
       <app-header>
-          <app-button @click.native="setIsOpenWindow({status: true, component: getCurrentComponentName()})">
+          <app-button :class="{'-hidden' : !isSettingsPage()}" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">
               <IconPlus class="icon -small -mr15"/>
               Ekle
           </app-button>
@@ -42,6 +42,9 @@ export default {
         ...mapMutations(["setIsOpenWindow"]),
         getCurrentComponentName() {
             return this.$router.currentRoute.path.split("/")[1]
+        },
+        isSettingsPage() {
+            return this.getCurrentComponentName() === 'settings' ? false : true;
         }
     }
 }
@@ -55,7 +58,6 @@ export default {
     padding-top: 40px;
     padding-left: 65px;
     padding-right: 65px;
-     background-color: var(--content-bg-color);
-    // background: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/skulls.png");
+    background: var(--content-bg-texture);
 }
 </style>

@@ -28,3 +28,9 @@ export const setThemeName = (state, themeName) => {
     document.documentElement.setAttribute("data-theme", state.currentTheme);
     localStorage.setItem("theme-name", state.currentTheme);
 }
+
+export const setTextureName = (state, textureName) => {
+    state.textureName = textureName;
+    document.documentElement.setAttribute("data-texture", state.textureName);
+    localStorage.setItem("texture-name", state.textureName);
+}

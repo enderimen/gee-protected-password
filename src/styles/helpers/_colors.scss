@@ -3,7 +3,7 @@
   --theme-mono-lisa: #ff8e8e;
   --theme-science-blue: #076dcb;
   --theme-bunker: #404e67;
-  --theme-klein-blue: #05299e;
+  --theme-klein-blue: #000102;
 
   --white: #fff;
   --black: #000;
@@ -14,7 +14,7 @@
   --sidewindow-bg-color: #fff;
   --sidewindow-border-color: transparent;
   --sidemenu-header-border-color: #fff;
-  --widget-text-color: #00;
+  --widget-text-color: #000;
   --active-bg-color: #1f383e;
   --active-tab-bg-color: #076dcb;
   --active-link-badge-color: #3b90a5;
@@ -53,6 +53,19 @@
   --alert-bg-color: #60bf82;
 }
 
+[data-texture="skulls"] {
+  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/skulls.png");
+}
+[data-texture="white-leather"] {
+  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/white-leather.png");
+}
+[data-texture="flowers"] {
+  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/flowers.png");
+}
+[data-texture="xv"] {
+  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/xv.png");
+}
+
 [data-theme="dark"] {
   --theme-bg-color: #0d1117;
   --active-bg-color: #0d1117;
@@ -63,6 +76,7 @@
   --sidemenu-header-border-color: #30363d;
   --tab-text-color: #fff;
   --widget-text-color: #fff;
+  --widget-card-border-color: #d1d1d1;
   --sidebar-border-color: #30363d;
 
   --note-header-bg-color: #fff;
@@ -76,9 +90,11 @@
   --sidemenu-bg-color: #ff8e8e;
   --button-bg-color: #ff8e8e;
   --button-border-color: #ff8e8e;
-  --active-link-badge-color: #3ac2e4;
+  --active-link-badge-color: #fff;
   --active-tab-bg-color: #912f56;
   --widget-text-color: #000;
+  --widget-card-border-color: #ff8e8e;
+
   --current-menu-bg-color: #912f56;
   --menu-bg-hover: #912f56;
   --soft-line-bg-color: #d6d6d6;
@@ -91,6 +107,7 @@
   --active-bg-color: #404e67;
   --sidemenu-bg-color: #404e67;
   --widget-text-color: #000;
+  --widget-card-border-color: #404e67;
   --soft-line-bg-color: #1f383e;
   --button-bg-color: #404e67;
   --button-border-color: #404e67;
@@ -107,6 +124,10 @@
   --active-tab-bg-color: #076dcb;
   --light-text-color: #fff;
   --widget-text-color: #000;
+  --widget-card-border-color: #076dcb;
+  --current-menu-bg-color: #2b99ff;
+  --menu-bg-hover: #2b99ff;
+  --active-link-badge-color: #fff;
 }
 
 [data-theme="klein-blue"] {
@@ -120,6 +141,9 @@
   --soft-text-color: #fff;
   --light-text-color: #fff;
   --widget-text-color: #000;
+  --current-menu-bg-color: #2b99ff;
+  --menu-bg-hover: #2b99ff;
+  --active-link-badge-color: #fff;
 }
 
 [data-theme="day-light"] {
@@ -138,6 +162,8 @@
   --menu-bg-hover: #000;
   --menu-text-hover: #fff;
   --widget-text-color: #000;
+  --widget-card-border-color: #d1d1d1;
+  --current-menu-bg-color: #2b99ff;
   --active-link-badge-color: #3ac2e4;
   --soft-text-color: #000;
 

@@ -23,13 +23,17 @@ export default {
     appSideWindow
   },
   methods: {
-    ...mapMutations(["setThemeName"])
+    ...mapMutations(["setThemeName", "setTextureName"])
   },
   created() {
     if(localStorage.getItem("theme-name") === null) {
       this.setThemeName("day-light");
     } else {
       this.setThemeName(localStorage.getItem("theme-name"));
+    }
+
+    if(localStorage.getItem("texture-name")) {
+      this.setTextureName(localStorage.getItem("texture-name"));
     }
   }
 }

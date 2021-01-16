@@ -9,3 +9,7 @@ export const getComponentOptions = (state) => {
 export const getCurrentThemeName = (state) => {
     return state.currentTheme;
 }
+
+export const getCurrentTextureName = (state) => {
+    return state.textureName;
+}

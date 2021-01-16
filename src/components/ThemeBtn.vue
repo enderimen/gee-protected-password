@@ -1,7 +1,7 @@
 <template>
     <label class="theme-option" :for="name" @click="isChecked">
-        <input :id="name" class="theme-option-checkbox" type="radio" name="theme" :checked="name == getCurrentThemeName()">
-        <div class="theme-btn -mb10" :class="color" :data-theme-name="name"></div>
+        <input :id="name" class="theme-option-checkbox" type="radio" :name="title" :checked="name == getCurrentThemeName() || name == getCurrentTextureName()">
+        <div class="theme-btn -mb10" :class="color" :data-theme-name="name" :data-texture-name="name"></div>
         <app-text color="soft"><slot/></app-text>
     </label>
 </template>
@@ -15,15 +15,27 @@ export default {
   components: { appText },
     props: {
         name: String,
-        color: String
+        color: String,
+        title: String
     },
     methods: {
         ...mapMutations(["setThemeName"]),
-        ...mapGetters(["getCurrentThemeName"]),
+        ...mapGetters(["getCurrentThemeName", "getCurrentTextureName"]),
         isChecked(event) {
-            const currentTheme = event.target.getAttribute("data-theme-name")
-            if(currentTheme) {
-                this.$store.commit("setThemeName", currentTheme);
+            const currentTheme = event.target.getAttribute("data-theme-name");
+            const currentTexture = event.target.getAttribute("data-texture-name");
+
+            switch(this.title){
+                case "colors":
+                    if(currentTheme){
+                        this.$store.commit("setThemeName", currentTheme);
+                    }
+                break;
+                case "textures":
+                    if(currentTexture){
+                        this.$store.commit("setTextureName", currentTexture);
+                    }
+                break;
             }
         }
     }

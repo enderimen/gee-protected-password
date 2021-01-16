@@ -11,6 +11,7 @@ export default new Vuex.Store({
   state: {
     isOpenWindow: false,
     currentTheme: "",
+    textureName: "",
     componentOptions: {
       name: "",
       title: ""

@@ -88,14 +88,6 @@ export default {
     color: var(--black-text-color);
     background-color: var(--note-content-bg-color);
     background-image: url("https://www.transparenttextures.com/patterns/lined-paper.png");
-
-    // url("https://www.transparenttextures.com/patterns/skulls.png");
-
-    // url("https://www.transparenttextures.com/patterns/xv.png");
-
-    // url("https://www.transparenttextures.com/patterns/white-leather.png");
-
-    // url("https://www.transparenttextures.com/patterns/flowers.png");
   }
 }
 </style>
