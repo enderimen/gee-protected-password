@@ -8,18 +8,18 @@ export default {
     this.generatedPasswordHistory = this.generatePassword();
   },
   methods: {
-    copyClipboard(event, input) {
+    copyClipboard(input) {
       const copyText = document.querySelector(`[${input}]`);
-      const alertMessage = document.querySelector("[data-copy-alert]");
+      const alertMessage = document.querySelectorAll("[data-copy-alert]");
       copyText.select();
       copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
       document.execCommand("copy");
 
-      alertMessage.classList.add("-copied");
+      alertMessage.forEach(input => input.classList.add("-copied"));
 
       setTimeout(() => {
-        alertMessage.classList.remove("-copied");
+        alertMessage.forEach(input => input.classList.remove("-copied"));
       }, 3000);
     },
     generatePassword() {

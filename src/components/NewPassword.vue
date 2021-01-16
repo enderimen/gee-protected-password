@@ -15,7 +15,7 @@
         <div class="group">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
             <input type="text" class="-generate-password -hidden" :value="generatedPasswordHistory" data-generate-password>
-            <icon-copy class="icon -soft -mr10" @click="copyClipboard($event,'data-generate-password')"></icon-copy>
+            <icon-copy class="icon -soft -mr10" @click="copyClipboard('data-generate-password')"></icon-copy>
             <icon-generate class="icon -soft" @click="actionGeneratePassword"></icon-generate>
         </div>
     </form>

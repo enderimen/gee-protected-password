@@ -23,7 +23,7 @@
           <div class="group">
             <input type="password" :value="getPasswordDetail().password" class="m-password__input">
             <input type="text" :value="getPasswordDetail().password" class="m-password__input -hidden" data-copy-clipboard>
-            <app-copy class="icon -soft" @click="copyClipboard($event ,'data-copy-clipboard')"/>
+            <app-copy class="icon -soft" @click="copyClipboard('data-copy-clipboard')"/>
           </div>
         </div>
         <div class="m-password__info">
