@@ -1,6 +1,6 @@
 <template>
   <section class="m-sidebar">
-      <div class="m-dashboard">
+      <div class="m-dashboard -borderBottom">
           <img src="./../assets/logo.png" alt="logo" height="58" class="-mr10">
           <p><strong>gee</strong>protected</p>
       </div>
@@ -41,9 +41,9 @@
 
       <div class="m-dashboard">
           <label for="darkmode" class="m-darkmode">
-              <input type="checkbox" id="darkmode">
+              <input type="checkbox" id="darkmode" v-model="isDarkmode" @change="setDarkmode">
               <div class="darkmode-switch-btn"></div>
-              <span>Darkmode</span>
+              <span>Gece Modu</span>
           </label>
           <router-link tag="a" to="/logout">
             <IconLogout class="icon -mr15"/>
@@ -69,6 +69,20 @@ export default {
     IconPerson,
     IconSettings,
     IconLogout,
+  },
+  data() {
+    return {
+      isDarkmode: null
+    }
+  },
+  methods: {
+    setDarkmode() {
+      if(this.isDarkmode) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }else {
+        document.documentElement.setAttribute("data-theme", localStorage.getItem("theme-name"));
+      }
+    }
   }
 }
 </script>
@@ -78,6 +92,7 @@ export default {
   width: 320px;
   min-width: 320px;
   background-color: var(--theme-bg-color);
+  border-right: 1px solid var(--sidebar-border-color);
   height: 100vh;
 
   display: flex;
@@ -98,6 +113,10 @@ export default {
 
   font-family: var(--font-family);
 
+  &.-borderBottom {
+    border-bottom: 1px solid var(--soft-line-bg-color);
+  }
+
   & p {
     font-size: 18px;
     text-transform: uppercase;
@@ -117,6 +136,7 @@ export default {
     display: inline-flex;
     align-items: center;
     font-weight: 300;
+    text-decoration: none;
 
     &:active, &:visited {
       text-decoration: none;
@@ -157,13 +177,12 @@ export default {
       content: "";
       height: 20px;
       width: 20px;
-      background-color: var(--active-bg-color);
+      background: var(--active-bg-color) url("./../icons/moon.png") no-repeat center / 11px;
       border-radius: 50%;
       transition: all ease .3s;
       cursor: pointer;
     }
   }
-
   #darkmode {
     display: none;
 
@@ -173,7 +192,7 @@ export default {
 
         &:after {
           margin-left: 22px;
-          background-color: var(--light-text-color);
+          background: var(--light-text-color) url("./../icons/moon-black.png") no-repeat center / 11px;
         }
       }
     }
@@ -212,6 +231,7 @@ export default {
     &:last-child {
       margin-top: auto;
       border-top: 1px solid var(--soft-line-bg-color);
+      border-bottom: 1px solid var(--soft-line-bg-color);
     }
 
     a {
@@ -230,13 +250,17 @@ export default {
         text-decoration: none;
       }
 
-      &:hover {
-        cursor: pointer;
-        background-color: #1e2631;
+      &:not(.router-link-exact-active) {
+        &:hover {
+          cursor: pointer;
+          background-color: var(--menu-bg-hover);
+          color: var(--menu-text-hover);
+        }
       }
 
       &.router-link-exact-active {
-        background-color: var(--button-bg-color);
+        color: var(--current-menu-text-color);
+        background-color: var(--current-menu-bg-color);
 
         &:before {
           content: "";
