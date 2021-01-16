@@ -21,7 +21,7 @@
           <app-text size="small" weight="bold" class="-mb10" color="soft">Parola</app-text>
 
           <div class="group">
-            <input type="password" :value="getPasswordDetail().password" class="m-password__input">
+            <input type="password" :value="getPasswordDetail().password" class="m-password__input" disabled>
             <input type="text" :value="getPasswordDetail().password" class="m-password__input -hidden" data-copy-clipboard>
             <app-copy class="icon -soft" @click="copyClipboard('data-copy-clipboard')"/>
           </div>
