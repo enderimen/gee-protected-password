@@ -1,6 +1,6 @@
 <template>
   <section class="m-password">
-      <section class="m-password__list">
+      <section class="m-password__list" v-if="getPasswordList().length > 0">
         <div class="m-password__searchArea">
           <input type="text" class="m-password__search -mr20" placeholder="Hesap ya da e-posta ara" @input="setSearchQuery">
         </div>
@@ -14,7 +14,7 @@
         :class="{'-active': password.id == 1}"></app-password-item>
       </section>
 
-      <section class="m-password__detail">
+      <section class="m-password__detail" v-if="getPasswordList().length > 0">
         <div class="m-password__summary">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Kullanıcı Adı</app-text>
           <app-text size="small" weight="thin" class="-mb20">{{ getPasswordDetail().name }}</app-text>
@@ -39,15 +39,29 @@
         </div>
         <app-copied-alert />
       </section>
+
+      <app-no-content v-if="getPasswordList().length === 0">
+        <icon-password class="icon -large -soft"/>
+        <app-text tag="h3" size="large" weight="bold" class="-mt20">
+            Tüm parolalarınız tek bir yerde!
+        </app-text>
+        <app-text tag="p" weight="thin" class="-mt20">
+            Özenle korunan GEE kasanıza, şifrelerinizi hemen eklemeye başlayın.
+        </app-text>
+        <app-button class="-mt20">Yeni Şifre</app-button>
+      </app-no-content>
   </section>
 </template>
 
 <script>
 import appText from "@/components/Text.vue";
 import appCopy from "@/icons/copy.svg";
+import IconPassword from "@/icons/password.svg";
+import appButton from "@/components/Button.vue";
 import appPasswordItem from '@/components/PasswordItem.vue';
 import appCopiedAlert from '@/components/CopiedAlert.vue';
 import helperFuncs from "@/mixin/index.js";
+import appNoContent from "@/components/NoContent.vue";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -55,7 +69,10 @@ export default {
     appText,
     appCopy,
     appPasswordItem,
-    appCopiedAlert
+    appCopiedAlert,
+    IconPassword,
+    appNoContent,
+    appButton
   },
   data() {
     return {
@@ -87,7 +104,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .m-password {
   padding-top: 10px;
   margin-left: -65px;
