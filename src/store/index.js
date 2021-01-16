@@ -4,6 +4,8 @@ import * as getters from "./getters";
 import * as mutations from "./mutations";
 import * as actions from "./actions";
 import password from "./password/password";
+import account from "./account/account";
+import note from "./note/note";
 
 Vue.use(Vuex);
 
@@ -21,6 +23,8 @@ export default new Vuex.Store({
   mutations,
   actions,
   modules: {
-    password
+    password,
+    account,
+    note
   }
 })

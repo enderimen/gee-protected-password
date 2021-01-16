@@ -2,7 +2,7 @@
   <section class="m-password">
       <section class="m-password__list">
         <div class="m-password__searchArea">
-          <input type="text" class="m-password__search -mr20" placeholder="Hesap ya da şifre ara" @input="setSearchQuery">
+          <input type="text" class="m-password__search -mr20" placeholder="Hesap ya da e-posta ara" @input="setSearchQuery">
         </div>
 
         <app-password-item

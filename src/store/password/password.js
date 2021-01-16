@@ -12,7 +12,7 @@ const state = {
         {
           id: 2,
           title: "Yahoo",
-          name: "imen.ender@gmail.com",
+          name: "erdi.imen@gmail.com",
           password: "sdasdasdasaasdasdasd",
           website: "https://www.gmail.com",
           lastModified: "Today at 12:09 PM",
@@ -37,42 +37,14 @@ const state = {
       lastModified: "Today at 12:09 PM",
       created: "Today at 03:25 AM"
     },
-    noteList: [
-      {
-          id: 1,
-          title: "Test Teknik Not",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 03:25 AM"
-        },
-        {
-          id: 2,
-          title: "Test Yahoo Notu",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 02:25 AM"
-        },
-        {
-          id: 3,
-          title: "Vue 101",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 07:25 AM"
-        },
-        {
-          id: 4,
-          title: "Vue 201",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 07:25 AM"
-        }
-    ],
     searchQuery: ""
 };
 const getters = {
     getPasswordList(state) {
       if(state.searchQuery !== "") {
-        return state.passwordList.filter(passwordItem => passwordItem.title.toLowerCase().match(state.searchQuery.toLowerCase()));
+        return state.passwordList.filter(passwordItem => {
+          return passwordItem.title.toLowerCase().match(state.searchQuery.toLowerCase()) || passwordItem.name.toLowerCase().match(state.searchQuery.toLowerCase());
+        });
       }
       return state.passwordList;
     },
@@ -81,12 +53,6 @@ const getters = {
     },
     getPasswordDetail(state) {
       return state.passwordDetail;
-    },
-    getNoteList(state) {
-      return state.noteList;
-    },
-    getNote(state, noteId) {
-      return state.noteList.filter(note => note.id === parseInt(noteId));
     }
 };
 const mutations = {
@@ -95,12 +61,6 @@ const mutations = {
     },
     setPasswordDetail(state, passwordItem) {
       state.passwordDetail = passwordItem;
-    },
-    deleteNote(state, noteId) {
-      state.noteList.splice(state.noteList.findIndex(note => note.id === parseInt(noteId)), 1);
-    },
-    editNote(state) {
-      return state.noteList;
     }
 };
 const actions = {

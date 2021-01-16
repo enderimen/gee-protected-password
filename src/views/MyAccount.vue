@@ -2,42 +2,24 @@
   <section class="m-account">
       <p class="m-account__title">E-Posta Adreslerim(3)</p>
       <div class="m-widget__list">
-        <div class="m-widget__item">
-          <div class="m-widget__card -mb15">
-            <IconMessage class="icon -large"/>
-          </div>
-          <app-text weight="bold" class="-mb15">E-posta 1</app-text>
-          <app-text weight="thin" size="small">imen.ender@gmail.com</app-text>
-        </div>
-        <div class="m-widget__item">
-          <div class="m-widget__card -mb15">
-            <IconMessage class="icon -large"/>
-          </div>
-          <app-text weight="bold" class="-mb15">E-posta 2</app-text>
-          <app-text weight="thin" size="small">imen.ender@gmail.com</app-text>
-        </div>
-        <div class="m-widget__item">
-          <div class="m-widget__card -mb15">
-            <IconMessage class="icon -large"/>
-          </div>
-          <app-text weight="bold" class="-mb15">E-posta 3</app-text>
-          <app-text weight="thin" size="small">imen.ender@gmail.com</app-text>
-        </div>
+        <app-account-item v-for="account in getAccountList()" :account="account" :key="account.id"></app-account-item>
         <app-copied-alert />
       </div>
   </section>
 </template>
 
 <script>
-import appText from '@/components/Text.vue';
-import IconMessage from '@/icons/message.svg';
 import appCopiedAlert from '@/components/CopiedAlert.vue';
+import appAccountItem from '@/components/AccountItem.vue';
+import { mapGetters } from "vuex";
 
 export default {
   components: {
-    appText,
-    IconMessage,
-    appCopiedAlert
+    appCopiedAlert,
+    appAccountItem
+  },
+  methods: {
+    ...mapGetters(["getAccountList"])
   }
 }
 </script>
@@ -62,26 +44,8 @@ export default {
 .m-widget {
   &__list {
     display: flex;
+    flex-wrap: wrap;
     padding-top: 30px;
-  }
-
-  &__card {
-    height: 106px;
-    width: 167px;
-    border: 1px solid var(--widget-card-border-color);
-    border-radius: 5px;
-    background-color: var(--theme-bg-color);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    margin-right: 37px;
-    color: var(--widget-text-color);
   }
 }
 </style>
