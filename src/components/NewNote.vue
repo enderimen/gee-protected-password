@@ -2,16 +2,21 @@
   <section class="m-newNote">
       <label for="title">
         <app-text class="-mb10" color="soft">Başlık giriniz</app-text>
-        <input id="title" type="text" class="m-newNote__title" placeholder="Başlık giriniz">
+        <input id="title" type="text" class="m-newNote__title" placeholder="Başlık giriniz" :value="getCurrentItem().title ? getCurrentItem().title : ''">
       </label>
-      <textarea class="m-newNote__type" placeholder="Notunuzu yazmaya başlayın..."></textarea>
+      <textarea class="m-newNote__type" placeholder="Notunuzu yazmaya başlayın..." :value="getCurrentItem().content"></textarea>
   </section>
 </template>
 
 <script>
-import appText from './Text.vue'
+import appText from './Text.vue';
+import { mapGetters } from "vuex";
+
 export default {
   components: { appText },
+  methods: {
+    ...mapGetters(["getCurrentItem"])
+  }
 }
 </script>
 

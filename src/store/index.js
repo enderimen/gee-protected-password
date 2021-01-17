@@ -17,6 +17,8 @@ export default new Vuex.Store({
     componentOptions: {
       name: "",
       title: ""
+    },
+    currentItem: {
     }
   },
   getters,

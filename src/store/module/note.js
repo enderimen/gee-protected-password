@@ -3,7 +3,7 @@ const state = {
       {
           id: 1,
           title: "Test Teknik Not",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
+          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum",
           lastModified: "Today at 12:09 PM",
           created: "Today at 03:25 AM"
         },
@@ -34,8 +34,8 @@ const getters = {
     getNoteList(state) {
       return state.noteList;
     },
-    getNote(state, noteId) {
-      return state.noteList.filter(note => note.id === parseInt(noteId));
+    getNote(state) {
+      return (noteId) => state.noteList.find(note => note.id === parseInt(noteId));
     }
 };
 const mutations = {

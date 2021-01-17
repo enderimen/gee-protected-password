@@ -34,3 +34,7 @@ export const setTextureName = (state, textureName) => {
     document.documentElement.setAttribute("data-texture", state.textureName);
     localStorage.setItem("texture-name", state.textureName);
 }
+
+export const setCurrentItem = (state, currentItem) => {
+    return state.currentItem = currentItem;
+}

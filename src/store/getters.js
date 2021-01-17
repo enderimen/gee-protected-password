@@ -13,3 +13,7 @@ export const getCurrentThemeName = (state) => {
 export const getCurrentTextureName = (state) => {
     return state.textureName;
 }
+
+export const getCurrentItem = (state) => {
+    return state.currentItem;
+}
