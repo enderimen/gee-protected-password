@@ -68,7 +68,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["savePassword"]),
+        ...mapMutations(["savePassword", "setIsOpenWindow"]),
         ...mapGetters(["getPasswordListSize"]),
         savePasswordToPasswordList() {
             this.savePassword({

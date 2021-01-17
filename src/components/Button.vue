@@ -39,7 +39,7 @@ export default {
 
     &.-disabled {
       background-color: var(--placeholder-color);
-      border: 1px solid var(--placeholder-color);
+      border: 1px solid var(--placeholder-color) !important;
     }
 }
 </style>

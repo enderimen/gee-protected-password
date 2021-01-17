@@ -34,6 +34,9 @@ const getters = {
     getNoteList(state) {
       return state.noteList;
     },
+    getNoteListSize(state) {
+      return state.noteList.length;
+    },
     getNote(state) {
       return (noteId) => state.noteList.find(note => note.id === parseInt(noteId));
     }
@@ -44,6 +47,9 @@ const mutations = {
     },
     editNote(state) {
       return state.noteList;
+    },
+    saveNote(state, noteData) {
+      state.noteList.push(noteData);
     }
 };
 const actions = {
