@@ -5,17 +5,12 @@
       </header>
       <div class="m-window__content">
         <component :is="getComponentOptions.name" />
-        <div class="group">
-            <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Vazgeç</app-button>
-            <app-button>Kaydet</app-button>
-        </div>
       </div>
   </section>
 </template>
 
 <script>
 import appText from './Text.vue';
-import appButton from './Button.vue';
 import appNewPassword from '@/components/NewPassword.vue';
 import appNewNote from '@/components/NewNote.vue';
 import appNewAccount from '@/components/NewAccount.vue';
@@ -24,12 +19,15 @@ import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {
-    appButton,
     appNewPassword,
     appNewAccount,
     appText,
     appNewNote,
     appThemeOptionList
+  },
+  data() {
+    return {
+    }
   },
   computed: {
     ...mapGetters(["getIsOpenWindow", "getComponentOptions"])
@@ -73,15 +71,6 @@ export default {
         flex: 2;
         padding: 45px 83px;
         background-color: var(--sidewindow-bg-color);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        & .group {
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
-        }
     }
 }
 </style>

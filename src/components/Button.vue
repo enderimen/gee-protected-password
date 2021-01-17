@@ -36,5 +36,10 @@ export default {
     &.-hidden {
       display: none;
     }
+
+    &.-disabled {
+      background-color: var(--placeholder-color);
+      border: 1px solid var(--placeholder-color);
+    }
 }
 </style>

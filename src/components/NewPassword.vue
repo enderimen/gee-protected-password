@@ -1,16 +1,19 @@
 <template>
     <form class="m-password__form">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Başlık*</app-text>
+        <input type="text" placeholder="Başlık giriniz" v-model="formData.title">
+
         <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Kullanıcı Adı*</app-text>
-        <input type="text" placeholder="Kullanıcı adı girin">
+        <input type="text" placeholder="Kullanıcı adı girin" v-model="formData.username">
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10">Website Adı</app-text>
-        <input type="text" placeholder="Website adresi girin">
+        <input type="text" placeholder="Website adresi girin" v-model="formData.website">
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parola*</app-text>
-        <input type="password" class="-passwordInput" placeholder="Parola girin">
+        <input type="password" class="-passwordInput" placeholder="Parola girin" v-model="formData.password">
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parola Tekrar*</app-text>
-        <input type="password" class="-passwordInput" placeholder="Parola tekrarı girin">
+        <input type="password" class="-passwordInput" placeholder="Parola tekrarı girin" v-model="formData.rePassword">
         <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
         <div class="group">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
@@ -18,20 +21,66 @@
             <icon-copy class="icon -soft -mr10" @click="copyClipboard('data-generate-password')"></icon-copy>
             <icon-generate class="icon -soft" @click="actionGeneratePassword"></icon-generate>
         </div>
+
+        <div class="row">
+            <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Vazgeç</app-button>
+            <app-button @click.prevent.native="savePasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
+        </div>
     </form>
 </template>
 
 <script>
 import appText from './Text.vue';
+import appButton from './Button.vue';
 import IconGenerate from "@/icons/generate.svg";
 import IconCopy from "@/icons/copy.svg";
+import { mapGetters, mapMutations } from "vuex";
 import helperFuncs from "@/mixin/index.js";
 
 export default {
     components: {
         appText,
         IconGenerate,
-        IconCopy
+        IconCopy,
+        appButton
+    },
+    data() {
+        return {
+            formData: {
+                title: "",
+                username: "",
+                website: "",
+                password: "",
+                rePassword: ""
+            }
+        }
+    },
+    computed: {
+    isSaveEnabled() {
+        if (this.formData.title !== "" &&
+            this.formData.username !== "" &&
+            this.formData.password !== "" &&
+            (this.formData.password === this.formData.rePassword)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    },
+    methods: {
+        ...mapMutations(["savePassword"]),
+        ...mapGetters(["getPasswordListSize"]),
+        savePasswordToPasswordList() {
+            this.savePassword({
+                id: this.getPasswordListSize() + 1,
+                title: this.formData.title,
+                name: this.formData.username,
+                password: this.formData.password,
+                website: this.formData.website,
+                lastModified: this.getCurrentDate(),
+                created: this.getCurrentDate()
+            });
+        }
     },
     mixins: [helperFuncs]
 }
@@ -41,6 +90,7 @@ export default {
 .m-password__form {
     display: flex;
     flex-direction: column;
+    height: 100%;
 
     & input {
         height: 50px;
@@ -92,6 +142,13 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    & .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: auto;
     }
 }
 </style>

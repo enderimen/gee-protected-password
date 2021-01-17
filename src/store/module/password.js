@@ -51,6 +51,9 @@ const getters = {
     getPassword(state) {
       return (productId) => state.passwordList.find(passwordItem => passwordItem.id === parseInt(productId))
     },
+    getPasswordListSize(state) {
+      return state.passwordList.length;
+    },
     getPasswordDetail(state) {
       return state.passwordDetail;
     }
@@ -61,6 +64,9 @@ const mutations = {
     },
     setPasswordDetail(state, passwordItem) {
       state.passwordDetail = passwordItem;
+    },
+    savePassword(state, passwordData) {
+      state.passwordList.push(passwordData);
     }
 };
 const actions = {
