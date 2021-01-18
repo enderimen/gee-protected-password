@@ -79,6 +79,7 @@ export default {
     setDarkmode() {
       if(this.isDarkmode) {
         document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme-name", "dark");
       }else {
         document.documentElement.setAttribute("data-theme", localStorage.getItem("theme-name"));
       }
