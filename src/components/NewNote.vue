@@ -1,16 +1,16 @@
 <template>
-  <section class="m-newNote">
-      <label for="title">
-        <app-text class="-mb10" color="soft">Başlık giriniz</app-text>
-        <input id="title" type="text" class="m-newNote__title" placeholder="Başlık giriniz" v-model="formData.title">
-      </label>
-      <textarea class="m-newNote__type" placeholder="Notunuzu yazmaya başlayın..." v-model="formData.content"></textarea>
-
-      <div class="row">
-        <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Vazgeç</app-button>
-        <app-button @click.prevent.native="saveNoteToNoteList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
-      </div>
-  </section>
+  <form id="noteForm" class="m-newNote">
+    <label for="title">
+      <app-text class="-mb10" color="soft">Başlık giriniz</app-text>
+      <input type="text" class="m-newNote__title" placeholder="Başlık giriniz" v-model="formData.title">
+    </label>
+    <textarea class="m-newNote__type" placeholder="Notunuzu yazmaya başlayın..." v-model="formData.content"></textarea>
+    <div class="row">
+      <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Vazgeç</app-button>
+      <app-button v-if="getComponentOptions().title !== 'Notu Güncelle'" @click.prevent.native="saveNoteToNoteList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
+      <app-button v-else @click.prevent.native="editNoteToNoteList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Güncelle</app-button>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -27,23 +27,27 @@ export default {
   data() {
     return {
       formData: {
-          title: "",
-          content: ""
+        title: "",
+        content: ""
       }
     }
   },
+  created() {
+    this.formData.title = this.getCurrentItem().title ? this.getCurrentItem().title : '';
+    this.formData.content = this.getCurrentItem().content ? this.getCurrentItem().content : '';
+  },
   computed: {
     isSaveEnabled() {
-      if (this.formData.title !== "" && this.formData.content !== "") {
-            return false;
-        } else {
-            return true;
-        }
+      if(this.formData.title !== "" && this.formData.content !== "") {
+        return false;
       }
+
+      return true;
+    }
   },
   methods: {
-    ...mapGetters(["getCurrentItem", "getNoteListSize"]),
-    ...mapMutations(["saveNote", "setIsOpenWindow"]),
+    ...mapGetters(["getCurrentItem", "getNoteListSize", "getComponentOptions"]),
+    ...mapMutations(["saveNote", "setIsOpenWindow", "editNote"]),
     saveNoteToNoteList() {
       this.saveNote({
         id: this.getNoteListSize() + 1,
@@ -51,6 +55,15 @@ export default {
         content: this.formData.content,
         lastModified: this.getCurrentDate(),
         created: this.getCurrentDate()
+      });
+    },
+    editNoteToNoteList() {
+      this.editNote({
+        id: this.getCurrentItem().id,
+        title: this.formData.title,
+        content: this.formData.content,
+        lastModified: this.getCurrentDate(),
+        created: this.getCurrentItem().created
       });
     }
   },

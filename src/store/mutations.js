@@ -9,7 +9,7 @@ export const setIsOpenWindow = (state, payload) => {
             break;
             case "secure-notes":
                 state.componentOptions.name = "app-new-note";
-                state.componentOptions.title = "Yeni Not Ekle";
+                state.componentOptions.title = payload.title ? payload.title : "Yeni Not Ekle";
             break;
             case "account":
                 state.componentOptions.name = "app-new-account";

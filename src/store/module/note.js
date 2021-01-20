@@ -45,12 +45,12 @@ const mutations = {
     deleteNote(state, noteId) {
       state.noteList.splice(state.noteList.findIndex(note => note.id === parseInt(noteId)), 1);
     },
-    editNote(state) {
-      return state.noteList;
+    editNote(state, editedNote) {
+      state.noteList.splice(state.noteList.findIndex(note => note.id === parseInt(editedNote.id)), 1, editedNote);
     },
     saveNote(state, noteData) {
       state.noteList.push(noteData);
-    }
+    },
 };
 const actions = {
 };

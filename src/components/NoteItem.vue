@@ -5,7 +5,7 @@
             <div class="row">
                 <IconEdit class="icon -black -mr10" @click="editNote(note.id)"/>
                 <IconDelete class="icon -black" @click="deleteNote({title: note.title, id: note.id})"/>
-            </div> 
+            </div>
         </header>
         <article class="m-note__content">
             {{note.content}}
@@ -41,7 +41,7 @@ export default {
             }
         },
         editNote(noteId) {
-            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName()});
+            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "Notu Güncelle"});
             this.$store.commit("setCurrentItem", this.$store.getters.getNote(noteId));
         },
         getCurrentComponentName() {
