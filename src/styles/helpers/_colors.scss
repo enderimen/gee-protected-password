@@ -54,16 +54,16 @@
 }
 
 [data-texture="skulls"] {
-  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/skulls.png");
+  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/skulls.png") !important;
 }
 [data-texture="white-leather"] {
-  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/white-leather.png");
+  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/white-leather.png") !important;
 }
 [data-texture="flowers"] {
-  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/flowers.png");
+  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/flowers.png") !important;
 }
 [data-texture="xv"] {
-  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/xv.png");
+  --content-bg-texture: var(--content-bg-color) url("https://www.transparenttextures.com/patterns/xv.png") !important;
 }
 
 [data-theme="dark"] {
@@ -71,6 +71,7 @@
   --active-bg-color: #0d1117;
   --content-bg-color: #0d1117;
   --soft-content-bg-color: #0d1117;
+  --content-bg-color: #0d1117;
   --sidewindow-bg-color: #0d1117;
   --sidewindow-border-color: #30363d;
   --sidemenu-header-border-color: #30363d;
@@ -78,6 +79,7 @@
   --widget-text-color: #fff;
   --widget-card-border-color: #d1d1d1;
   --sidebar-border-color: #30363d;
+  --content-bg-texture: var(--content-bg-color);
 
   --note-header-bg-color: #fff;
   --note-footer-bg-color: #fff;

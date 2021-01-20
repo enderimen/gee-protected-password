@@ -41,7 +41,7 @@
 
       <div class="m-dashboard">
           <label for="darkmode" class="m-darkmode">
-              <input type="checkbox" id="darkmode" v-model="isDarkmode" @change="setDarkmode">
+              <input type="checkbox" id="darkmode" :checked="isDarkmode" @change="setDarkmode">
               <div class="darkmode-switch-btn"></div>
               <span>Gece Modu</span>
           </label>
@@ -70,17 +70,22 @@ export default {
     IconSettings,
     IconLogout,
   },
-  data() {
-    return {
-      isDarkmode: null
+  computed: {
+    isDarkmode() {
+      return localStorage.getItem("theme-name") === "dark" ? true : false;
     }
   },
   methods: {
-    setDarkmode() {
-      if(this.isDarkmode) {
+    setDarkmode(event) {
+      if(event.target.checked) {
         document.documentElement.setAttribute("data-theme", "dark");
+        if(localStorage.getItem("theme-name") !== "dark") {
+          localStorage.setItem("last-theme", localStorage.getItem("theme-name"));
+        }
+
         localStorage.setItem("theme-name", "dark");
-      }else {
+      } else {
+        localStorage.setItem("theme-name", localStorage.getItem("last-theme"));
         document.documentElement.setAttribute("data-theme", localStorage.getItem("theme-name"));
       }
     }
