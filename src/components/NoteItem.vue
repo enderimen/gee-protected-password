@@ -11,8 +11,13 @@
             {{note.content}}
         </article>
         <header class="m-note__footer -footer">
-            <app-text size="small" weight="bold"><strong>Oluşturulma:</strong> {{note.created}}</app-text>
-            <app-text size="small" weight="bold"><strong>Son düzenleme:</strong> {{note.lastModified}}</app-text>
+            <app-text size="xsmall" weight="bold">
+                <app-text size="xsmall" tag="p" color="soft">Oluşturulma</app-text><strong>{{note.created}}</strong>
+            </app-text>
+            <app-text size="xsmall" weight="bold">
+                <app-text size="xsmall" tag="p" color="soft">Son düzenleme</app-text>
+                <strong>{{note.lastModified}}</strong>
+            </app-text>
         </header>
     </div>
 </template>
