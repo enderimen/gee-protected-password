@@ -42,10 +42,17 @@ export default {
     getCurrentDate() {
       const today = new Date();
 
-      const date = `${today.getDate()}/${(today.getMonth()+1)}/${today.getFullYear()}`;
-      const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+      const hour = today.getHours() < 10 ? `0${today.getHours()}` : today.getHours();
+      const minute = today.getMinutes() < 10 ? `0${today.getMinutes()}` : today.getMinutes();
+      const second = today.getSeconds() < 10 ? `0${today.getSeconds()}` : today.getSeconds();
 
-      return `${date} ${time}`;
+      const date = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
+      const month = today.getMonth() < 10 ? `0${today.getMonth() + 1}` : today.getMonth();
+
+      const fullDate = `${date}/${month}/${today.getFullYear()}`;
+      const fullTime = `${hour}:${minute}:${second}`;
+
+      return `${fullDate} ${fullTime}`;
     }
   }
 }
