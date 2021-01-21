@@ -26,6 +26,7 @@
 import appText from '@/components/Text.vue';
 import IconDelete from '@/icons/delete.svg';
 import IconEdit from '@/icons/edit.svg';
+import helperFuncs from "@/mixin/index.js";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -38,7 +39,7 @@ export default {
         note: Object
     },
     methods: {
-        ...mapGetters(["getNote", "getCurrentComponentName"]),
+        ...mapGetters(["getNote"]),
         ...mapMutations(["setIsOpenWindow", "setCurrentItem"]),
         deleteNote(note){
             if(confirm(`${note.title} başlıklı notu silmek istediğinizden emin misiniz?`)){
@@ -48,11 +49,9 @@ export default {
         editNote(noteId) {
             this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "Notu Güncelle"});
             this.$store.commit("setCurrentItem", this.$store.getters.getNote(noteId));
-        },
-        getCurrentComponentName() {
-            return this.$router.currentRoute.path.split("/")[1]
         }
-    }
+    },
+    mixins: [helperFuncs]
 }
 </script>
 

@@ -53,6 +53,9 @@ export default {
       const fullTime = `${hour}:${minute}:${second}`;
 
       return `${fullDate} ${fullTime}`;
+    },
+    getCurrentComponentName() {
+      return this.$router.currentRoute.path.split("/")[1]
     }
   }
 }
