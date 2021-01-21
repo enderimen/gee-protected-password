@@ -6,7 +6,7 @@
     </label>
     <textarea class="m-newNote__type" placeholder="Notunuzu yazmaya başlayın..." v-model="formData.content"></textarea>
     <div class="row">
-      <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Vazgeç</app-button>
+      <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
       <app-button v-if="getComponentOptions().title !== 'Notu Güncelle'" @click.prevent.native="saveNoteToNoteList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
       <app-button v-else @click.prevent.native="editNoteToNoteList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Güncelle</app-button>
     </div>

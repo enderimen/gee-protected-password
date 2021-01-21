@@ -20,7 +20,7 @@
         </div>
 
         <div class="group">
-            <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Vazgeç</app-button>
+            <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
             <app-button>Kaydet</app-button>
         </div>
         <app-copied-alert />
