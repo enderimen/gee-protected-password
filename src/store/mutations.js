@@ -38,3 +38,7 @@ export const setTextureName = (state, textureName) => {
 export const setCurrentItem = (state, currentItem) => {
     return state.currentItem = currentItem;
 }
+
+export const setSearchQuery = (state, searchText) => {
+    state.searchQuery = searchText.toLowerCase();
+}

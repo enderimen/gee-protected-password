@@ -14,6 +14,7 @@ export default new Vuex.Store({
     isOpenWindow: false,
     currentTheme: "",
     textureName: "",
+    searchQuery: "",
     componentOptions: {
       name: "",
       title: ""

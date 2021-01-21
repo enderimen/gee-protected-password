@@ -36,14 +36,13 @@ const state = {
       website: "https://www.gee.com",
       lastModified: "Today at 12:09 PM",
       created: "Today at 03:25 AM"
-    },
-    searchQuery: ""
+    }
 };
 const getters = {
-    getPasswordList(state) {
-      if(state.searchQuery !== "") {
+    getPasswordList(state, getters, rootState) {
+      if(rootState.searchQuery !== "") {
         return state.passwordList.filter(passwordItem => {
-          return passwordItem.title.toLowerCase().match(state.searchQuery.toLowerCase()) || passwordItem.name.toLowerCase().match(state.searchQuery.toLowerCase());
+          return passwordItem.title.toLowerCase().match(rootState.searchQuery) || passwordItem.name.toLowerCase().match(rootState.searchQuery);
         });
       }
       return state.passwordList;
@@ -59,9 +58,6 @@ const getters = {
     }
 };
 const mutations = {
-    setSearchQuery(state, searchText){
-      state.searchQuery = searchText;
-    },
     setPasswordDetail(state, passwordItem) {
       state.passwordDetail = passwordItem;
     },

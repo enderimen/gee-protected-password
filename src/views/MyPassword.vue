@@ -1,10 +1,6 @@
 <template>
   <section class="m-password">
       <section class="m-password__list" v-if="getPasswordList().length > 0">
-        <div class="m-password__searchArea">
-          <input type="text" class="m-password__search -mr20" placeholder="Hesap ya da e-posta ara" @input="setSearchQuery">
-        </div>
-
         <app-password-item
         @click.native="currentAccount"
         v-for="password in getPasswordList()"
@@ -95,10 +91,7 @@ export default {
 
       event.target.classList.add("-active");
       this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(event.target.dataset.id));
-    },
-    setSearchQuery(event) {
-      this.$store.commit("setSearchQuery", event.target.value);
-    },
+    }
   },
   mixins: [helperFuncs]
 }

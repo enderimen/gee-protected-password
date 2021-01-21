@@ -31,7 +31,12 @@ const state = {
     ]
 };
 const getters = {
-    getNoteList(state) {
+    getNoteList(state, getters, rootState) {
+      if(rootState.searchQuery !== "") {
+        return state.noteList.filter(noteItem => {
+          return noteItem.title.toLowerCase().match(rootState.searchQuery) || noteItem.content.toLowerCase().match(rootState.searchQuery)
+        });
+      }
       return state.noteList;
     },
     getNoteListSize(state) {
