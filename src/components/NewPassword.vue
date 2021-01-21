@@ -4,7 +4,7 @@
         <input type="text" placeholder="Başlık giriniz" v-model="formData.title">
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Kullanıcı Adı*</app-text>
-        <input type="text" placeholder="Kullanıcı adı girin" v-model="formData.username">
+        <input type="text" placeholder="Kullanıcı adı girin" v-model="formData.name">
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10">Website Adı</app-text>
         <input type="text" placeholder="Website adresi girin" v-model="formData.website">
@@ -24,7 +24,8 @@
 
         <div class="row">
             <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-            <app-button @click.prevent.native="savePasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
+            <app-button v-if="getComponentOptions().title !== 'Şifre Güncelle'" @click.prevent.native="savePasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
+            <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Güncelle</app-button>
         </div>
     </form>
 </template>
@@ -48,17 +49,24 @@ export default {
         return {
             formData: {
                 title: "",
-                username: "",
+                name: "",
                 website: "",
                 password: "",
                 rePassword: ""
             }
         }
     },
+    created() {
+        this.formData.title = this.getCurrentItem().title ? this.getCurrentItem().title : "";
+        this.formData.name = this.getCurrentItem().name ? this.getCurrentItem().name : "";
+        this.formData.website = this.getCurrentItem().website ? this.getCurrentItem().website : "";
+        this.formData.password = this.getCurrentItem().password ? this.getCurrentItem().password : "";
+        this.formData.rePassword = this.getCurrentItem().password ? this.getCurrentItem().password : "";
+    },
     computed: {
-    isSaveEnabled() {
-        if (this.formData.title !== "" &&
-            this.formData.username !== "" &&
+        isSaveEnabled() {
+            if (this.formData.title !== "" &&
+            this.formData.name !== "" &&
             this.formData.password !== "" &&
             (this.formData.password === this.formData.rePassword)) {
                 return false;
@@ -68,17 +76,28 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["savePassword", "setIsOpenWindow"]),
-        ...mapGetters(["getPasswordListSize"]),
+        ...mapMutations(["savePassword", "setIsOpenWindow", "editPassword"]),
+        ...mapGetters(["getPasswordListSize", "getCurrentItem", "getComponentOptions"]),
         savePasswordToPasswordList() {
             this.savePassword({
                 id: this.getPasswordListSize() + 1,
                 title: this.formData.title,
-                name: this.formData.username,
+                name: this.formData.name,
                 password: this.formData.password,
                 website: this.formData.website,
                 lastModified: this.getCurrentDate(),
                 created: this.getCurrentDate()
+            });
+        },
+        editPasswordToPasswordList() {
+            this.editPassword({
+                id: this.getCurrentItem().id,
+                title: this.formData.title,
+                name: this.formData.name,
+                password: this.formData.password,
+                website: this.formData.website,
+                lastModified: this.getCurrentDate(),
+                created: this.getCurrentItem().created
             });
         }
     },

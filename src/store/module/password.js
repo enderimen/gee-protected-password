@@ -63,7 +63,10 @@ const mutations = {
     },
     savePassword(state, passwordData) {
       state.passwordList.push(passwordData);
-    }
+    },
+    editPassword(state, editedPassword) {
+      state.passwordList.splice(state.passwordList.findIndex(password => password.id === parseInt(editedPassword.id)), 1, editedPassword);
+    },
 };
 const actions = {
 };
