@@ -48,7 +48,6 @@ export default {
 
 <style lang="scss" scoped>
 .m-note {
-  padding-top: 30px;
   margin-left: -20px;
   margin-right: -20px;
   height: calc(100% - var(--header-gap));

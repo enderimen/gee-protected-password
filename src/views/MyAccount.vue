@@ -28,8 +28,6 @@ export default {
 .m-account {
     font-family: var(--font-family);
 
-    padding-top: 50px;
-
     &__title {
         padding-bottom: 30px;
         font-weight: 500;

@@ -39,7 +39,6 @@ export default {
     width: 100%;
     height: 100vh;
     overflow-y: scroll;
-    padding-top: 40px;
     padding-left: 65px;
     padding-right: 65px;
     background: var(--content-bg-texture);
