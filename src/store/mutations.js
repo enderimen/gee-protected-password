@@ -5,7 +5,7 @@ export const setIsOpenWindow = (state, payload) => {
         switch(payload.component){
             case "passwords":
                 state.componentOptions.name = "app-new-password";
-                state.componentOptions.title = "Yeni Parola Ekle";
+                state.componentOptions.title = payload.title ? payload.title : "Yeni Parola Ekle";
             break;
             case "secure-notes":
                 state.componentOptions.name = "app-new-note";
