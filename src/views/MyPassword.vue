@@ -2,7 +2,7 @@
   <section class="m-password">
       <section class="m-password__list" v-if="getPasswordList().length > 0">
         <app-password-item
-        @click.native="currentAccount"
+        @click.self.native="currentAccount"
         v-for="password in getPasswordList()"
         :key="password.id"
         :password="password"
@@ -15,7 +15,6 @@
           <app-text size="small" weight="bold" class="-mb10" color="soft">Kullanıcı Adı</app-text>
           <app-text size="small" weight="thin" class="-mb20">{{ getPasswordDetail().name }}</app-text>
           <app-text size="small" weight="bold" class="-mb10" color="soft">Parola</app-text>
-
           <div class="group">
             <input type="password" :value="getPasswordDetail().password" class="m-password__input" disabled>
             <input type="text" :value="getPasswordDetail().password" class="m-password__input -hidden" data-copy-clipboard>
@@ -70,7 +69,7 @@ export default {
     appNoContent,
     appButton
   },
-  data() {
+  data(){
     return {
       passwordDetail: {},
     }
@@ -79,7 +78,7 @@ export default {
     this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(1))
   },
   methods: {
-    ...mapGetters(["getPasswordList", "getPasswordDetail"]),
+    ...mapGetters(["getPasswordList", "getCurrentItem", "getPasswordDetail"]),
     currentAccount(event) {
       const tabList = document.querySelectorAll(".js-tab");
 
@@ -99,7 +98,6 @@ export default {
 
 <style lang="scss" scoped>
 .m-password {
-  padding-top: 10px;
   margin-left: -65px;
   margin-right: -65px;
   display: flex;

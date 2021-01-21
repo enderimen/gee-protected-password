@@ -59,7 +59,7 @@ const getters = {
 };
 const mutations = {
     setPasswordDetail(state, passwordItem) {
-      state.passwordDetail = passwordItem;
+      state.passwordDetail = passwordItem ? passwordItem : state.passwordList[0];
     },
     savePassword(state, passwordData) {
       state.passwordList.push(passwordData);
