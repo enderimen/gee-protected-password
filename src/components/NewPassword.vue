@@ -23,7 +23,7 @@
         </div>
 
         <div class="row">
-            <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
+            <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
             <app-button @click.prevent.native="savePasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
         </div>
     </form>
