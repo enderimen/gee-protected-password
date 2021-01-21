@@ -66,7 +66,7 @@ export default {
         font-weight: 300;
         background-color: var(--white);
         border-radius: 10px;
-        border: none;
+        border: 1px solid var(--line-bg-color);
         outline: none;
     }
 
