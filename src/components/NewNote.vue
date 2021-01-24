@@ -2,13 +2,13 @@
   <form id="noteForm" class="m-newNote">
     <label for="title">
       <app-text class="-mb10" color="soft">Başlık giriniz</app-text>
-      <input type="text" class="m-newNote__title" placeholder="Başlık giriniz" v-model="formData.title">
+      <input type="text" id="title" class="m-newNote__title" placeholder="Başlık giriniz" :value="title">
     </label>
-    <textarea class="m-newNote__type" placeholder="Notunuzu yazmaya başlayın..." v-model="formData.content"></textarea>
+    <textarea class="m-newNote__type" id="content" placeholder="Notunuzu yazmaya başlayın..." :value="content"></textarea>
     <div class="row">
       <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-      <app-button v-if="getComponentOptions().title !== 'Notu Güncelle'" @click.prevent.native="saveNoteToNoteList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
-      <app-button v-else @click.prevent.native="editNoteToNoteList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Güncelle</app-button>
+      <app-button v-if="getComponentOptions().title !== 'Notu Güncelle'" @click.prevent.native="saveNoteToNoteList()">Kaydet</app-button>
+      <app-button v-else @click.prevent.native="editNoteToNoteList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
     </div>
   </form>
 </template>
@@ -24,47 +24,57 @@ export default {
     appText,
     appButton
   },
-  data() {
+  data() {
     return {
-      formData: {
-        title: "",
-        content: ""
-      }
+      isUpdated: false
     }
   },
-  created() {
-    this.formData.title = this.getCurrentItem().title ? this.getCurrentItem().title : '';
-    this.formData.content = this.getCurrentItem().content ? this.getCurrentItem().content : '';
-  },
   computed: {
-    isSaveEnabled() {
-      if(this.formData.title !== "" && this.formData.content !== "") {
-        return false;
-      }
-
-      return true;
+    title() {
+        return this.getCurrentItem() ? this.getCurrentItem().title : "";
+    },
+    content() {
+        return this.getCurrentItem() ? this.getCurrentItem().content : "";
     }
   },
   methods: {
     ...mapGetters(["getCurrentItem", "getNoteListSize", "getComponentOptions"]),
-    ...mapMutations(["saveNote", "setIsOpenWindow", "editNote"]),
+    ...mapMutations(["saveNote", "setIsOpenWindow", "editNote", "setCurrentItem"]),
     saveNoteToNoteList() {
-      this.saveNote({
+      const title = document.getElementById("title").value;
+      const content = document.getElementById("content").value;
+
+      const currentNote = {
         id: this.getNoteListSize() + 1,
-        title: this.formData.title,
-        content: this.formData.content,
+        title: title,
+        content: content,
         lastModified: this.getCurrentDate(),
         created: this.getCurrentDate()
-      });
+      }
+
+      this.saveNote(currentNote);
     },
     editNoteToNoteList() {
-      this.editNote({
+      const title = document.getElementById("title").value;
+      const content = document.getElementById("content").value;
+
+      const currentNote = {
         id: this.getCurrentItem().id,
-        title: this.formData.title,
-        content: this.formData.content,
+        title: title,
+        content: content,
         lastModified: this.getCurrentDate(),
         created: this.getCurrentItem().created
-      });
+      }
+
+      this.editNote(currentNote);
+
+      this.setCurrentItem(currentNote);
+
+      this.isUpdated = true;
+
+      setTimeout(() => {
+          this.isUpdated = false;
+      }, 2000);
     }
   },
   mixins: [helperFuncs]

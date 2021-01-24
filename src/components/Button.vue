@@ -41,5 +41,11 @@ export default {
       background-color: var(--placeholder-color);
       border: 1px solid var(--placeholder-color) !important;
     }
+
+    &.-updated {
+      background-color: var(--alert-bg-color);
+      border: 1px solid var(--alert-bg-color) !important;
+      color: var(--white);
+    }
 }
 </style>

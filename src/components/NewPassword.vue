@@ -75,12 +75,17 @@ export default {
         ...mapMutations(["savePassword", "setIsOpenWindow", "editPassword", "setCurrentItem"]),
         ...mapGetters(["getPasswordListSize", "getCurrentItem", "getComponentOptions"]),
         savePasswordToPasswordList() {
+            const title = document.getElementById("title").value;
+            const name = document.getElementById("name").value;
+            const website = document.getElementById("website").value;
+            const password = document.getElementById("password").value;
+
             this.savePassword({
                 id: this.getPasswordListSize() + 1,
-                title: this.formData.title,
-                name: this.formData.name,
-                password: this.formData.password,
-                website: this.formData.website,
+                title: title,
+                name: name,
+                password: password,
+                website: website,
                 lastModified: this.getCurrentDate(),
                 created: this.getCurrentDate()
             });
