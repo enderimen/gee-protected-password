@@ -5,7 +5,7 @@
             <app-text size="small" weight="thin">{{ password.name }}</app-text>
         </div>
 
-        <IconEdit class="icon -black -mr10" @click="editPassword(password.id)"/>
+        <IconEdit class="icon -black -mr10" :data-password-id="password.id" @click="editPassword($event)"/>
     </div>
 </template>
 
@@ -25,9 +25,10 @@ export default {
     },
     methods: {
         ...mapMutations(["setIsOpenWindow"]),
-        editPassword(passwordId) {
-            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "Şifre Güncelle"});
+        editPassword(event) {
+            const passwordId = event.target.getAttribute("data-password-id");
             this.$store.commit("setCurrentItem", this.$store.getters.getPassword(passwordId));
+            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "Şifre Güncelle"});
         }
     },
     mixins: [helperFuncs]

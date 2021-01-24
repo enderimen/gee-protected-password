@@ -78,7 +78,7 @@ export default {
     this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(1))
   },
   methods: {
-    ...mapGetters(["getPasswordList", "getCurrentItem", "getPasswordDetail"]),
+    ...mapGetters(["getPasswordList", "getPasswordDetail"]),
     currentAccount(event) {
       const tabList = document.querySelectorAll(".js-tab");
 

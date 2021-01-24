@@ -1,19 +1,19 @@
 <template>
     <form class="m-password__form">
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Başlık*</app-text>
-        <input type="text" placeholder="Başlık giriniz" v-model="formData.title">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">Başlık*</app-text>
+        <input type="text" id="title" placeholder="Başlık giriniz" :value="title" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Kullanıcı Adı*</app-text>
-        <input type="text" placeholder="Kullanıcı adı girin" v-model="formData.name">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">Kullanıcı Adı*</app-text>
+        <input type="text" id="name" placeholder="Kullanıcı adı girin" :value="name" required>
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10">Website Adı</app-text>
-        <input type="text" placeholder="Website adresi girin" v-model="formData.website">
+        <input type="text" id="website" placeholder="Website adresi girin" :value="website" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parola*</app-text>
-        <input type="password" class="-passwordInput" placeholder="Parola girin" v-model="formData.password">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">Parola*</app-text>
+        <input type="password" id="password" placeholder="Parola girin" class="-passwordInput" :value="password" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parola Tekrar*</app-text>
-        <input type="password" class="-passwordInput" placeholder="Parola tekrarı girin" v-model="formData.rePassword">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">Parola Tekrar*</app-text>
+        <input type="password" id="repassword" placeholder="Parola tekrarı girin" class="-passwordInput" :value="password" required>
         <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
         <div class="group">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
@@ -25,7 +25,7 @@
         <div class="row">
             <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
             <app-button v-if="getComponentOptions().title !== 'Şifre Güncelle'" @click.prevent.native="savePasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
-            <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Güncelle</app-button>
+            <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled, '-updated' : isUpdated}" :disable="isSaveEnabled">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
         </div>
     </form>
 </template>
@@ -35,8 +35,8 @@ import appText from './Text.vue';
 import appButton from './Button.vue';
 import IconGenerate from "@/icons/generate.svg";
 import IconCopy from "@/icons/copy.svg";
-import { mapGetters, mapMutations } from "vuex";
 import helperFuncs from "@/mixin/index.js";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
     components: {
@@ -49,34 +49,30 @@ export default {
         return {
             formData: {
                 title: "",
-                name: "",
-                website: "",
-                password: "",
-                rePassword: ""
-            }
+                name : "",
+                website : "",
+                password : "",
+                rePassword : ""
+            },
+            isUpdated: false
         }
     },
-    created() {
-        this.formData.title = this.getCurrentItem().title ? this.getCurrentItem().title : "";
-        this.formData.name = this.getCurrentItem().name ? this.getCurrentItem().name : "";
-        this.formData.website = this.getCurrentItem().website ? this.getCurrentItem().website : "";
-        this.formData.password = this.getCurrentItem().password ? this.getCurrentItem().password : "";
-        this.formData.rePassword = this.getCurrentItem().password ? this.getCurrentItem().password : "";
-    },
     computed: {
-        isSaveEnabled() {
-            if (this.formData.title !== "" &&
-            this.formData.name !== "" &&
-            this.formData.password !== "" &&
-            (this.formData.password === this.formData.rePassword)) {
-                return false;
-            } else {
-                return true;
-            }
+        title() {
+            return this.getCurrentItem() ? this.getCurrentItem().title : "";
+        },
+        name() {
+            return this.getCurrentItem() ? this.getCurrentItem().name : "";
+        },
+        website() {
+            return this.getCurrentItem() ? this.getCurrentItem().website : "";
+        },
+        password() {
+            return this.getCurrentItem() ? this.getCurrentItem().password : "";
         }
     },
     methods: {
-        ...mapMutations(["savePassword", "setIsOpenWindow", "editPassword"]),
+        ...mapMutations(["savePassword", "setIsOpenWindow", "editPassword", "setCurrentItem"]),
         ...mapGetters(["getPasswordListSize", "getCurrentItem", "getComponentOptions"]),
         savePasswordToPasswordList() {
             this.savePassword({
@@ -90,15 +86,32 @@ export default {
             });
         },
         editPasswordToPasswordList() {
-            this.editPassword({
-                id: this.getCurrentItem().id,
-                title: this.formData.title,
-                name: this.formData.name,
-                password: this.formData.password,
-                website: this.formData.website,
-                lastModified: this.getCurrentDate(),
-                created: this.getCurrentItem().created
-            });
+            const title = document.getElementById("title").value;
+            const name = document.getElementById("name").value;
+            const website = document.getElementById("website").value;
+            const password = document.getElementById("password").value;
+
+            if (title !== "" && name !== "" && website !== "" && password !== "")  {
+                const currentPassword = {
+                    id: this.getCurrentItem().id,
+                    title: title,
+                    name: name,
+                    password: password,
+                    website: website,
+                    lastModified: this.getCurrentDate(),
+                    created: this.getCurrentItem().created
+                }
+
+                this.editPassword(currentPassword);
+
+                this.setCurrentItem(currentPassword);
+
+                this.isUpdated = true;
+
+                setTimeout(() => {
+                    this.isUpdated = false;
+                }, 2000);
+            }
         }
     },
     mixins: [helperFuncs]
