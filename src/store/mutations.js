@@ -14,7 +14,7 @@ export const setIsOpenWindow = (state, payload) => {
             break;
             case "account":
                 state.componentOptions.name = "app-new-account";
-                state.componentOptions.title = "Yeni Hesap Ekle";
+                state.componentOptions.title = payload.title ? payload.title : "Yeni Hesap Ekle";
             break;
             case "theme-option":
                 state.componentOptions.name = "app-theme-option-list";

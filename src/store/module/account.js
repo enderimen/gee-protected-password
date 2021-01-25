@@ -38,16 +38,22 @@ const getters = {
     getAccountList(state) {
       return state.accountList;
     },
-    getAccount(state, accountId) {
-      return state.accountList.filter(account => account.id === parseInt(accountId));
+    getAccount(state) {
+      return (accountId) => state.accountList.find(account => account.id === parseInt(accountId));
+    },
+    getAccountListSize(state) {
+      return state.accountList.length;
     }
 };
 const mutations = {
+    saveAccount(state, accountData) {
+      state.accountList.push(accountData);
+    },
     deleteAccount(state, accountId) {
       state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(accountId)), 1);
     },
-    editAccount(state) {
-      return state.accountList;
+    editAccount(state, editAccountId) {
+      state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(editAccountId.id)), 1, editAccountId);
     }
 };
 const actions = {
