@@ -53,7 +53,7 @@ export default {
 .m-note {
   margin-left: -20px;
   margin-right: -20px;
-  height: calc(100% - var(--header-gap));
+  height: calc(100% - var(--header-gap) - 30px);
 
   &__list {
     display: flex;
