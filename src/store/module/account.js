@@ -35,7 +35,12 @@ const state = {
     ]
 };
 const getters = {
-    getAccountList(state) {
+    getAccountList(state, getters, rootState) {
+      if(rootState.searchQuery !== "") {
+        return state.accountList.filter(accountItem => {
+          return accountItem.title.toLowerCase().match(rootState.searchQuery) || accountItem.email.toLowerCase().match(rootState.searchQuery);
+        });
+      }
       return state.accountList;
     },
     getAccount(state) {
