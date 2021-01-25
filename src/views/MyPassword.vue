@@ -9,7 +9,6 @@
         :data-id="password.id"
         :class="{'-active': password.id == 1}"></app-password-item>
       </section>
-
       <section class="m-password__detail" v-if="getPasswordList().length > 0">
         <div class="m-password__summary">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Kullanıcı Adı</app-text>
@@ -35,7 +34,7 @@
         <app-copied-alert />
       </section>
 
-      <app-no-content v-if="getPasswordList().length === 0">
+      <app-no-content v-if="getPasswordList().length === 0 && getSearchQuery() == ''">
         <icon-password class="icon -large -soft"/>
         <app-text tag="h3" size="large" weight="bold" class="-mt20">
             Tüm parolalarınız tek bir yerde!
@@ -45,6 +44,9 @@
         </app-text>
         <app-button class="-mt20">Yeni Şifre</app-button>
       </app-no-content>
+      <div class="-noResult" v-if="getPasswordList().length === 0 && getSearchQuery() != ''">
+        <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
+      </div>
   </section>
 </template>
 
@@ -78,7 +80,7 @@ export default {
     this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(1))
   },
   methods: {
-    ...mapGetters(["getPasswordList", "getPasswordDetail"]),
+    ...mapGetters(["getPasswordList", "getPasswordDetail", "getSearchQuery"]),
     currentAccount(event) {
       const tabList = document.querySelectorAll(".js-tab");
 
@@ -186,6 +188,12 @@ export default {
     & a {
       text-decoration: none;
     }
+  }
+
+  & .-noResult {
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
 }
 </style>

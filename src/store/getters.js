@@ -17,3 +17,7 @@ export const getCurrentTextureName = (state) => {
 export const getCurrentItem = (state) => {
     return state.currentItem;
 }
+
+export const getSearchQuery = (state) => {
+    return state.searchQuery;
+}
