@@ -54,6 +54,8 @@ export default {
       justify-content: center;
       flex: .5;
       padding-left: 20px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     &__input {
