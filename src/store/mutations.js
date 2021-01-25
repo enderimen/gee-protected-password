@@ -3,6 +3,7 @@ export const setIsOpenWindow = (state, payload) => {
 
     if(payload.status){
         switch(payload.component){
+            case "":
             case "passwords":
                 state.componentOptions.name = "app-new-password";
                 state.componentOptions.title = payload.title ? payload.title : "Yeni Parola Ekle";
