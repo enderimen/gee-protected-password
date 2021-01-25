@@ -1,10 +1,10 @@
 <template>
   <section class="m-note">
-    <div class="m-note__list" v-if="getNoteList().length > 0">
+    <div class="m-note__list" v-if="getNoteListSize() > 0">
       <app-note-item v-for="note in getNoteList()" :key="note.id" :note="note"></app-note-item>
     </div>
 
-    <app-no-content v-else>
+    <app-no-content v-if="getNoteListSize() === 0 && getSearchQuery() == ''">
       <icon-note class="icon -large -soft"/>
       <app-text tag="h3" size="large" weight="bold" class="-mt20">
           Tüm notlarınızı bir yerden yönetin!
@@ -12,8 +12,12 @@
       <app-text tag="p" weight="thin" class="-mt20">
           Unutmak istemediğiniz notlarınızı GEE kasanıza, hemen kaydetmeye başlayın.
       </app-text>
-      <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">Yeni Not</app-button>
+      <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">Not Ekleyin</app-button>
     </app-no-content>
+
+    <div class="-noResult" v-if="getNoteListSize() !== 0 && getSearchQuery() != ''">
+      <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
+    </div>
   </section>
 </template>
 
@@ -24,6 +28,7 @@ import appNoContent from "@/components/NoContent.vue";
 import appText from "@/components/Text.vue";
 import IconNote from "@/icons/note.svg";
 import appButton from "@/components/Button.vue";
+import helperFuncs from "@/mixin/index.js";
 
 export default {
     components: {
@@ -34,15 +39,13 @@ export default {
         appButton
     },
     methods: {
-      ...mapGetters(["getNoteList"]),
+      ...mapGetters(["getNoteList", "getNoteListSize", "getSearchQuery"]),
       ...mapMutations(["setIsOpenWindow"]),
-        getCurrentComponentName() {
-            return this.$router.currentRoute.path.split("/")[1]
-        },
         isSettingsPage() {
             return this.getCurrentComponentName() === 'settings' ? false : true;
         }
-    }
+    },
+    mixins: [helperFuncs]
 }
 </script>
 
@@ -56,6 +59,13 @@ export default {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+  }
+
+
+  & .-noResult {
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
 }
 </style>
