@@ -33,7 +33,7 @@
             <icon-generate class="icon -soft" @click="actionGeneratePassword"></icon-generate>
         </div>
 
-        <div class="row">
+        <div class="row -auto">
             <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
             <app-button v-if="getComponentOptions().title !== 'Şifre Güncelle'" @click.prevent.enter.native="savePasswordToPasswordList()">Kaydet</app-button>
             <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
@@ -205,7 +205,10 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: auto;
+        
+        &.-auto {
+            margin-top: auto;
+        }
     }
 
     & .icon.-openEye {
