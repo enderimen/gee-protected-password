@@ -10,10 +10,21 @@
         <input type="text" id="website" placeholder="Website adresi girin" :value="website" required>
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10">Parola*</app-text>
-        <input type="password" id="password" placeholder="Parola girin" class="-passwordInput" :value="password" required>
+
+        <div class="row">
+            <input :type="changePasswordType" id="password" placeholder="Parola girin" class="-passwordInput" :value="password" required>
+            <icon-open-eye v-if="isShowPassword" class="icon -soft -openEye" @click.self="isShowPassword = !isShowPassword"></icon-open-eye>
+            <icon-close-eye v-else class="icon -soft -openEye" @click.self="isShowPassword = !isShowPassword"></icon-close-eye>
+        </div>
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10">Parola Tekrar*</app-text>
-        <input type="password" id="repassword" placeholder="Parola tekrarı girin" class="-passwordInput" :value="password" required>
+
+        <div class="row">
+             <input :type="changeRePasswordType" id="repassword" placeholder="Parola tekrarı girin" class="-passwordInput" :value="password" required>
+            <icon-open-eye v-if="isShowRePassword" class="icon -soft -openEye" @click.self="isShowRePassword = !isShowRePassword"></icon-open-eye>
+            <icon-close-eye v-else class="icon -soft -openEye" @click.self="isShowRePassword = !isShowRePassword"></icon-close-eye>
+        </div>
+
         <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
         <div class="group">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
@@ -24,8 +35,8 @@
 
         <div class="row">
             <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-            <app-button v-if="getComponentOptions().title !== 'Şifre Güncelle'" @click.prevent.native="savePasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled}" :disabled="isSaveEnabled">Kaydet</app-button>
-            <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-disabled' : isSaveEnabled, '-updated' : isUpdated}" :disable="isSaveEnabled">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
+            <app-button v-if="getComponentOptions().title !== 'Şifre Güncelle'" @click.prevent.enter.native="savePasswordToPasswordList()">Kaydet</app-button>
+            <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
         </div>
     </form>
 </template>
@@ -35,14 +46,18 @@ import appText from './Text.vue';
 import appButton from './Button.vue';
 import IconGenerate from "@/icons/generate.svg";
 import IconCopy from "@/icons/copy.svg";
+import IconOpenEye from "@/icons/opened-eye.svg";
+import IconCloseEye from "@/icons/closed-eye.svg";
 import helperFuncs from "@/mixin/index.js";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
     components: {
         appText,
-        IconGenerate,
         IconCopy,
+        IconGenerate,
+        IconOpenEye,
+        IconCloseEye,
         appButton
     },
     data() {
@@ -54,10 +69,18 @@ export default {
                 password : "",
                 rePassword : ""
             },
-            isUpdated: false
+            isUpdated: false,
+            isShowPassword: true,
+            isShowRePassword: true
         }
     },
     computed: {
+        changePasswordType() {
+            return this.isShowPassword ? "password" : "text";
+        },
+        changeRePasswordType() {
+            return this.isShowRePassword ? "password" : "text";
+        },
         title() {
             return this.getCurrentItem() ? this.getCurrentItem().title : "";
         },
@@ -130,11 +153,12 @@ export default {
     height: 100%;
 
     & input {
+        width: 100%;
         height: 50px;
         border: none;
         margin-bottom: 20px;
         padding-left: 25px;
-        padding-right: 25px;
+        padding-right: 40px;
         color: var(--placeholder-color);
         background-color: var(--input-bg-color);
         font-weight: 500;
@@ -145,12 +169,7 @@ export default {
             color: var(--placeholder-color);
         }
 
-        &.-passwordInput {
-            background: url('./../icons/opened-eye.svg') no-repeat center 22px;
-        }
-
         &.-generate-password {
-            width: 80%;
             padding-left: 0;
             margin-bottom: 0;
             margin-right: auto;
@@ -182,10 +201,17 @@ export default {
     }
 
     & .row {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-top: auto;
+    }
+
+    & .icon.-openEye {
+        position: absolute;
+        right: 10px;
+        top: 15px;
     }
 }
 </style>
