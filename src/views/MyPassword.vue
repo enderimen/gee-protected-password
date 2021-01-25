@@ -1,6 +1,6 @@
 <template>
   <section class="m-password">
-      <section class="m-password__list" v-if="getPasswordList().length > 0">
+      <section class="m-password__list" v-if="getPasswordList().length">
         <app-password-item
         @click.self.native="currentAccount"
         v-for="password in getPasswordList()"
@@ -9,7 +9,7 @@
         :data-id="password.id"
         :class="{'-active': password.id == 1}"></app-password-item>
       </section>
-      <section class="m-password__detail" v-if="getPasswordList().length > 0">
+      <section class="m-password__detail" v-if="getPasswordList().length">
         <div class="m-password__summary">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Kullanıcı Adı</app-text>
           <app-text size="small" weight="thin" class="-mb20">{{ getPasswordDetail().name }}</app-text>
@@ -42,9 +42,9 @@
         <app-text tag="p" weight="thin" class="-mt20">
             Özenle korunan GEE kasanıza, şifrelerinizi hemen eklemeye başlayın.
         </app-text>
-        <app-button class="-mt20">Yeni Şifre</app-button>
+        <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">Yeni Şifre</app-button>
       </app-no-content>
-      <div class="-noResult" v-if="getPasswordList().length === 0 && getSearchQuery() != ''">
+      <div class="-noResult" v-if="getPasswordList().length !== 0 && getSearchQuery() != ''">
         <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
       </div>
   </section>
@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     ...mapGetters(["getPasswordList", "getPasswordDetail", "getSearchQuery"]),
+    ...mapMutations(["setIsOpenWindow"]),
     currentAccount(event) {
       const tabList = document.querySelectorAll(".js-tab");
 
@@ -92,6 +93,9 @@ export default {
 
       event.target.classList.add("-active");
       this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(event.target.dataset.id));
+    },
+    isSettingsPage() {
+      return this.getCurrentComponentName() === 'settings' ? false : true;
     }
   },
   mixins: [helperFuncs]
