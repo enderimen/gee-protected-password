@@ -1,6 +1,6 @@
 <template>
   <section class="m-password">
-      <section class="m-password__list" v-if="getPasswordList().length">
+      <section class="m-password__list" v-if="getPasswordListSize()">
         <app-password-item
         @click.self.native="currentAccount"
         v-for="password in getPasswordList()"
@@ -8,8 +8,12 @@
         :password="password"
         :data-id="password.id"
         :class="{'-active': password.id == 1}"></app-password-item>
+
+        <div class="-noResult" v-if="getPasswordListSize() !== 0 && getSearchQuery() != ''">
+          <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
+        </div>
       </section>
-      <section class="m-password__detail" v-if="getPasswordList().length">
+      <section class="m-password__detail" v-if="getPasswordListSize()">
         <div class="m-password__summary">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Kullanıcı Adı</app-text>
           <app-text size="small" weight="thin" class="-mb20">{{ getPasswordDetail().name }}</app-text>
@@ -34,7 +38,7 @@
         <app-copied-alert />
       </section>
 
-      <app-no-content v-if="getPasswordList().length === 0 && getSearchQuery() == ''">
+      <app-no-content v-if="getPasswordListSize() === 0 && getSearchQuery() == ''">
         <icon-password class="icon -large -soft"/>
         <app-text tag="h3" size="large" weight="bold" class="-mt20">
             Tüm parolalarınız tek bir yerde!
@@ -44,9 +48,6 @@
         </app-text>
         <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">Yeni Şifre</app-button>
       </app-no-content>
-      <div class="-noResult" v-if="getPasswordList().length !== 0 && getSearchQuery() != ''">
-        <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
-      </div>
   </section>
 </template>
 
@@ -80,7 +81,7 @@ export default {
     this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(1))
   },
   methods: {
-    ...mapGetters(["getPasswordList", "getPasswordDetail", "getSearchQuery"]),
+    ...mapGetters(["getPasswordList", "getPasswordDetail", "getSearchQuery", "getPasswordListSize"]),
     ...mapMutations(["setIsOpenWindow"]),
     currentAccount(event) {
       const tabList = document.querySelectorAll(".js-tab");
@@ -107,7 +108,7 @@ export default {
   margin-left: -65px;
   margin-right: -65px;
   display: flex;
-  height: calc(100% - var(--header-gap) - 10px);
+  height: calc(100% - var(--header-gap) - 30px);
 
   &__search {
     &Area {
@@ -137,6 +138,7 @@ export default {
   }
 
   &__list {
+    position: relative;
     flex: 1;
     border-right: 1px solid var(--line-bg-color);
     overflow-y: scroll;
@@ -198,6 +200,7 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 </style>
