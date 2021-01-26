@@ -9,7 +9,7 @@
         :data-id="password.id"
         :class="{'-active': password.id == 1}"></app-password-item>
 
-        <div class="-noResult" v-if="getPasswordListSize() !== 0 && getSearchQuery() != ''">
+        <div class="-noResult" v-if="getPasswordList().length === 0 && getSearchQuery() != ''">
           <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
         </div>
       </section>

@@ -15,7 +15,7 @@
       <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">Not Ekleyin</app-button>
     </app-no-content>
 
-    <div class="-noResult" v-if="getNoteListSize() !== 0 && getSearchQuery() != ''">
+    <div class="-noResult" v-if="getNoteList().length === 0 && getSearchQuery().length > 0">
       <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
     </div>
   </section>

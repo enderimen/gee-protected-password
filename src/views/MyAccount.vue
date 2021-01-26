@@ -1,6 +1,6 @@
 <template>
   <section class="m-account">
-    <section class="m-account__list" v-if="getAccountListSize()">
+    <section class="m-account__list" v-if="getAccountList().length">
         <p class="m-account__title">E-Posta Adreslerim({{getAccountListSize()}})</p>
         <div class="m-widget__list">
           <app-account-item v-for="account in getAccountList()" :account="account" :key="account.id"></app-account-item>
@@ -8,7 +8,7 @@
         </div>
     </section>
 
-    <app-no-content v-if="getAccountListSize() === 0 && getSearchQuery() == ''">
+    <app-no-content v-if="getAccountList().length === 0 && getSearchQuery() == ''">
       <icon-account class="icon -large -soft"/>
       <app-text tag="h3" size="large" weight="bold" class="-mt20">
           Tüm e-posta adresleriniz bir yerde!
@@ -19,7 +19,7 @@
       <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">Yeni Hesap</app-button>
     </app-no-content>
 
-    <div class="-noResult" v-if="getAccountListSize() !== 0 && getSearchQuery() != ''">
+    <div class="-noResult" v-if="getAccountList().length === 0 && getSearchQuery() != ''">
       <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
     </div>
   </section>
