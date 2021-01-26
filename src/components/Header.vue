@@ -1,7 +1,7 @@
 <template>
   <header class="m-header">
         <slot />
-        <div class="m-searchArea">
+        <div class="m-searchArea" v-if="getCurrentComponentName() !== 'settings'">
           <input type="text" class="m-search__input -mr20" placeholder="Hesap, not ya da e-posta arayın" @input="getSearchQuery">
         </div>
         <div class="row">
@@ -14,8 +14,9 @@
 
 <script>
 import IconBell from "@/icons/bell.svg";
-import { mapMutations } from "vuex";
 import appText from './Text.vue';
+import helperFuncs from '@/mixin/index.js';
+import { mapMutations } from "vuex";
 
 export default {
     components: {
@@ -27,7 +28,8 @@ export default {
         getSearchQuery(event) {
             this.setSearchQuery(event.target.value);
         }
-    }
+    },
+    mixins: [helperFuncs]
 }
 </script>
 
@@ -43,6 +45,7 @@ export default {
         display: flex;
         align-items: center;
         height: inherit;
+        margin-left: auto;
     }
 }
 .m-search {
