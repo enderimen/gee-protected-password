@@ -15,6 +15,7 @@ export default new Vuex.Store({
     currentTheme: "",
     textureName: "",
     searchQuery: "",
+    language: "tr",
     componentOptions: {
       name: "",
       title: ""

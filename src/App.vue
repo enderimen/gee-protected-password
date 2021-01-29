@@ -46,4 +46,13 @@ body {
 .row {
   display: flex;
 }
+html:lang(ar) * {
+  text-align: right !important;
+}
+html:lang(ar) .m-password__item .row {
+  order: 2;
+}
+html:lang(ar) .m-password__item svg {
+  order: 1;
+}
 </style>

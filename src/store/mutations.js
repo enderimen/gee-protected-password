@@ -43,3 +43,7 @@ export const setCurrentItem = (state, currentItem) => {
 export const setSearchQuery = (state, searchText) => {
     state.searchQuery = searchText.toLowerCase();
 }
+
+export const setLanguage = (state, currentLanguage) => {
+    state.language = currentLanguage;
+}

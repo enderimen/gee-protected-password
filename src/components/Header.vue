@@ -7,6 +7,11 @@
         <div class="row">
             <app-text color="soft" class="-mr10">Hoşgeldin, Ender!</app-text>
             <button class="a-themeOption -mr20" title="Tema seçin" @click="setIsOpenWindow({status: true, component: 'theme-option'})"></button>
+            <select class="m-language -mr20" v-model="language" @change="chooseLanguage($event)">
+                <option value="tr">Türkçe</option>
+                <option value="en">English</option>
+                <option value="ar">Arabic</option>
+            </select>
             <IconBell class="icon -black" />
         </div>
   </header>
@@ -19,16 +24,29 @@ import helperFuncs from '@/mixin/index.js';
 import { mapMutations } from "vuex";
 
 export default {
+    data() {
+        return {
+            language: localStorage.getItem("language") || "tr"
+        }
+    },
     components: {
         IconBell,
         appText
     },
     methods: {
-        ...mapMutations(["setIsOpenWindow", "setSearchQuery"]),
+        ...mapMutations(["setIsOpenWindow", "setSearchQuery", "setLanguage"]),
         getSearchQuery(event) {
             this.setSearchQuery(event.target.value);
+        },
+        chooseLanguage(event) {
+            const language = event.target.value;
+
+            localStorage.setItem("language", language);
+            document.documentElement.lang = language
+            this.setLanguage(language);
         }
     },
+
     mixins: [helperFuncs]
 }
 </script>
@@ -39,13 +57,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
 
     & .row {
         display: flex;
         align-items: center;
         height: inherit;
         margin-left: auto;
+        flex-shrink: 0;
     }
 }
 .m-search {
@@ -55,7 +73,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      flex: .5;
+      flex: 1;
       padding-left: 20px;
       margin-left: auto;
       margin-right: auto;
@@ -65,7 +83,7 @@ export default {
         box-sizing: border-box;
         padding: 15px 20px;
         height: 50px;
-        text-align: center;
+        text-align: center !important;
         color: var(--soft-icon-color);
         font-size: 16px;
         font-weight: 300;
@@ -88,5 +106,11 @@ export default {
     border-radius: 20px;
     cursor: pointer;
     outline: none;
+}
+
+.m-language {
+    height: 30px;
+    outline: none;
+    cursor: pointer;
 }
 </style>

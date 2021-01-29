@@ -21,3 +21,7 @@ export const getCurrentItem = (state) => {
 export const getSearchQuery = (state) => {
     return state.searchQuery;
 }
+
+export const getLanguage = (state) => {
+    return state.language;
+}
