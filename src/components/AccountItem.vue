@@ -60,16 +60,16 @@ export default {
 
         & .icon.-edit {
             position: absolute;
-            right: 3px;
+            right: 7px;
             top: 7px;
-            fill: var(--account-card-edit-color);
+            color: var(--account-card-edit-color);
         }
 
         & .icon.-delete {
             position: absolute;
             right: 30px;
             top: 7px;
-            fill: var(--account-card-edit-color);
+            color: var(--account-card-edit-color);
         }
     }
 

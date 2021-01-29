@@ -1,6 +1,6 @@
 <template>
     <div class="m-password__item js-tab">
-        <div class="row">
+        <div class="row -mr10">
             <app-text size="small" weight="bold" class="-mb10">{{ password.title }}</app-text>
             <app-text size="small" weight="thin">{{ password.name }}</app-text>
         </div>

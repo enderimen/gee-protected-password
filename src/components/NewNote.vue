@@ -97,11 +97,12 @@ export default {
       margin-bottom: 30px;
       padding-left: 15px;
       padding-right: 15px;
+      border: 1px solid var(--line-bg-color);
     }
 
     &__type {
       width: 100%;
-      padding: 30px;
+      padding: 15px;
       border: 1px solid var(--line-bg-color);
       resize: none;
       margin-bottom: 30px;

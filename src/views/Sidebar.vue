@@ -43,11 +43,11 @@
           <label for="darkmode" class="m-darkmode">
               <input type="checkbox" id="darkmode" :checked="isDarkmode" @change="setDarkmode">
               <div class="darkmode-switch-btn"></div>
-              <span>Gece Modu</span>
+              <span class="-ml10">Gece Modu</span>
           </label>
           <router-link tag="a" to="/logout">
-            <IconLogout class="icon -mr15"/>
-              <span>logout</span>
+            <IconLogout class="icon -mr10"/>
+              <span>Çıkış</span>
           </router-link>
       </div>
   </section>
@@ -176,6 +176,7 @@ export default {
     border: 2px solid var(--active-link-badge-color);
     margin-right: 5px;
     transition: all ease .3s;
+    text-align: left !important;
 
     &::after {
       display: inline-flex;

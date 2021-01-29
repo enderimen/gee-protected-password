@@ -1,16 +1,16 @@
 <template>
   <form class="m-settings__form">
         <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Kullanıcı Adı*</app-text>
-        <input type="text" class="-border" placeholder="Kullanıcı adı girin">
+        <input type="text" class="-border" placeholder="Kullanıcı adınızı girin">
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">E-Posta Adresi*</app-text>
-        <input type="email" class="-border" placeholder="E-posta adresi girin">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">E-Posta Adresini Değiştir</app-text>
+        <input type="email" class="-border" placeholder="E-posta adresinizi girin">
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parola*</app-text>
-        <input type="password" class="-passwordInput -border" placeholder="Parola girin">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parolanı Değiştir</app-text>
+        <input type="password" class="-passwordInput -border" placeholder="Parolanızı girin">
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parola Tekrar*</app-text>
-        <input type="password" class="-passwordInput -border" placeholder="Parola tekrarı girin">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parola Tekrarı</app-text>
+        <input type="password" class="-passwordInput -border" placeholder="Parolanızı tekrarı girin">
         <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
         <div class="group -mb20">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>

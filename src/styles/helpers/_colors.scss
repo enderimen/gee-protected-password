@@ -85,6 +85,10 @@
   --note-header-bg-color: #fff;
   --note-footer-bg-color: #fff;
   --note-content-bg-color: #fff;
+
+  .m-password__item .icon{
+    color: #fff !important;
+  }
 }
 
 [data-theme="mona-lisa"] {
@@ -103,6 +107,10 @@
   --soft-line-bg-color: #d6d6d6;
   --light-text-color: #fff;
   --soft-text-color: #fff;
+
+  .m-password__item.-active .icon{
+    color: #fff !important;
+  }
 }
 
 [data-theme="bunker"] {
@@ -115,6 +123,10 @@
   --button-bg-color: #404e67;
   --button-border-color: #404e67;
   --active-tab-bg-color: #404e67;
+
+  .m-password__item.-active .icon{
+    color: #fff !important;
+  }
 }
 
 [data-theme="science-blue"] {
@@ -131,6 +143,10 @@
   --current-menu-bg-color: #2b99ff;
   --menu-bg-hover: #2b99ff;
   --active-link-badge-color: #fff;
+
+  .m-password__item.-active .icon{
+    color: #fff !important;
+  }
 }
 
 [data-theme="klein-blue"] {
@@ -147,6 +163,10 @@
   --current-menu-bg-color: #2b99ff;
   --menu-bg-hover: #2b99ff;
   --active-link-badge-color: #fff;
+
+  .m-password__item.-active .icon {
+    color: #fff !important;
+  }
 }
 
 [data-theme="day-light"] {
@@ -170,8 +190,12 @@
   --active-link-badge-color: #3ac2e4;
   --soft-text-color: #000;
 
-  // & .m-content {
-  //   background: var(--content-bg-color)
-  //     url("https://www.transparenttextures.com/patterns/skulls.png");
-  // }
+  .m-password__item.-active .icon{
+    color: #fff !important;
+  }
+
+  .m-sidebar a.router-link-exact-active .icon,
+  .m-navigation a:hover .icon {
+    color: #fff !important;
+  }
 }
