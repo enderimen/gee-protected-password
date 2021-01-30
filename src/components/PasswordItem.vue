@@ -43,7 +43,7 @@ export default {
     align-items: center;
     padding-left: 20px;
     cursor: pointer;
-    transition: ease-in 300ms;
+    transition: ease-out 200ms;
     color: var(--tab-text-color);
     border-bottom: 1px solid var(--line-bg-color);
 
@@ -60,7 +60,7 @@ export default {
 
     &:not(.-active) {
       &:hover {
-        transition: ease-out 300ms;
+        transition: ease-in 200ms;
         background-color: var(--soft-content-bg-color);
       }
     }

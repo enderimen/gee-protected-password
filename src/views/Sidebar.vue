@@ -250,7 +250,7 @@ export default {
       padding: 15px 35px;
       position: relative;
       width: 100%;
-      transition: all 300ms;
+      transition: ease-out 200ms;
       letter-spacing: 1px;
 
       &:active, &:visited {
@@ -262,6 +262,7 @@ export default {
           cursor: pointer;
           background-color: var(--menu-bg-hover);
           color: var(--menu-text-hover);
+          transition: ease-in 200ms;
         }
       }
 
