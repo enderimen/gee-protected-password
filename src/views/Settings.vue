@@ -1,16 +1,25 @@
 <template>
   <form class="m-settings__form">
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Kullanıcı Adı*</app-text>
-        <input type="text" class="-border" placeholder="Kullanıcı adınızı girin">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">Kullanıcı Adı</app-text>
+        <input type="text" id="username" class="-border" placeholder="Kullanıcı adınızı girin" :value="getUser().name" required>
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10">E-Posta Adresini Değiştir</app-text>
-        <input type="email" class="-border" placeholder="E-posta adresinizi girin">
+        <input type="email" id="email" class="-border" placeholder="E-posta adresinizi girin" :value="getUser().email" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parolanı Değiştir</app-text>
-        <input type="password" class="-passwordInput -border" placeholder="Parolanızı girin">
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">Parolanızı Giriniz</app-text>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10" required>Parola Tekrarı</app-text>
-        <input type="password" class="-passwordInput -border" placeholder="Parolanızı tekrarı girin">
+        <div class="row">
+            <input :type="changePasswordType" id="password" placeholder="Parolanızı girin" class="-border" :value="getUser().password" required>
+            <icon-open-eye v-if="isShowPassword" class="icon -soft -openEye" @click.self="isShowPassword = !isShowPassword"></icon-open-eye>
+            <icon-close-eye v-else class="icon -soft -openEye" @click.self="isShowPassword = !isShowPassword"></icon-close-eye>
+        </div>
+
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">Parolanızı Tekrar Giriniz</app-text>
+        <div class="row">
+            <input :type="changeRePasswordType" id="repassword" placeholder="Parolanızı tekrarı girin" class="-border" :value="getUser().password" required>
+            <icon-open-eye v-if="isShowRePassword" class="icon -soft -openEye" @click.self="isShowRePassword = !isShowRePassword"></icon-open-eye>
+            <icon-close-eye v-else class="icon -soft -openEye" @click.self="isShowRePassword = !isShowRePassword"></icon-close-eye>
+        </div>
         <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
         <div class="group -mb20">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
@@ -20,8 +29,7 @@
         </div>
 
         <div class="group">
-            <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-            <app-button>Kaydet</app-button>
+            <app-button @click.prevent.native="updateUserInfo()">Güncelle</app-button>
         </div>
         <app-copied-alert />
     </form>
@@ -32,16 +40,57 @@ import appButton from '@/components/Button.vue';
 import appText from '@/components/Text.vue';
 import IconGenerate from "@/icons/generate.svg";
 import IconCopy from "@/icons/copy.svg";
+import IconOpenEye from "@/icons/opened-eye.svg";
+import IconCloseEye from "@/icons/closed-eye.svg";
 import helperFuncs from "@/mixin/index.js";
-import appCopiedAlert from '@/components/CopiedAlert.vue';
+import appCopiedAlert from "@/components/CopiedAlert.vue";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
     components: {
         appText,
         IconGenerate,
         IconCopy,
+        IconOpenEye,
+        IconCloseEye,
         appButton,
         appCopiedAlert
+    },
+    data() {
+        return {
+            isShowRePassword: true,
+            isShowPassword: true
+        }
+    },
+    computed: {
+        changeRePasswordType() {
+            return this.isShowRePassword ? "password" : "text";
+        },
+        changePasswordType() {
+            return this.isShowPassword ? "password" : "text";
+        }
+    },
+    methods: {
+        ...mapGetters(["getUser"]),
+        ...mapMutations(["editUser"]),
+        updateUserInfo() {
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const repassword = document.getElementById("repassword").value;
+
+            if(username !== "" && email !== "" && (password === repassword)) {
+                const userInfo = {
+                    id: 1,
+                    name: username,
+                    email: email,
+                    password: password,
+                    lastModified: this.getCurrentDate()
+                };
+                console.table(userInfo);
+                this.editUser(userInfo);
+            }
+        }
     },
     mixins: [helperFuncs]
 }
@@ -55,11 +104,12 @@ export default {
     max-width: 400px;
 
     & input {
+        width: 100%;
         height: 50px;
         border: none;
         margin-bottom: 20px;
         padding-left: 25px;
-        padding-right: 25px;
+        padding-right: 40px;
         color: var(--placeholder-color);
         background-color: var(--input-bg-color);
         font-weight: 500;
@@ -73,10 +123,6 @@ export default {
 
         &::placeholder {
             color: var(--placeholder-color);
-        }
-
-        &.-passwordInput {
-            background: url('./../icons/opened-eye.svg') no-repeat center 22px;
         }
 
         &.-generate-password {
@@ -108,7 +154,24 @@ export default {
         width: 100%;
         display: flex;
         align-items: center;
+        justify-content: flex-end;
+    }
+
+    & .row {
+        position: relative;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
+
+        &.-auto {
+            margin-top: auto;
+        }
+    }
+
+    & .icon.-openEye {
+        position: absolute;
+        right: 10px;
+        top: 15px;
     }
 }
 </style>

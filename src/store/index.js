@@ -6,6 +6,7 @@ import * as actions from "./actions";
 import password from "./module/password";
 import account from "./module/account";
 import note from "./module/note";
+import user from "./module/user";
 
 Vue.use(Vuex);
 
@@ -29,6 +30,7 @@ export default new Vuex.Store({
   modules: {
     password,
     account,
-    note
+    note,
+    user
   }
 })
