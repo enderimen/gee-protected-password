@@ -45,10 +45,10 @@
               <div class="darkmode-switch-btn"></div>
               <span class="-ml10">Gece Modu</span>
           </label>
-          <router-link tag="a" to="/logout">
+          <div class="row" @click="logout()">
             <IconLogout class="icon -mr10"/>
-              <span>Çıkış</span>
-          </router-link>
+            <span>Çıkış</span>
+          </div>
       </div>
   </section>
 </template>
@@ -88,6 +88,9 @@ export default {
         localStorage.setItem("theme-name", localStorage.getItem("last-theme"));
         document.documentElement.setAttribute("data-theme", localStorage.getItem("theme-name"));
       }
+    },
+    logout() {
+      this.$store.dispatch("logout");
     }
   }
 }
@@ -151,6 +154,12 @@ export default {
     & span {
       color: var(--light-text-color);
     }
+  }
+
+  & .row {
+    display: flex;
+    align-items: center;
+    color: var(--white);
   }
 
   .m-darkmode {
