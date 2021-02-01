@@ -25,3 +25,11 @@ export const getSearchQuery = (state) => {
 export const getLanguage = (state) => {
     return state.language;
 }
+
+export const isAuthenticated = (state) => {
+    return state.token !== "" ;
+}
+
+export const getAuthenticationMessage = (state) => {
+    return state.authenticationMessage;
+}

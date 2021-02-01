@@ -17,6 +17,13 @@ export default new Vuex.Store({
     textureName: "",
     searchQuery: "",
     language: "tr",
+    isLogin: false,
+    token: "",
+    apiKey: "AIzaSyB1RFrinX_xmm4DugHGhfR421JMdAtG0UQ",
+    authenticationMessage: {
+      email: null,
+      password: null
+    },
     componentOptions: {
       name: "",
       title: ""

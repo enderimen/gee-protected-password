@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <div class="row">
+    <div class="row" v-if="isAuthenticated()">
       <app-sidebar />
       <app-Content>
         <router-view/>
       </app-Content>
       <app-side-window></app-side-window>
     </div>
+    <app-login-template v-else>
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
+    </app-login-template>
   </div>
 </template>
 
@@ -14,18 +19,24 @@
 import appSidebar from "@/views/Sidebar.vue";
 import appContent from "@/views/Content.vue";
 import appSideWindow from '@/components/SideWindow.vue';
-import { mapMutations } from "vuex";
+import appLoginTemplate from "@/components/LoginTemplate.vue";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   components: {
     appSidebar,
     appContent,
-    appSideWindow
+    appSideWindow,
+    appLoginTemplate
   },
   methods: {
-    ...mapMutations(["setThemeName", "setTextureName"])
+    ...mapMutations(["setThemeName", "setTextureName"]),
+    ...mapGetters(["isAuthenticated"])
   },
   created() {
+
+    this.$store.dispatch("initAuth");
+
     if(localStorage.getItem("theme-name") === null) {
       this.setThemeName("day-light");
     } else {
@@ -54,5 +65,11 @@ html:lang(ar) .m-password__item .row {
 }
 html:lang(ar) .m-password__item svg {
   order: 1;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .200s;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }
 </style>

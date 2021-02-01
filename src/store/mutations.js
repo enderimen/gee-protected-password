@@ -47,3 +47,11 @@ export const setSearchQuery = (state, searchText) => {
 export const setLanguage = (state, currentLanguage) => {
     state.language = currentLanguage;
 }
+
+export const setToken = (state, token) => {
+    state.token = token;
+}
+
+export const clearToken = (state) => {
+    state.token = "";
+}
