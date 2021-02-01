@@ -16,7 +16,7 @@ export default {
       type: String,
       default: 'normal', // normal:14, small:12, xsmall:11, xxsmall:10
       validator: function(value) {
-        return ['large', 'normal', 'small', 'xsmall', 'xxsmall'].indexOf(value) !== -1
+        return ['xlarge', 'large', 'normal', 'small', 'xsmall', 'xxsmall'].indexOf(value) !== -1
       }
     },
     weight: {
@@ -28,7 +28,7 @@ export default {
     color: {
       type: String,
       validator: function(value) {
-        return ['soft'].indexOf(value) !== -1
+        return ['red', 'soft', 'white', 'darkblue'].indexOf(value) !== -1
       }
     }
   }
@@ -41,6 +41,11 @@ export default {
   user-select: none;
 }
 /* size */
+.xlarge {
+  font-size: 36px;
+  line-height: 54px;
+  font-weight: 600;
+}
 .large {
   font-size: 24px;
   line-height: 36px;
@@ -71,5 +76,14 @@ export default {
 /* color */
 .soft {
   color: var(--soft-icon-color);
+}
+.red {
+  color: red;
+}
+.white {
+  color: var(--white);
+}
+.darkblue {
+  color: var(--login-title-text-color);
 }
 </style>
