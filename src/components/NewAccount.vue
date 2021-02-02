@@ -22,7 +22,7 @@
 
      <div class="row -auto">
             <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-            <app-button v-if="getComponentOptions().title !== 'Hesap Bilgilerini Güncelle'" @click.prevent.enter.native="saveAccountToAccountList()" :class="{'-updated' : isSaved}">{{ isSaved ? "Kaydedildi" : "Kaydet"}}</app-button>
+            <app-button v-if="getComponentOptions.title !== 'Hesap Bilgilerini Güncelle'" @click.prevent.enter.native="saveAccountToAccountList()" :class="{'-updated' : isSaved}">{{ isSaved ? "Kaydedildi" : "Kaydet"}}</app-button>
             <app-button v-else @click.prevent.native="editSelectedAccount()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
         </div>
   </form>
@@ -50,19 +50,19 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(["getAccountListSize", "getCurrentItem", "getComponentOptions"]),
         title() {
-            return this.getCurrentItem() ? this.getCurrentItem().title : "";
+            return this.getCurrentItem ? this.getCurrentItem.title : "";
         },
         email() {
-            return this.getCurrentItem() ? this.getCurrentItem().email : "";
+            return this.getCurrentItem ? this.getCurrentItem.email : "";
         },
         password() {
-            return this.getCurrentItem() ? this.getCurrentItem().password : "";
+            return this.getCurrentItem ? this.getCurrentItem.password : "";
         }
     },
     methods: {
         ...mapMutations(["saveAccount", "setIsOpenWindow", "editAccount", "setCurrentItem"]),
-        ...mapGetters(["getAccountListSize", "getCurrentItem", "getComponentOptions"]),
         saveAccountToAccountList() {
 
             const title = document.getElementById("title").value;
@@ -73,15 +73,15 @@ export default {
             if (title !== "" && email !== "" && password !== "" && (password === repassword))  {
 
                 const currentAccount = {
-                id: this.getAccountListSize() + 1,
-                title: title,
-                password: password,
-                email: email,
-                lastModified: this.getCurrentDate(),
-                created: this.getCurrentDate()
-            }
+                    id: this.getAccountListSize + 1,
+                    title: title,
+                    password: password,
+                    email: email,
+                    lastModified: this.getCurrentDate(),
+                    created: this.getCurrentDate()
+                }
 
-                this.saveAccount(currentAccount);
+                this.$store.dispatch("saveAccount", currentAccount);
                 this.isSaved = true;
 
                  setTimeout(() => {
@@ -97,15 +97,16 @@ export default {
 
             if (title !== "" && email !== "" && password !== "" && (password === repassword))  {
                 const currentAccount = {
-                    id: this.getCurrentItem().id,
+                    id: this.getCurrentItem.id,
                     title: title,
                     password: password,
+                    key: this.getCurrentItem.key,
                     email: email,
                     lastModified: this.getCurrentDate(),
-                    created: this.getCurrentItem().created
+                    created: this.getCurrentItem.created
                 }
 
-                this.editAccount(currentAccount);
+                this.$store.dispatch("editAccount", currentAccount);
 
                 this.setCurrentItem(currentAccount);
 

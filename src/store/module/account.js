@@ -1,38 +1,8 @@
+import Vue from "vue";
+import { api } from "@/api";
+
 const state = {
-    accountList: [
-      {
-          id: 1,
-          title: "E-Posta 1",
-          email: "imen.ender@gmail.com",
-          password: "sdasdsd",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 03:25 AM"
-        },
-        {
-          id: 2,
-          title: "E-Posta 2",
-          email: "imen.ender@gmail.com",
-          password: "sdasdsd",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 02:25 AM"
-        },
-        {
-          id: 3,
-          title: "E-Posta 3",
-          email: "imen.ender@gmail.com",
-          password: "sdasdsd",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 07:25 AM"
-        },
-        {
-          id: 4,
-          title: "E-Posta 4",
-          email: "imen.ender@gmail.com",
-          password: "sdasdsd",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 07:25 AM"
-        }
-    ]
+    accountList: []
 };
 const getters = {
     getAccountList(state, getters, rootState) {
@@ -57,11 +27,34 @@ const mutations = {
     deleteAccount(state, accountId) {
       state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(accountId)), 1);
     },
-    editAccount(state, editAccountId) {
-      state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(editAccountId.id)), 1, editAccountId);
+    editAccount(state, editedAccount) {
+      state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(editedAccount.id)), 1, editedAccount);
     }
-};
-const actions = {
+  };
+  const actions = {
+    initAccountList({commit}) {
+      Vue.http.get(`${api.databaseUrl}accounts.json`).then(response => {
+        const data = response.data;
+
+        for (const key in data) {
+          data[key].key = key;
+          commit("saveAccount", data[key]);
+        }
+      });
+    },
+    saveAccount({commit}, accountData) {
+      Vue.http.post(`${api.databaseUrl}accounts.json`, accountData).then(() => {
+        commit("saveAccount", accountData);
+      }).catch(error => `Hesap verileri getirilirken hata ile karşılaşıldı. Hata detayı: ${error}`);
+    },
+    // deleteAccount({commit}, accountId) {
+    //   state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(accountId)), 1);
+    // },
+    editAccount({commit}, editedAccount) {
+      Vue.http.put(`${api.databaseUrl}accounts/${editedAccount.key}.json`, editedAccount).then(() => {
+        commit("editAccount", editedAccount);
+      });
+    },
 };
 
 export default {
