@@ -35,7 +35,7 @@
 
         <div class="row -auto">
             <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-            <app-button v-if="getComponentOptions().title !== 'Şifre Güncelle'" @click.prevent.enter.native="savePasswordToPasswordList()">Kaydet</app-button>
+            <app-button v-if="getComponentOptions.title !== 'Şifre Güncelle'" @click.prevent.enter.native="savePasswordToPasswordList()">Kaydet</app-button>
             <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
         </div>
     </form>
@@ -75,6 +75,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(["getPasswordListSize", "getCurrentItem", "getComponentOptions"]),
         changePasswordType() {
             return this.isShowPassword ? "password" : "text";
         },
@@ -82,29 +83,28 @@ export default {
             return this.isShowRePassword ? "password" : "text";
         },
         title() {
-            return this.getCurrentItem() ? this.getCurrentItem().title : "";
+            return this.getCurrentItem ? this.getCurrentItem.title : "";
         },
         name() {
-            return this.getCurrentItem() ? this.getCurrentItem().name : "";
+            return this.getCurrentItem ? this.getCurrentItem.name : "";
         },
         website() {
-            return this.getCurrentItem() ? this.getCurrentItem().website : "";
+            return this.getCurrentItem ? this.getCurrentItem.website : "";
         },
         password() {
-            return this.getCurrentItem() ? this.getCurrentItem().password : "";
+            return this.getCurrentItem ? this.getCurrentItem.password : "";
         }
     },
     methods: {
-        ...mapMutations(["savePassword", "setIsOpenWindow", "editPassword", "setCurrentItem"]),
-        ...mapGetters(["getPasswordListSize", "getCurrentItem", "getComponentOptions"]),
+        ...mapMutations(["setIsOpenWindow", "editPassword", "setCurrentItem"]),
         savePasswordToPasswordList() {
             const title = document.getElementById("title").value;
             const name = document.getElementById("name").value;
             const website = document.getElementById("website").value;
             const password = document.getElementById("password").value;
 
-            this.savePassword({
-                id: this.getPasswordListSize() + 1,
+            this.$store.dispatch("savePassword", {
+                id: this.getPasswordListSize + 1,
                 title: title,
                 name: name,
                 password: password,
@@ -118,19 +118,21 @@ export default {
             const name = document.getElementById("name").value;
             const website = document.getElementById("website").value;
             const password = document.getElementById("password").value;
+            const repassword = document.getElementById("repassword").value;
 
-            if (title !== "" && name !== "" && website !== "" && password !== "")  {
+            if (title !== "" && name !== "" && website !== "" && (password === repassword))  {
                 const currentPassword = {
-                    id: this.getCurrentItem().id,
+                    id: this.getCurrentItem.id,
                     title: title,
                     name: name,
+                    key: this.getCurrentItem.key,
                     password: password,
                     website: website,
                     lastModified: this.getCurrentDate(),
-                    created: this.getCurrentItem().created
+                    created: this.getCurrentItem.created
                 }
 
-                this.editPassword(currentPassword);
+                this.$store.dispatch("editPassword", currentPassword);
 
                 this.setCurrentItem(currentPassword);
 

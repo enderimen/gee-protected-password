@@ -34,8 +34,8 @@ export default {
     ...mapGetters(["isAuthenticated"])
   },
   created() {
-
     this.$store.dispatch("initAuth");
+    this.$store.dispatch("fetchPasswordList")
 
     if(localStorage.getItem("theme-name") === null) {
       this.setThemeName("day-light");

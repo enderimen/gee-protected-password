@@ -87,7 +87,6 @@ export default {
                     password: password,
                     lastModified: this.getCurrentDate()
                 };
-                console.table(userInfo);
                 this.editUser(userInfo);
             }
         }

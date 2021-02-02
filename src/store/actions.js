@@ -36,7 +36,6 @@ export const login = ({commit, dispatch, state}, authData) => {
 
         dispatch("expiresIn", new Date().getTime() + +response.data.expiresIn * 1000);
     }).catch((error) => {
-        console.log(error.data);
 
         switch (error.body.error.message) {
             case "EMAIL_NOT_FOUND":

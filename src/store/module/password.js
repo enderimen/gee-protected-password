@@ -1,42 +1,8 @@
+import Vue from "vue";
+import { api } from "@/api";
 const state = {
-    passwordList: [
-      {
-          id: 1,
-          title: "Google Gmail",
-          name: "imen.ender@gmail.com",
-          password: "sdasdasdasasdsdsdasdasds",
-          website: "https://www.gmail.com",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 03:25 AM"
-        },
-        {
-          id: 2,
-          title: "Yahoo",
-          name: "erdi.imen@gmail.com",
-          password: "sdasdasdasaasdasdasd",
-          website: "https://www.gmail.com",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 02:25 AM"
-        },
-        {
-          id: 3,
-          title: "Google Gmail",
-          name: "imen.ender@gmail.com",
-          password: "sdasda",
-          website: "https://www.gmail.com",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 07:25 AM"
-        }
-    ],
-    passwordDetail: {
-      id: 1,
-      title: "Test Account",
-      name: "test@gmail.com",
-      password: "sdasdasdasasdsdsdasdas",
-      website: "https://www.gee.com",
-      lastModified: "Today at 12:09 PM",
-      created: "Today at 03:25 AM"
-    }
+    passwordList: [],
+    passwordDetail: {}
 };
 const getters = {
     getPasswordList(state, getters, rootState) {
@@ -66,9 +32,38 @@ const mutations = {
     },
     editPassword(state, editedPassword) {
       state.passwordList.splice(state.passwordList.findIndex(password => password.id === parseInt(editedPassword.id)), 1, editedPassword);
-    },
+    }
 };
 const actions = {
+  savePassword({commit}, password) {
+    Vue.http.post(`${api.databaseUrl}passwords.json`, password).then((response) => {
+      commit("savePassword", password);
+    });
+  },
+  fetchPasswordList({commit, state}) {
+    Vue.http.get(`${api.databaseUrl}passwords.json`).then((response) => {
+      let data = response.data;
+
+      for (let key in data) {
+        data[key].key = key;
+        commit("savePassword", data[key]);
+      }
+
+      commit("setPasswordDetail", state.passwordList[0])
+    });
+  },
+  editPassword({commit}, editedPassword) {
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+      }
+    };
+
+    Vue.http.put(`${api.databaseUrl}passwords/${editedPassword.key}.json`, editedPassword, config).then((response => {
+      commit("editPassword", editedPassword)
+    }));
+  }
 };
 
 export default {

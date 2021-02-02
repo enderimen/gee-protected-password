@@ -18,7 +18,7 @@
             </router-link>
           </li>
           <li>
-            <router-link tag="a" to="/secure-notes" class="active">
+            <router-link tag="a" to="/secure-notes">
               <IconNote class="icon -mr15"/>
               <span>Notlarım</span>
             </router-link>

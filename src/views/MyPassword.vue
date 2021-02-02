@@ -1,44 +1,44 @@
 <template>
   <section class="m-password">
-      <section class="m-password__list" v-if="getPasswordListSize()">
+      <section class="m-password__list" v-if="getPasswordListSize">
         <app-password-item
         @click.self.native="currentAccount"
-        v-for="password in getPasswordList()"
+        v-for="password in getPasswordList"
         :key="password.id"
         :password="password"
         :data-id="password.id"
         :class="{'-active': password.id == 1}"></app-password-item>
 
-        <div class="-noResult" v-if="getPasswordList().length === 0 && getSearchQuery() != ''">
+        <div class="-noResult" v-if="getPasswordList.length === 0 && getSearchQuery != ''">
           <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
         </div>
       </section>
-      <section class="m-password__detail" v-if="getPasswordListSize()">
+      <section class="m-password__detail" v-if="getPasswordListSize">
         <div class="m-password__summary">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Kullanıcı Adı</app-text>
-          <app-text size="small" weight="thin" class="-mb20">{{ getPasswordDetail().name }}</app-text>
+          <app-text size="small" weight="thin" class="-mb20">{{ getPasswordDetail.name }}</app-text>
           <app-text size="small" weight="bold" class="-mb10" color="soft">Parola</app-text>
           <div class="group">
-            <input type="password" :value="getPasswordDetail().password" class="m-password__input" disabled>
-            <input type="text" :value="getPasswordDetail().password" class="m-password__input -hidden" data-copy-clipboard>
+            <input type="password" :value="getPasswordDetail.password" class="m-password__input" disabled>
+            <input type="text" :value="getPasswordDetail.password" class="m-password__input -hidden" data-copy-clipboard>
             <app-copy class="icon -soft" @click="copyClipboard('data-copy-clipboard')"/>
           </div>
         </div>
         <div class="m-password__info">
           <app-text size="small" weight="bold" class="-mb10" color="soft">Website Adresi</app-text>
           <a href="https://www.gmail.com" class="-mb20">
-            <app-text size="small" weight="thin" color="soft" >{{ getPasswordDetail().website }}</app-text>
+            <app-text size="small" weight="thin" color="soft" >{{ getPasswordDetail.website }}</app-text>
           </a>
           <app-text size="small" weight="bold" class="-mb10" color="soft">Son Düzenleme</app-text>
-          <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail().lastModified }}</app-text>
+          <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail.lastModified }}</app-text>
 
           <app-text size="small" weight="bold" class="-mb10" color="soft">Oluşturulma</app-text>
-          <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail().created }}</app-text>
+          <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail.created }}</app-text>
         </div>
         <app-copied-alert />
       </section>
 
-      <app-no-content v-if="getPasswordListSize() === 0 && getSearchQuery() == ''">
+      <app-no-content v-if="getPasswordListSize === 0 && getSearchQuery == ''">
         <icon-password class="icon -large -soft"/>
         <app-text tag="h3" size="large" weight="bold" class="-mt20">
             Tüm parolalarınız tek bir yerde!
@@ -80,8 +80,10 @@ export default {
   created() {
     this.$store.commit("setPasswordDetail", this.$store.getters.getPassword(1))
   },
-  methods: {
+  computed: {
     ...mapGetters(["getPasswordList", "getPasswordDetail", "getSearchQuery", "getPasswordListSize"]),
+  },
+  methods: {
     ...mapMutations(["setIsOpenWindow"]),
     currentAccount(event) {
       const tabList = document.querySelectorAll(".js-tab");
