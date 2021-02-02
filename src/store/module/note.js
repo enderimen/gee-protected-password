@@ -33,6 +33,7 @@ const mutations = {
 };
 const actions = {
   fetchNoteListFromServer({commit}) {
+    state.noteList = [];
     Vue.http.get(`${api.databaseUrl}notes.json`).then(response => {
       let data = response.data;
 
