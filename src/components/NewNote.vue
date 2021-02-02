@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["saveNote", "setIsOpenWindow", "editNote", "setCurrentItem"]),
+    ...mapMutations(["setIsOpenWindow", "setCurrentItem"]),
     saveNoteToNoteList() {
       const title = document.getElementById("title").value;
       const content = document.getElementById("content").value;
@@ -61,12 +61,13 @@ export default {
       const currentNote = {
         id: this.getCurrentItem.id,
         title: title,
+        key: this.getCurrentItem.key,
         content: content,
         lastModified: this.getCurrentDate(),
         created: this.getCurrentItem.created
       }
 
-      this.editNote(currentNote);
+      this.$store.dispatch("editNote", currentNote);
 
       this.setCurrentItem(currentNote);
 

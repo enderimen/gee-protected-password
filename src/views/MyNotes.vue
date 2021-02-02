@@ -1,10 +1,10 @@
 <template>
   <section class="m-note">
-    <div class="m-note__list" v-if="getNoteListSize() > 0">
-      <app-note-item v-for="note in getNoteList()" :key="note.id" :note="note"></app-note-item>
+    <div class="m-note__list" v-if="getNoteListSize > 0">
+      <app-note-item v-for="note in getNoteList" :key="note.key" :note="note"></app-note-item>
     </div>
 
-    <app-no-content v-if="getNoteListSize() === 0 && getSearchQuery() == ''">
+    <app-no-content v-if="getNoteListSize === 0 && getSearchQuery == ''">
       <icon-note class="icon -large -soft"/>
       <app-text tag="h3" size="large" weight="bold" class="-mt20">
           Tüm notlarınızı bir yerden yönetin!
@@ -15,20 +15,20 @@
       <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">Not Ekleyin</app-button>
     </app-no-content>
 
-    <div class="-noResult" v-if="getNoteList().length === 0 && getSearchQuery().length > 0">
+    <div class="-noResult" v-if="getNoteList.length === 0 && getSearchQuery.length > 0">
       <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
     </div>
   </section>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
 import appNoteItem from '@/components/NoteItem.vue';
 import appNoContent from "@/components/NoContent.vue";
 import appText from "@/components/Text.vue";
 import IconNote from "@/icons/note.svg";
 import appButton from "@/components/Button.vue";
 import helperFuncs from "@/mixin/index.js";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
     components: {
@@ -38,8 +38,13 @@ export default {
         appNoContent,
         appButton
     },
-    methods: {
+    created() {
+      this.$store.dispatch("fetchNoteListFromServer");
+    },
+    computed: {
       ...mapGetters(["getNoteList", "getNoteListSize", "getSearchQuery"]),
+    },
+    methods: {
       ...mapMutations(["setIsOpenWindow"]),
         isSettingsPage() {
             return this.getCurrentComponentName() === 'settings' ? false : true;

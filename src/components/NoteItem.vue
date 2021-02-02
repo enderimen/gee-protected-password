@@ -4,7 +4,7 @@
             <app-text size="small" weight="bold">{{note.title}}</app-text>
             <div class="row">
                 <IconEdit class="icon -black -mr10" @click="editNote(note.id)"/>
-                <IconDelete class="icon -black" @click="deleteNote({title: note.title, id: note.id})"/>
+                <IconDelete class="icon -black" @click="deleteNote({title: note.title, id: note.key})"/>
             </div>
         </header>
         <article class="m-note__content">
@@ -38,12 +38,14 @@ export default {
     props: {
         note: Object
     },
+    computed: {
+        ...mapGetters(["getNote"])
+    },
     methods: {
-        ...mapGetters(["getNote"]),
         ...mapMutations(["setIsOpenWindow", "setCurrentItem"]),
         deleteNote(note){
             if(confirm(`${note.title} başlıklı notu silmek istediğinizden emin misiniz?`)){
-                this.$store.commit("deleteNote", note.id);
+                this.$store.dispatch("deleteNote", note.id);
             }
         },
         editNote(noteId) {

@@ -2,36 +2,7 @@ import Vue from "vue";
 import { api } from "@/api";
 
 const state = {
-    noteList: [
-      {
-          id: 1,
-          title: "Test Teknik Not",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 03:25 AM"
-        },
-        {
-          id: 2,
-          title: "Test Yahoo Notu",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 02:25 AM"
-        },
-        {
-          id: 3,
-          title: "Vue 101",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 07:25 AM"
-        },
-        {
-          id: 4,
-          title: "Vue 201",
-          content: "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, expedita. Lorem ipsum, dolor sit.",
-          lastModified: "Today at 12:09 PM",
-          created: "Today at 07:25 AM"
-        }
-    ]
+    noteList: []
 };
 const getters = {
     getNoteList(state, getters, rootState) {
@@ -61,10 +32,29 @@ const mutations = {
     },
 };
 const actions = {
+  fetchNoteListFromServer({commit}) {
+    Vue.http.get(`${api.databaseUrl}notes.json`).then(response => {
+      let data = response.data;
+
+      for (const key in data) {
+        data[key].key = key;
+        commit("saveNote", data[key]);
+      }
+    });
+  },
   saveNote({commit}, noteData) {
     Vue.http.post(`${api.databaseUrl}notes.json`, noteData).then(response => {
       commit("saveNote", noteData);
-      console.log(response.data);
+    });
+  },
+  editNote({commit}, editedNote) {
+    Vue.http.put(`${api.databaseUrl}notes/${editedNote.key}.json`, editedNote).then(() => {
+      commit("editNote", editedNote);
+    });
+  },
+  deleteNote({commit}, noteId) {
+    Vue.http.delete(`${api.databaseUrl}notes/${noteId}.json`).then(() => {
+      commit("deleteNote", noteId);
     });
   }
 };
