@@ -32,6 +32,9 @@ const mutations = {
     },
     editPassword(state, editedPassword) {
       state.passwordList.splice(state.passwordList.findIndex(password => password.id === parseInt(editedPassword.id)), 1, editedPassword);
+    },
+    deletePassword(state, passwordId) {
+      state.passwordList.splice(state.passwordList.findIndex(password => password.key === passwordId), 1);
     }
 };
 const actions = {
@@ -49,19 +52,17 @@ const actions = {
         commit("savePassword", data[key]);
       }
 
-      commit("setPasswordDetail", state.passwordList[0])
+      commit("setPasswordDetail", state.passwordList[0]);
     });
   },
   editPassword({commit}, editedPassword) {
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
-      }
-    };
-
-    Vue.http.put(`${api.databaseUrl}passwords/${editedPassword.key}.json`, editedPassword, config).then((response => {
+    Vue.http.put(`${api.databaseUrl}passwords/${editedPassword.key}.json`, editedPassword).then((response => {
       commit("editPassword", editedPassword)
+    }));
+  },
+  deletePassword({commit}, passwordId) {
+    Vue.http.delete(`${api.databaseUrl}passwords/${passwordId}.json`).then((() => {
+      commit("deletePassword", passwordId);
     }));
   }
 };
