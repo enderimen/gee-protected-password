@@ -22,7 +22,7 @@ const getters = {
 };
 const mutations = {
     deleteNote(state, noteId) {
-      state.noteList.splice(state.noteList.findIndex(note => note.id === parseInt(noteId)), 1);
+      state.noteList.splice(state.noteList.findIndex(note => note.key === noteId), 1);
     },
     editNote(state, editedNote) {
       state.noteList.splice(state.noteList.findIndex(note => note.id === parseInt(editedNote.id)), 1, editedNote);
