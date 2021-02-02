@@ -144,6 +144,7 @@ export default {
     flex: 1;
     border-right: 1px solid var(--line-bg-color);
     overflow-y: scroll;
+    margin-bottom: -30px;
   }
 
   &__detail {
@@ -152,6 +153,7 @@ export default {
     align-items: center;
     flex: 1;
     background-color: var(--soft-content-bg-color);
+    margin-bottom: -30px;
   }
 
   &__summary {
