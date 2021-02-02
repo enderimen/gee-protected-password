@@ -7,7 +7,7 @@
     <textarea class="m-newNote__type" id="content" placeholder="Notunuzu yazmaya başlayın..." :value="content"></textarea>
     <div class="row">
       <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-      <app-button v-if="getComponentOptions().title !== 'Notu Güncelle'" @click.prevent.native="saveNoteToNoteList()">Kaydet</app-button>
+      <app-button v-if="getComponentOptions.title !== 'Notu Güncelle'" @click.prevent.native="saveNoteToNoteList()">Kaydet</app-button>
       <app-button v-else @click.prevent.native="editNoteToNoteList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
     </div>
   </form>
@@ -30,40 +30,40 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(["getCurrentItem", "getNoteListSize", "getComponentOptions"]),
     title() {
-        return this.getCurrentItem() ? this.getCurrentItem().title : "";
+        return this.getCurrentItem ? this.getCurrentItem.title : "";
     },
     content() {
-        return this.getCurrentItem() ? this.getCurrentItem().content : "";
+        return this.getCurrentItem ? this.getCurrentItem.content : "";
     }
   },
   methods: {
-    ...mapGetters(["getCurrentItem", "getNoteListSize", "getComponentOptions"]),
     ...mapMutations(["saveNote", "setIsOpenWindow", "editNote", "setCurrentItem"]),
     saveNoteToNoteList() {
       const title = document.getElementById("title").value;
       const content = document.getElementById("content").value;
 
       const currentNote = {
-        id: this.getNoteListSize() + 1,
+        id: this.getNoteListSize + 1,
         title: title,
         content: content,
         lastModified: this.getCurrentDate(),
         created: this.getCurrentDate()
       }
 
-      this.saveNote(currentNote);
+      this.$store.dispatch("saveNote", currentNote);
     },
     editNoteToNoteList() {
       const title = document.getElementById("title").value;
       const content = document.getElementById("content").value;
 
       const currentNote = {
-        id: this.getCurrentItem().id,
+        id: this.getCurrentItem.id,
         title: title,
         content: content,
         lastModified: this.getCurrentDate(),
-        created: this.getCurrentItem().created
+        created: this.getCurrentItem.created
       }
 
       this.editNote(currentNote);

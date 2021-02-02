@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { api } from "@/api";
+
 const state = {
     noteList: [
       {
@@ -58,6 +61,12 @@ const mutations = {
     },
 };
 const actions = {
+  saveNote({commit}, noteData) {
+    Vue.http.post(`${api.databaseUrl}notes.json`, noteData).then(response => {
+      commit("saveNote", noteData);
+      console.log(response.data);
+    });
+  }
 };
 
 export default {
