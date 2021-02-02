@@ -38,9 +38,6 @@ export default {
         appNoContent,
         appButton
     },
-    created() {
-      this.$store.dispatch("fetchNoteListFromServer");
-    },
     computed: {
       ...mapGetters(["getNoteList", "getNoteListSize", "getSearchQuery"]),
     },

@@ -35,7 +35,8 @@ export default {
   },
   created() {
     this.$store.dispatch("initAuth");
-    this.$store.dispatch("fetchPasswordList")
+    this.$store.dispatch("fetchPasswordList");
+    this.$store.dispatch("fetchNoteListFromServer");
 
     if(localStorage.getItem("theme-name") === null) {
       this.setThemeName("day-light");
