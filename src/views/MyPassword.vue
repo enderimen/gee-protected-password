@@ -7,7 +7,7 @@
         :key="password.id"
         :password="password"
         :data-id="password.id"
-        :class="{'-active': password.id == 1}"></app-password-item>
+        :class="{'-active': password.id == getPasswordList[0].id}"></app-password-item>
 
         <div class="-noResult" v-if="getPasswordList.length === 0 && getSearchQuery != ''">
           <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>

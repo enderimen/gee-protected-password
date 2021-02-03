@@ -25,7 +25,7 @@ const mutations = {
       state.accountList.push(accountData);
     },
     deleteAccount(state, accountId) {
-      state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(accountId)), 1);
+      state.accountList.splice(state.accountList.findIndex(account => account.key === accountId), 1);
     },
     editAccount(state, editedAccount) {
       state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(editedAccount.id)), 1, editedAccount);
@@ -47,9 +47,11 @@ const mutations = {
         commit("saveAccount", accountData);
       }).catch(error => `Hesap verileri getirilirken hata ile karşılaşıldı. Hata detayı: ${error}`);
     },
-    // deleteAccount({commit}, accountId) {
-    //   state.accountList.splice(state.accountList.findIndex(account => account.id === parseInt(accountId)), 1);
-    // },
+    deleteAccount({commit}, accountId) {
+      Vue.http.delete(`${api.databaseUrl}accounts/${accountId}.json`).then(() => {
+        commit("deleteAccount", accountId);
+      });
+    },
     editAccount({commit}, editedAccount) {
       Vue.http.put(`${api.databaseUrl}accounts/${editedAccount.key}.json`, editedAccount).then(() => {
         commit("editAccount", editedAccount);

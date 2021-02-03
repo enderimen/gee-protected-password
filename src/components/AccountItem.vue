@@ -3,7 +3,7 @@
         <div class="m-widget__card -mb15">
             <IconMessage class="icon -large"/>
             <IconEdit class="icon -edit" :data-account-id="account.id" @click="editAccount($event)"/>
-            <IconDelete class="icon -delete" :data-account-id="account.id" @click="deleteAccountFromList({title: account.title, id: account.id})"/>
+            <IconDelete class="icon -delete" :data-account-key="account.key" @click="deleteAccountFromList({title: account.title, id: account.key})"/>
         </div>
         <app-text weight="bold" class="-mb15">{{ account.title }}</app-text>
         <app-text weight="thin" size="small">{{ account.email }}</app-text>
@@ -37,7 +37,7 @@ export default {
         },
         deleteAccountFromList(account) {
            if(confirm(`${account.title} başlıklı hesabı silmek istediğinizden emin misiniz?`)){
-                this.deleteAccount(account.id);
+                this.$store.dispatch("deleteAccount", account.id);
             }
         }
     },
