@@ -3,7 +3,7 @@
       <app-header>
           <app-button :class="{'-hidden' : !isSettingsPage()}" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">
               <IconPlus class="icon -small -mr15"/>
-              Ekle
+              {{$t('addButton')}}
           </app-button>
       </app-header>
       <slot/>

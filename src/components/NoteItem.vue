@@ -12,10 +12,10 @@
         </article>
         <header class="m-note__footer -footer">
             <app-text size="xsmall" weight="bold">
-                <app-text size="xsmall" tag="p" color="soft">Oluşturulma</app-text><strong>{{note.created}}</strong>
+                <app-text size="xsmall" tag="p" color="soft">{{$t("createdTitle")}}</app-text><strong>{{note.created}}</strong>
             </app-text>
             <app-text size="xsmall" weight="bold">
-                <app-text size="xsmall" tag="p" color="soft">Son düzenleme</app-text>
+                <app-text size="xsmall" tag="p" color="soft">{{$t("lastEdit")}}</app-text>
                 <strong>{{note.lastModified}}</strong>
             </app-text>
         </header>
@@ -49,7 +49,7 @@ export default {
             }
         },
         editNote(noteId) {
-            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "Notu Güncelle"});
+            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "updateTitle"});
             this.$store.commit("setCurrentItem", this.$store.getters.getNote(noteId));
         }
     },

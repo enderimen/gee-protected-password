@@ -1,26 +1,26 @@
 <template>
   <form class="m-settings__form">
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">Kullanıcı Adı</app-text>
-        <input type="text" id="username" class="-border" placeholder="Kullanıcı adınızı girin" :value="getUser().name" required>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("username")}}</app-text>
+        <input type="text" id="username" class="-border" :placeholder="$t('enterUsername')" :value="getUser.name" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">E-Posta Adresini Değiştir</app-text>
-        <input type="email" id="email" class="-border" placeholder="E-posta adresinizi girin" :value="getUser().email" required>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("enterEmail")}}</app-text>
+        <input type="email" id="email" class="-border" :placeholder="$t('enterEmail')" :value="getUser.email" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">Parolanızı Giriniz</app-text>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("enterPassword")}}</app-text>
 
         <div class="row">
-            <input :type="changePasswordType" id="password" placeholder="Parolanızı girin" class="-border" :value="getUser().password" required>
+            <input :type="changePasswordType" id="password" :placeholder="$t('enterPassword')" class="-border" :value="getUser.password" required>
             <icon-open-eye v-if="isShowPassword" class="icon -soft -openEye" @click.self="isShowPassword = !isShowPassword"></icon-open-eye>
             <icon-close-eye v-else class="icon -soft -openEye" @click.self="isShowPassword = !isShowPassword"></icon-close-eye>
         </div>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">Parolanızı Tekrar Giriniz</app-text>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("enterRepassword")}}</app-text>
         <div class="row">
-            <input :type="changeRePasswordType" id="repassword" placeholder="Parolanızı tekrarı girin" class="-border" :value="getUser().password" required>
+            <input :type="changeRePasswordType" id="repassword" :placeholder="$t('enterRepassword')" class="-border" :value="getUser.password" required>
             <icon-open-eye v-if="isShowRePassword" class="icon -soft -openEye" @click.self="isShowRePassword = !isShowRePassword"></icon-open-eye>
             <icon-close-eye v-else class="icon -soft -openEye" @click.self="isShowRePassword = !isShowRePassword"></icon-close-eye>
         </div>
-        <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
+        <app-text tag="p" color="soft" weight="thin">{{$t("generatePassword")}}</app-text>
         <div class="group -mb20">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
             <input type="text" class="-generate-password -hidden" :value="generatedPasswordHistory" data-generate-password>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="group">
-            <app-button @click.prevent.native="updateUserInfo()">Güncelle</app-button>
+            <app-button @click.prevent.native="updateUserInfo()">{{$t("updateButton")}}</app-button>
         </div>
         <app-copied-alert />
     </form>
@@ -63,6 +63,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(["getUser", "getUserListSize"]),
         changeRePasswordType() {
             return this.isShowRePassword ? "password" : "text";
         },
@@ -71,7 +72,6 @@ export default {
         }
     },
     methods: {
-        ...mapGetters(["getUser"]),
         ...mapMutations(["editUser"]),
         updateUserInfo() {
             const username = document.getElementById("username").value;
@@ -81,13 +81,12 @@ export default {
 
             if(username !== "" && email !== "" && (password === repassword)) {
                 const userInfo = {
-                    id: 1,
+                    id: this.getUserListSize + 1,
                     name: username,
                     email: email,
-                    password: password,
-                    lastModified: this.getCurrentDate()
+                    password: password
                 };
-                this.editUser(userInfo);
+                this.$store.dispatch("editUser", userInfo);
             }
         }
     },

@@ -33,7 +33,7 @@ export default {
         editAccount(event) {
             const accountId = event.target.getAttribute("data-account-id");
             this.$store.commit("setCurrentItem", this.$store.getters.getAccount(accountId));
-            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "Hesap Bilgilerini Güncelle"});
+            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "accountUpdateTitle"});
         },
         deleteAccountFromList(account) {
            if(confirm(`${account.title} başlıklı hesabı silmek istediğinizden emin misiniz?`)){

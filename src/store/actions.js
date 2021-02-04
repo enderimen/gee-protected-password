@@ -30,6 +30,7 @@ export const login = ({commit, dispatch, state}, authData) => {
         returnSecureToken: true
     }).then(response => {
         commit("setToken", response.data.idToken);
+        commit("setUserInfo", authData);
         router.push("/");
         localStorage.setItem("token", response.data.idToken);
         localStorage.setItem("expirationDate", new Date().getTime() + +response.data.expiresIn * 1000);

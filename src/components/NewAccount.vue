@@ -1,29 +1,28 @@
 <template>
   <form class="m-newAccount">
-    <app-text tag="p" color="soft" weight="thin" class="-mb10">Hesap Adı*</app-text>
-    <input type="text" id="title" placeholder="Kullanıcı adı girin" :value="title" required>
+    <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("accountName")}}*</app-text>
+    <input type="text" id="title" :placeholder="$t('enterUsername')" :value="title" required>
 
-    <app-text tag="p" color="soft" weight="thin" class="-mb10">E-Posta*</app-text>
-    <input type="email" id="email" placeholder="E-posta adresi girin" :value="email">
+    <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("email")}}*</app-text>
+    <input type="email" id="email" :placeholder="$t('enterEmail')" :value="email">
 
-    <app-text tag="p" color="soft" weight="thin" class="-mb10">Parola*</app-text>
-    <input type="password" id="password" class="-passwordInput" placeholder="Parola girin" :value="password" required>
+    <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("password")}}*</app-text>
+    <input type="password" id="password" class="-passwordInput" :placeholder="$t('enterPassword')" :value="password" required>
 
-    <app-text tag="p" color="soft" weight="thin" class="-mb10">Parola Tekrar*</app-text>
-    <input type="password" id="repassword" class="-passwordInput" placeholder="Parola tekrarı girin" :value="password" required>
+    <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("rePassword")}}*</app-text>
+    <input type="password" id="repassword" class="-passwordInput" :placeholder="$t('enterRepassword')" :value="password" required>
 
-    <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
+    <app-text tag="p" color="soft" weight="thin">{{$t("generatePassword")}}</app-text>
     <div class="group">
         <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
         <input type="text" class="-generate-password -hidden" :value="generatedPasswordHistory" data-generate-password>
         <icon-copy class="icon -soft -mr10" @click="copyClipboard('data-generate-password')"></icon-copy>
         <icon-generate class="icon -soft" @click="actionGeneratePassword"></icon-generate>
     </div>
-
      <div class="row -auto">
-            <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-            <app-button v-if="getComponentOptions.title !== 'Hesap Bilgilerini Güncelle'" @click.prevent.enter.native="saveAccountToAccountList()" :class="{'-updated' : isSaved}">{{ isSaved ? "Kaydedildi" : "Kaydet"}}</app-button>
-            <app-button v-else @click.prevent.native="editSelectedAccount()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
+            <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">{{$t('closeButton')}}</app-button>
+            <app-button v-if="getComponentOptions.title !== 'accountUpdateTitle'" @click.prevent.enter.native="saveAccountToAccountList()" :class="{'-updated' : isSaved}">{{ isSaved ? $t('saveButtonMsg') : $t('saveButton')}}</app-button>
+            <app-button v-else @click.prevent.native="editSelectedAccount()" :class="{'-updated' : isUpdated}">{{ isUpdated ? $t('updatedMsg') : $t('updateButton')}}</app-button>
         </div>
   </form>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <section class="m-window" :class="{'-opened' : getIsOpenWindow}">
       <header class="m-window__header">
-          <app-text tag="p" size="large">{{ getComponentOptions.title }}</app-text>
+          <app-text tag="p" size="large">{{ $t(getComponentOptions.title)}} </app-text>
       </header>
       <div class="m-window__content">
         <component :is="getComponentOptions.name" />

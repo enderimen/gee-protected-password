@@ -1,18 +1,17 @@
 <template>
   <form id="noteForm" class="m-newNote">
     <label for="title">
-      <app-text class="-mb10" color="soft">Başlık giriniz</app-text>
-      <input type="text" id="title" class="m-newNote__title" placeholder="Başlık giriniz" :value="title">
+      <app-text class="-mb10" color="soft">{{$t("enterTitle")}}</app-text>
+      <input type="text" id="title" class="m-newNote__title" :placeholder="$t('enterTitle')" :value="title">
     </label>
-    <textarea class="m-newNote__type" id="content" placeholder="Notunuzu yazmaya başlayın..." :value="content"></textarea>
+    <textarea class="m-newNote__type" id="content" :placeholder="$t('enterNote')" :value="content"></textarea>
     <div class="row">
-      <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-      <app-button v-if="getComponentOptions.title !== 'Notu Güncelle'" @click.prevent.native="saveNoteToNoteList()">Kaydet</app-button>
-      <app-button v-else @click.prevent.native="editNoteToNoteList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
+      <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">{{$t('closeButton')}}</app-button>
+      <app-button v-if="getComponentOptions.title !== 'updateTitle'" @click.prevent.native="saveNoteToNoteList()">{{$t('saveButton')}}</app-button>
+      <app-button v-else @click.prevent.native="editNoteToNoteList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? $t('updatedMsg') : $t('updateButton')}}</app-button>
     </div>
   </form>
 </template>
-
 <script>
 import appText from './Text.vue';
 import appButton from './Button.vue';

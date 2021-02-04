@@ -1,6 +1,6 @@
 <template>
     <div class="m-password__item js-tab">
-        <div class="row -mr10">
+        <div class="row -mr20">
             <app-text size="small" weight="bold" class="-mb10">{{ password.title }}</app-text>
             <app-text size="small" weight="thin">{{ password.name }}</app-text>
         </div>
@@ -32,7 +32,7 @@ export default {
         editPassword(event) {
             const passwordId = event.target.getAttribute("data-password-id");
             this.$store.commit("setCurrentItem", this.$store.getters.getPassword(passwordId));
-            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "Şifre Güncelle"});
+            this.setIsOpenWindow({status: true, component: this.getCurrentComponentName(), title: "passwordUpdateTitle"});
         },
         deletePassword(password) {
             if(confirm(`${this.password.title} başlıklı parolanızı silmek istediğinizden emin misiniz?`)){

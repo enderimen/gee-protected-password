@@ -1,5 +1,5 @@
 <template>
-  <div class="m-copied" :class="{'-hasWindow' : getIsOpenWindow()}" data-copy-alert>Parola kopyalandı 🎉</div>
+  <div class="m-copied" :class="{'-hasWindow' : getIsOpenWindow()}" data-copy-alert>{{$t("copiedPassword")}} 🎉</div>
 </template>
 
 <script>

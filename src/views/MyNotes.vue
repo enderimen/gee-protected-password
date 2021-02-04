@@ -12,11 +12,11 @@
       <app-text tag="p" weight="thin" class="-mt20">
           Unutmak istemediğiniz notlarınızı GEE kasanıza, hemen kaydetmeye başlayın.
       </app-text>
-      <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">Not Ekleyin</app-button>
+      <app-button class="-mt20" @click.native="setIsOpenWindow({status: isSettingsPage(), component: getCurrentComponentName()})">{{$t('addNote')}}</app-button>
     </app-no-content>
 
     <div class="-noResult" v-if="getNoteList.length === 0 && getSearchQuery.length > 0">
-      <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
+      <app-text tag="h3" size="large" weight="bold" color="soft">{{$t("noResultMsg")}}</app-text>
     </div>
   </section>
 </template>

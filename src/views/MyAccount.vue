@@ -1,7 +1,7 @@
 <template>
   <section class="m-account">
     <section class="m-account__list" v-if="getAccountList().length">
-        <p class="m-account__title">E-Posta Adreslerim({{getAccountListSize()}})</p>
+        <p class="m-account__title">{{$t("myEmailAddresses")}} ({{getAccountListSize()}})</p>
         <div class="m-widget__list">
           <app-account-item v-for="account in getAccountList()" :account="account" :key="account.id"></app-account-item>
           <app-copied-alert />
@@ -20,7 +20,7 @@
     </app-no-content>
 
     <div class="-noResult" v-if="getAccountList().length === 0 && getSearchQuery() != ''">
-      <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
+      <app-text tag="h3" size="large" weight="bold" color="soft">{{$t("noResultMsg")}}</app-text>
     </div>
   </section>
 </template>

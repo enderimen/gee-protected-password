@@ -1,5 +1,7 @@
 import Vue from "vue";
 import { api } from "@/api";
+import axios from "axios";
+
 const state = {
     passwordList: [],
     passwordDetail: {}
@@ -44,7 +46,7 @@ const actions = {
     });
   },
   fetchPasswordList({commit, state}) {
-    Vue.http.get(`${api.databaseUrl}passwords.json`).then((response) => {
+    axios.get(`${api.databaseUrl}passwords.json`).then((response) => {
       let data = response.data;
 
       for (let key in data) {

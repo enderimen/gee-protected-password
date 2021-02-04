@@ -10,14 +10,14 @@
         :class="{'-active': password.id == getPasswordList[0].id}"></app-password-item>
 
         <div class="-noResult" v-if="getPasswordList.length === 0 && getSearchQuery != ''">
-          <app-text tag="h3" size="large" weight="bold" color="soft">Sonuç Bulunamadı!</app-text>
+          <app-text tag="h3" size="large" weight="bold" color="soft">{{$t("noResultMsg")}}</app-text>
         </div>
       </section>
       <section class="m-password__detail" v-if="getPasswordListSize">
         <div class="m-password__summary">
-          <app-text size="small" weight="bold" class="-mb10" color="soft">Kullanıcı Adı</app-text>
+          <app-text size="small" weight="bold" class="-mb10" color="soft">{{$t("username")}}</app-text>
           <app-text size="small" weight="thin" class="-mb20">{{ getPasswordDetail.name }}</app-text>
-          <app-text size="small" weight="bold" class="-mb10" color="soft">Parola</app-text>
+          <app-text size="small" weight="bold" class="-mb10" color="soft">{{$t("password")}}</app-text>
           <div class="group">
             <input type="password" :value="getPasswordDetail.password" class="m-password__input" disabled>
             <input type="text" :value="getPasswordDetail.password" class="m-password__input -hidden" data-copy-clipboard>
@@ -25,14 +25,14 @@
           </div>
         </div>
         <div class="m-password__info">
-          <app-text size="small" weight="bold" class="-mb10" color="soft">Website Adresi</app-text>
+          <app-text size="small" weight="bold" class="-mb10" color="soft">{{$t("websiteAdress")}}</app-text>
           <a href="https://www.gmail.com" class="-mb20">
             <app-text size="small" weight="thin" color="soft" >{{ getPasswordDetail.website }}</app-text>
           </a>
-          <app-text size="small" weight="bold" class="-mb10" color="soft">Son Düzenleme</app-text>
+          <app-text size="small" weight="bold" class="-mb10" color="soft">{{$t("lastEdit")}}</app-text>
           <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail.lastModified }}</app-text>
 
-          <app-text size="small" weight="bold" class="-mb10" color="soft">Oluşturulma</app-text>
+          <app-text size="small" weight="bold" class="-mb10" color="soft">{{$t("createdTitle")}}</app-text>
           <app-text size="small" weight="thin" color="soft" class="-mb20">{{ getPasswordDetail.created }}</app-text>
         </div>
         <app-copied-alert />

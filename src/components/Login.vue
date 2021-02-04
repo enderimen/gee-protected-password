@@ -5,11 +5,11 @@
         <app-text tag="p" color="soft" weight="thin" class="-mb10">Kullanıcı Adı</app-text>
         <input type="email" v-model="user.email" placeholder="Kullanıcı adınızı girin" required>
 
-        <app-text tag="p" color="red" size="small" weight="thin" class="-mb10">{{ getAuthenticationMessage().email }}</app-text>
+        <app-text tag="p" color="red" size="small" weight="thin" class="-mb10">{{ getAuthenticationMessage.email }}</app-text>
 
         <app-text tag="p" color="soft" weight="thin" class="-mb10">Şifre</app-text>
         <input type="password" v-model="user.password" placeholder="Şifre giriniz" required>
-        <app-text tag="p" color="red" size="small" weight="thin" class="-mb10">{{ getAuthenticationMessage().password }}</app-text>
+        <app-text tag="p" color="red" size="small" weight="thin" class="-mb10">{{ getAuthenticationMessage.password }}</app-text>
 
         <app-button class="-mb20 -mt10">Giriş yap</app-button>
 
@@ -41,10 +41,12 @@ export default {
             }
         }
     },
+    computed: {
+        ...mapGetters(["getAuthenticationMessage", "getUserListSize"]),
+    },
     methods: {
-        ...mapGetters(["getAuthenticationMessage"]),
         setLogin() {
-           this.$store.dispatch("login", {...this.user});
+            this.$store.dispatch("login", {id: this.getUserListSize + 1, name: "", ...this.user});
         }
     }
 }

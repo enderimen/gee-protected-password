@@ -6,19 +6,19 @@ export const setIsOpenWindow = (state, payload) => {
             case "":
             case "passwords":
                 state.componentOptions.name = "app-new-password";
-                state.componentOptions.title = payload.title ? payload.title : "Yeni Parola Ekle";
+                state.componentOptions.title = payload.title ? payload.title : "addNewPasswordTitle";
             break;
             case "secure-notes":
                 state.componentOptions.name = "app-new-note";
-                state.componentOptions.title = payload.title ? payload.title : "Yeni Not Ekle";
+                state.componentOptions.title = payload.title ? payload.title : "addNewNoteTitle";
             break;
             case "account":
                 state.componentOptions.name = "app-new-account";
-                state.componentOptions.title = payload.title ? payload.title : "Yeni Hesap Ekle";
+                state.componentOptions.title = payload.title ? payload.title : "addNewAccountTitle";
             break;
             case "theme-option":
                 state.componentOptions.name = "app-theme-option-list";
-                state.componentOptions.title = "Tema Seçin";
+                state.componentOptions.title = "chooseThemeTitle";
             break;
         }
     }

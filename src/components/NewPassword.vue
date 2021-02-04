@@ -1,31 +1,31 @@
 <template>
     <form class="m-password__form">
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">Başlık*</app-text>
-        <input type="text" id="title" placeholder="Başlık giriniz" :value="title" required>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("title")}}*</app-text>
+        <input type="text" id="title" :placeholder="$t('enterTitle')" :value="title" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">Kullanıcı Adı*</app-text>
-        <input type="text" id="name" placeholder="Kullanıcı adı girin" :value="name" required>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("username")}}*</app-text>
+        <input type="text" id="name" :placeholder="$t('enterUsername')" :value="name" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">Website Adı</app-text>
-        <input type="text" id="website" placeholder="Website adresi girin" :value="website" required>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("websiteAdress")}}</app-text>
+        <input type="text" id="website" :placeholder="$t('enterWebsite')" :value="website" required>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">Parola*</app-text>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t("password")}}*</app-text>
 
         <div class="row">
-            <input :type="changePasswordType" id="password" placeholder="Parola girin" class="-passwordInput" :value="password" required>
+            <input :type="changePasswordType" id="password" :placeholder="$t('enterPassword')" class="-passwordInput" :value="password" required>
             <icon-open-eye v-if="isShowPassword" class="icon -soft -openEye" @click.self="isShowPassword = !isShowPassword"></icon-open-eye>
             <icon-close-eye v-else class="icon -soft -openEye" @click.self="isShowPassword = !isShowPassword"></icon-close-eye>
         </div>
 
-        <app-text tag="p" color="soft" weight="thin" class="-mb10">Parola Tekrar*</app-text>
+        <app-text tag="p" color="soft" weight="thin" class="-mb10">{{$t('rePassword')}}*</app-text>
 
         <div class="row">
-             <input :type="changeRePasswordType" id="repassword" placeholder="Parola tekrarı girin" class="-passwordInput" :value="password" required>
+             <input :type="changeRePasswordType" id="repassword" :placeholder="$t('enterRepassword')" class="-passwordInput" :value="password" required>
             <icon-open-eye v-if="isShowRePassword" class="icon -soft -openEye" @click.self="isShowRePassword = !isShowRePassword"></icon-open-eye>
             <icon-close-eye v-else class="icon -soft -openEye" @click.self="isShowRePassword = !isShowRePassword"></icon-close-eye>
         </div>
 
-        <app-text tag="p" color="soft" weight="thin">Parola Üret</app-text>
+        <app-text tag="p" color="soft" weight="thin">{{$t('generatePassword')}}</app-text>
         <div class="group">
             <input type="text" class="-generate-password" :value="generatedPasswordHistory" disabled>
             <input type="text" class="-generate-password -hidden" :value="generatedPasswordHistory" data-generate-password>
@@ -34,9 +34,9 @@
         </div>
 
         <div class="row -auto">
-            <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
-            <app-button v-if="getComponentOptions.title !== 'Şifre Güncelle'" @click.prevent.enter.native="savePasswordToPasswordList()">Kaydet</app-button>
-            <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? "Güncellendi" : "Güncelle"}}</app-button>
+            <app-button class="-mr20" @click.prevent.native="setIsOpenWindow({status: false, component: ''})">{{$t('closeButton')}}</app-button>
+            <app-button v-if="getComponentOptions.title !== 'passwordUpdateTitle'" @click.prevent.enter.native="savePasswordToPasswordList()">{{$t('saveButton')}}</app-button>
+            <app-button v-else @click.prevent.native="editPasswordToPasswordList()" :class="{'-updated' : isUpdated}">{{ isUpdated ? $t('updatedMsg') : $t('updateButton')}}</app-button>
         </div>
     </form>
 </template>

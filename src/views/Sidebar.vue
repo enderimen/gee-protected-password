@@ -9,31 +9,31 @@
         <ul>
           <li>
             <IconLamb class="icon -mr15"/>
-            <h4>Hemen Başla!</h4>
+            <h4>{{$t('introTitle')}}</h4>
           </li>
           <li>
             <router-link tag="a" to="/passwords">
               <IconPassword class="icon -mr15"/>
-              <span>Şifrelerim</span>
+              <span>{{$t('passwords')}}</span>
             </router-link>
           </li>
           <li>
             <router-link tag="a" to="/secure-notes">
               <IconNote class="icon -mr15"/>
-              <span>Notlarım</span>
+              <span>{{$t('notes')}}</span>
             </router-link>
           </li>
           <li>
             <router-link tag="a" to="/account">
               <IconPerson class="icon -mr15"/>
-              <span>Hesabım</span>
+              <span>{{$t('accounts')}}</span>
             </router-link>
           </li>
 
           <li>
             <router-link tag="a" to="/settings">
               <IconSettings class="icon -mr15"/>
-              <span>Ayarlar</span>
+              <span>{{$t('settings')}}</span>
             </router-link>
           </li>
         </ul>
@@ -43,11 +43,11 @@
           <label for="darkmode" class="m-darkmode">
               <input type="checkbox" id="darkmode" :checked="isDarkmode" @change="setDarkmode">
               <div class="darkmode-switch-btn"></div>
-              <span class="-ml10">Gece Modu</span>
+              <span class="-ml10">{{$t('darkmode')}}</span>
           </label>
           <div class="row" @click="logout()">
             <IconLogout class="icon -mr10"/>
-            <span>Çıkış</span>
+            <span>{{$t('exit')}}</span>
           </div>
       </div>
   </section>

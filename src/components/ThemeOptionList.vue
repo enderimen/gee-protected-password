@@ -1,6 +1,6 @@
 <template>
   <section class="o-themeOption">
-    <app-text tag="h3" color="soft">Renkler</app-text>
+    <app-text tag="h3" color="soft">{{$t("colorTitle")}}</app-text>
     <section class="m-themeOption__list">
       <app-theme-btn title="colors" name="bunker" color="bunker">Bunker</app-theme-btn>
       <app-theme-btn title="colors" name="science-blue" color="science-blue">Science Blue</app-theme-btn>
@@ -8,7 +8,7 @@
       <app-theme-btn title="colors" name="day-light" color="day-light">White</app-theme-btn>
       <app-theme-btn title="colors" name="mona-lisa" color="mona-lisa">Mona Lisa</app-theme-btn>
     </section>
-    <app-text tag="h3"  color="soft" class="-mt20">Dokular</app-text>
+    <app-text tag="h3"  color="soft" class="-mt20">{{$t("textureTitle")}}</app-text>
     <section class="m-textureOption__list">
       <app-theme-btn title="textures" name="skulls" color="skulls">Skulls</app-theme-btn>
       <app-theme-btn title="textures" name="white-leather" color="white-leather">White Leather</app-theme-btn>
@@ -17,7 +17,7 @@
     </section>
 
     <div class="row">
-      <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">Kapat</app-button>
+      <app-button class="-mr20" @click.native="setIsOpenWindow({status: false, component: ''})">{{$t('closeButton')}}</app-button>
     </div>
   </section>
 </template>

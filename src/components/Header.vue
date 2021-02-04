@@ -2,10 +2,10 @@
   <header class="m-header">
         <slot />
         <div class="m-searchArea" v-if="getCurrentComponentName() !== 'settings'">
-          <input type="text" class="m-search__input -mr20" placeholder="Hesap, not ya da e-posta arayın" @input="getSearchQuery">
+          <input type="text" class="m-search__input -mr20" :placeholder="$t('searchPlaceholderText')" @input="getSearchQuery">
         </div>
         <div class="row">
-            <app-text color="soft" class="-mr10">Hoşgeldin, Ender!</app-text>
+            <app-text color="soft" class="-mr10">{{ $t('welcomeMsg') }}, Ender!</app-text>
             <button class="a-themeOption -mr20" title="Tema seçin" @click="setIsOpenWindow({status: true, component: 'theme-option'})"></button>
             <select class="m-language -mr20" v-model="language" @change="chooseLanguage($event)">
                 <option value="tr">Türkçe</option>
@@ -21,6 +21,7 @@
 import IconBell from "@/icons/bell.svg";
 import appText from './Text.vue';
 import helperFuncs from '@/mixin/index.js';
+import {i18n} from "@/plugins/i18n";
 import { mapMutations } from "vuex";
 
 export default {
@@ -41,6 +42,7 @@ export default {
         chooseLanguage(event) {
             const language = event.target.value;
 
+            i18n.locale = language;
             localStorage.setItem("language", language);
             document.documentElement.lang = language
             this.setLanguage(language);
