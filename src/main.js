@@ -3,12 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueResource from "vue-resource"
-import {i18n} from '@/plugins/i18n';
+import { i18n } from '@/plugins/i18n';
 import "./styles/app.scss"
 
 Vue.use(VueResource);
 
-const language = localStorage.getItem("language") || "tr";
+const language = localStorage.getItem("language") || "tr";
 document.documentElement.lang = language;
 i18n.locale = language;
 
